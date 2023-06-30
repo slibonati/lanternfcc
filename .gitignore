@@ -18,3 +18,6 @@ buildNumber.properties
 
 #lanternfcc
 lantern_credentials.txt
+lantern_default_size.ini
+multi_mine_settings.txt
+pearl-monkeyjuice.pgn
