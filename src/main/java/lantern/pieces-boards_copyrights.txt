@@ -1,0 +1,55 @@
+The pieces and Boards in this program come from Jin except for those otherwise noted below which is released undger GPL.
+
+I do not know that the pieces and boards are all gpl and by making them avaiable offer no more rights than by www.jinchess.com making them available.
+
+The spatial set includes author and copyright info.
+
+Jin change log states: * Added all the non 3D piece sets from blitzin (bookup, dyche1, dyche2, dyche3),
+  with permission from Daniel Sleator (Darooha).
+
+
+To me the above means for the bookup and dyche piece sets ICC could ask that you not use them in your client, perhaps depending on how they are used, i.e. if they are primarily used for connections to the chessclub server or not.  While my client connects to fics, its primarily for chat, game play only half supported, and the primary intent is for this client to be  used on icc.  I do not at this time advertise it on FICS, but the option is for icc members who may want to log onto fics while on lantern and chat a bit.  I will investigate if jin uses the pieces above on both fics and icc as it does allow conncections to both.
+
+The rest of the pieces I do not know though the alpha pieces i understand are compatible with GPL.
+
+flags came from http://www.free-country-flags.com/ under the creative commons share and share alike liscence.  i am using flags small in flag pack 1.
+
+note July 17 2011: the purple chess board was copied from blitzin and is not an exact copy but a partial screen grab. i can grant no more rights than i have and icc can request it be taken down.
+
+The Olive chess board and Cherry board came off the net as partial screen grabs. I was not able to ascertain the
+complete rights from the sites i grabbed the images. The Olive and Cherry board were part of blog posts found
+in image search.
+
+note March 2nd 2017:
+the CCube chess pieces are made by perlhacker(now PerlHackr) which he describes as based on Raptor and GPL
+the Wood-4 and Wood-5 boards are from Stockfish also GPL
+
+The liebeskind, molten, moltengood, moltenevil pieces were made by moltenthinker for Lantern. He asked me to put them in teh program. 
+
+note March 8th 2017 and March 23 2017 update added the Alpha pieces from same source:
+Lantern use Eric De Mund's adaptation of the Merida and Alpha(listed as Alpha-2 in pieces menu) chess pieces(merida.ead-01 and alpha.ead-01). "merida" refers to
+Armando H. Marroquin's free Truetype chess font named "Mérida". "alpha" refers to Eric Bentzen's free Truetype chess font named "Alpha". (More info on  merida and alpha see
+http://ixian.com/chess/#other They are available under the Creative Commons Attribution 4.0 International License
+and used unmodified by Lantern. https://creativecommons.org/licenses/by/4.0/
+
+note March 21st 2017:
+Added the Cold Marble, Green Marble, Slate, and Gray Tiles boards from Jin. Update - removed Gray Tiles, it did not scale to small sizes well.
+
+note march 21st 2017:
+added Kingdom and Condal pieces from Jin.
+
+note March 28th 2017:
+Lantern now uses the Chess Alpha 2 font.
+"This font was originally designed by Eric Bentzen © 1998. Version 2 was modified by Peter Strickland © 2006."
+It is free for non commercial use. The readme for it and the font is in the chessalpha2 folder
+in the lantern folder visible when you extract the contents of the jar.
+
+note March 30th 2017:
+Added three new board choices, Thief, Tournament Mat, and Tournament
+Mat2. (April 1st 2017 also added Wood 2 and 3 from Raptor. they are in Lantern's menu as Wood-6 and Wood-7)
+ They are from Raptor. Rapter is under the BSD New License.
+ 
+ note April 2nd 2017:
+ Wood-8 board is from smallfish. smallfish is open source based on the GPL stockfish.  the earlier wood8 board found in google search has been removed.
+
+Mike Adams

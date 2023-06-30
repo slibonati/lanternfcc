@@ -1,0 +1,26 @@
+This copyright is for code in this folder, the Lantern folder or package lantern
+The files in the free folder are from jinchess.com and contain their copyright
+in their files which is LGPL
+The graphics suce as pieces and boards and the flag pack's copyright
+is discussed in pieces-boards_copyrights.txt in this folder.
+I did not create any of those graphics and they inherit their copyright
+from where they came from documented in pieces-boards_copyrights.txt
+
+
+Lantern Chess client for internet chess servers.
+Copyright (C) 2009-2017 Michael Ronald Adams.
+All rights reserved.
+ 
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+ 
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
