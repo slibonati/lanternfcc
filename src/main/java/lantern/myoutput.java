@@ -1,4 +1,5 @@
 package lantern;
+
 /*
 *  Copyright (C) 2010 Michael Ronald Adams.
 *  All rights reserved.
@@ -48,75 +49,79 @@ class myoutput {
 	int gameConsoleSize;
 	int repaint64;
 	String tabTitle;
-	// these next two (game board and game looking) are ignored generally and not set or used
+	// these next two (game board and game looking) are ignored generally and not
+	// set or used
 	// but during a game if sent from the mouse release function after a move
-	// they are set to see if you are in a simul and switch you to the low time board
+	// they are set to see if you are in a simul and switch you to the low time
+	// board
 	int gameboard;
 	int gamelooking;
-	 int reconnectTry;
-	 int soundBoard;
-	 int boardClosing;
-	 int repaintTabBorders;
-	 int swapActivities;
-         boolean printing;
-         boolean promotion;
-         boolean iAmWhite; // for promotion
-         int wildNumber; // for promotion
-         writer mywriter;
-myoutput(){
+	int reconnectTry;
+	int soundBoard;
+	int boardClosing;
+	int repaintTabBorders;
+	int swapActivities;
+	boolean printing;
+	boolean promotion;
+	boolean iAmWhite; // for promotion
+	int wildNumber; // for promotion
+	writer mywriter;
 
-	data = "";
-	printing = false;
-	promotion = false;
-	iAmWhite=true;
-	wildNumber = 0;
-	boardClosing=-1;
-	repaintTabBorders=-1;
-	gameFocusConsole=-1;
-	gameConsoleSide = -1;
-	gameConsoleSize = -1;
-	consoleNumber = -1;
-	focusConsole = -1;
-	soundBoard = -1;
-	reconnectTry=-1;
-	game=0; // set to 1 if message comes from gameboard
-	tab=-1;
-	tabTitle="";
-	gameboard=-1;
-	gamelooking=-1;
-	closetab=-1;
-	clearconsole=-1;
-	clearboard=-1;
-	trimconsole=-1;
-	trimboard=-1;
-	startengine=-1;
-	repaint64=-1;
-	swapActivities=-1;
+	myoutput() {
+
+		data = "";
+		printing = false;
+		promotion = false;
+		iAmWhite = true;
+		wildNumber = 0;
+		boardClosing = -1;
+		repaintTabBorders = -1;
+		gameFocusConsole = -1;
+		gameConsoleSide = -1;
+		gameConsoleSize = -1;
+		consoleNumber = -1;
+		focusConsole = -1;
+		soundBoard = -1;
+		reconnectTry = -1;
+		game = 0; // set to 1 if message comes from gameboard
+		tab = -1;
+		tabTitle = "";
+		gameboard = -1;
+		gamelooking = -1;
+		closetab = -1;
+		clearconsole = -1;
+		clearboard = -1;
+		trimconsole = -1;
+		trimboard = -1;
+		startengine = -1;
+		repaint64 = -1;
+		swapActivities = -1;
 	}
 
-class writer {
-StyledDocument doc;
-String thetell;
-Color col;
-int index;
-int attempt;
-int game;
-SimpleAttributeSet attrs;
-messageStyles myStyles;
+	class writer {
+		StyledDocument doc;
+		String thetell;
+		Color col;
+		int index;
+		int attempt;
+		int game;
+		SimpleAttributeSet attrs;
+		messageStyles myStyles;
 
-}
-void processLink(StyledDocument doc, String thetell, Color col, int index, int attempt, int game, SimpleAttributeSet attrs, messageStyles myStyles)
-{
-  mywriter = new writer();
-  mywriter.doc=doc;
-  mywriter.thetell = thetell;
-  mywriter.col = col;
-  mywriter.index = index;
-  mywriter.attempt = attempt;
-  mywriter.game = game;
-  mywriter.attrs = attrs;
-  mywriter.myStyles = myStyles;
-  printing=true;
-}// end process link
+	}
+
+	void processLink(StyledDocument doc, String thetell, Color col, int index, int attempt, int game,
+			SimpleAttributeSet attrs, messageStyles myStyles) {
+		mywriter = new writer();
+		mywriter.doc = doc;
+		mywriter.thetell = thetell;
+		mywriter.col = col;
+		mywriter.index = index;
+		mywriter.attempt = attempt;
+		mywriter.game = game;
+		mywriter.attrs = attrs;
+		mywriter.myStyles = myStyles;
+		printing = true;
+	}// end process link
 
 }// end class output

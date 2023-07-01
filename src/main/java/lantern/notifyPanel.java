@@ -38,316 +38,268 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 class notifyPanel extends JPanel// implements InternalFrameListener
 {
 
-	//subframe [] consoleSubframes;
-channels sharedVariables;
- listClass notifyList;
- ConcurrentLinkedQueue queue;
-JList theNotifyList;
-JScrollPane notifylistScroller;
-int lastSelectedIndex = -1;
+	// subframe [] consoleSubframes;
+	channels sharedVariables;
+	listClass notifyList;
+	ConcurrentLinkedQueue queue;
+	JList theNotifyList;
+	JScrollPane notifylistScroller;
+	int lastSelectedIndex = -1;
 
+	notifyPanel(channels sharedVariables1, ConcurrentLinkedQueue queue1, listClass notifyList1) {
+		sharedVariables = sharedVariables1;
+		queue = queue1;
+		notifyList = notifyList1;
 
-notifyPanel(channels sharedVariables1, ConcurrentLinkedQueue queue1,  listClass notifyList1)
-{
-sharedVariables=sharedVariables1;
-queue=queue1;
-notifyList=notifyList1;
+		initializeComponents();
 
+	}// end constructor
 
-initializeComponents();
+	void initializeComponents() {
+		/********* now notify list *****************/
+		theNotifyList = new JList(notifyList.model);
+		theNotifyList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		theNotifyList.setLayoutOrientation(JList.VERTICAL);
+		theNotifyList.setVisibleRowCount(-1);
+		theNotifyList.setCellRenderer(new DefaultListCellRenderer() {
+			@Override
+			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
+				Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				if (value.toString().contains("Playing"))
+					c.setForeground(sharedVariables.channelColor[400]);
+				else
+					c.setForeground(Color.black);
+				if (isSelected) {
+					c.setBackground(theNotifyList.getBackground());
+				}
 
+				return c;
+			}
+		});
 
-}// end constructor
+		MouseListener mouseListenerNotify = new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
 
-void initializeComponents()
-{
-/********* now notify list *****************/
-theNotifyList = new JList(notifyList.model);
-theNotifyList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-theNotifyList.setLayoutOrientation(JList.VERTICAL);
-theNotifyList.setVisibleRowCount(-1);
-theNotifyList.setCellRenderer(new DefaultListCellRenderer() {
-    @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-       Component c = super.getListCellRendererComponent(
-            list,value,index,isSelected,cellHasFocus);
-       if( value.toString().contains("Playing"))
-        c.setForeground(sharedVariables.channelColor[400]);
-        else
-        c.setForeground(Color.black);
-        if (isSelected) {
-           c.setBackground(theNotifyList.getBackground());
-        }
-        
-        return c;
-    }
-});
+				int index = theNotifyList.locationToIndex(e.getPoint());
+				final String watchName = (String) notifyList.modeldata.elementAt(index);
 
-MouseListener mouseListenerNotify = new MouseAdapter() {
-     public void mouseClicked(MouseEvent e) {
-
-
-
-              int index = theNotifyList.locationToIndex(e.getPoint());
-             final String watchName =(String) notifyList.modeldata.elementAt(index);
-
-
-
- // if right click
-if (e.getButton() == MouseEvent.BUTTON3 || (sharedVariables.autoHistoryPopup == true && e.getClickCount() == 2))
-{
+				// if right click
+				if (e.getButton() == MouseEvent.BUTTON3
+						|| (sharedVariables.autoHistoryPopup == true && e.getClickCount() == 2)) {
 // determine their state
-boolean supressLogins=sharedVariables.getNotifyControllerState(watchName);
-final notifyOnTabs tabsNotify = sharedVariables.getNotifyOnTabs(watchName);
-
-JPopupMenu menu2=new JPopupMenu("Popup2");
-JMenuItem itemobserve= new JMenuItem("Observe " + watchName);
- itemobserve.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-
-         String action = "`c0`" + "Observe " + watchName + "\n";
-         if(channels.fics) {
-            action = "$Observe " + watchName + "\n";
-         }
-              
-         myoutput output = new myoutput();
-         output.data=action;
-         output.consoleNumber=0;
-         queue.add(output);
-            }
-       });
-       menu2.add(itemobserve);
-
-
-JMenuItem item1;
-if(supressLogins == false)
-{
-
-item1= new JMenuItem("Suppress Login Logout Messages");
- item1.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-            sharedVariables.notifyControllerScript.add(watchName);
-            sharedVariables.setNotifyControllerState();
-            }
-       });
-       menu2.add(item1);
-
-JMenu tabsnot = new  JMenu("Tabs To Show Notify On If Channels On Tab");
-menu2.add(tabsnot);
-for(int z=0; z< tabsNotify.notifyControllerTabs.size(); z++)
-{
-  final JCheckBoxMenuItem tempo = new JCheckBoxMenuItem("Show Notifications on Tab " + z);
-  if(tabsNotify.notifyControllerTabs.get(z).equals("T"))
-  tempo.setSelected(true);
-  else
-  tempo.setSelected(false);
-  final int num = z;
-  tempo.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-            if(tabsNotify.notifyControllerTabs.get(num).equals("T"))
-            {
-                    tempo.setSelected(false);
-                    tabsNotify.notifyControllerTabs.set(num, "F");
-                    sharedVariables.setNotifyOnTabsState();
-            }
-            else
-            {
-                    tempo.setSelected(true);
-                    tabsNotify.notifyControllerTabs.set(num, "T");
-                    sharedVariables.setNotifyOnTabsState();
-            }
-        }
-       });
-  tabsnot.add(tempo);
-}// end for
-
-
-
-
-
-
-  final JMenuItem tempo2 = new JMenuItem("Deselect All");
-
-
-  tempo2.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-
-                    for(int c=0; c< tabsNotify.notifyControllerTabs.size(); c++)
-                    tabsNotify.notifyControllerTabs.set(c, "F");
-                    sharedVariables.setNotifyOnTabsState();
-
-        }
-       });
-  tabsnot.add(tempo2);
-
- final JMenuItem tempo3 = new JMenuItem("Select All");
-
-
-  tempo3.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-
-                    for(int c=0; c< tabsNotify.notifyControllerTabs.size(); c++)
-                    tabsNotify.notifyControllerTabs.set(c, "T");
-                    sharedVariables.setNotifyOnTabsState();
-
-        }
-       });
-  tabsnot.add(tempo3);
-
-} // end if supress logins false
-else
-{
-item1= new JMenuItem("Enable Login Logout Messages");
- item1.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-            sharedVariables.notifyControllerScript.remove(watchName);
-           sharedVariables.setNotifyControllerState();
-
-            }
-       });
-       menu2.add(item1);
-
-
-}
-
-JMenuItem item2= new JMenuItem("History " + watchName);
- item2.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-
-         String action = "`c0`" + "History " + watchName + "\n";
-              if(channels.fics) {
-                 action = "$History " + watchName + "\n";
-              }
-         myoutput output = new myoutput();
-         output.data=action;
-         output.consoleNumber=0;
-         queue.add(output);
-            }
-       });
-       menu2.add(item2);
-JMenuItem item3= new JMenuItem("Finger " + watchName);
- item3.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-
-         String action = "`c0`" +  "Finger " + watchName + "\n";
-              if(channels.fics) {
-                 action = "$Finger " + watchName + "\n";
-              }
-         myoutput output = new myoutput();
-         output.data=action;
-         output.consoleNumber=0;
-         queue.add(output);
-            }
-       });
-       menu2.add(item3);
-
-
-JMenuItem item4= new JMenuItem("Games " + watchName);
- item4.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-
-         String action = "`c0`" +  "Games " + watchName + "\n";
-              if(channels.fics) {
-                 action = "$Games " + watchName + "\n";
-              }
-         myoutput output = new myoutput();
-         output.data=action;
-         output.consoleNumber=0;
-         queue.add(output);
-            }
-       });
-       menu2.add(item4);
-
-JMenuItem item5= new JMenuItem("Ping " + watchName);
- item5.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-
-         String action = "`c0`" +  "Ping " + watchName + "\n";
-              if(channels.fics) {
-                 action = "$Ping " + watchName + "\n";
-              }
-         myoutput output = new myoutput();
-         output.data=action;
-         output.consoleNumber=0;
-         queue.add(output);
-            }
-       });
-       menu2.add(item5);
-
-
-add(menu2);
-menu2.show(e.getComponent(),e.getX(),e.getY());
-
-
-}// end if right click
-         else if (e.getClickCount() == 2) {
-
-
-
-
-
-             String watch = "Observe " + watchName + "\n";
-
-				 myoutput output = new myoutput();
-				 output.data=watch;
-
-				 output.consoleNumber=0;
-      			 queue.add(output);
-
-             //seekDialog aDialog;
-			 //aDialog= new seekDialog(homeFrame, false,"Selected from " +  index );
-			 //aDialog.setVisible(true);
-
-          }  if(index == lastSelectedIndex && e.getButton() != MouseEvent.BUTTON3) {
-            theNotifyList.clearSelection();
-            lastSelectedIndex = -1;
-        }
-        else if(e.getButton() != MouseEvent.BUTTON3)
-        lastSelectedIndex = index;
-     }
- };
- theNotifyList.addMouseListener(mouseListenerNotify);
- theNotifyList.setBackground(sharedVariables.listColor);
- notifylistScroller = new JScrollPane(theNotifyList); 
-  makeLayout();
-} // end init components
-
-
-
-void  makeLayout()
-  {
-  GroupLayout layout = new GroupLayout(this);
-      setLayout(layout);
-	//Create a parallel group for the horizontal axis
-	ParallelGroup hGroup = layout.createParallelGroup(GroupLayout.Alignment.LEADING, true);
-	ParallelGroup h1 = layout.createParallelGroup(GroupLayout.Alignment.LEADING, true);
-
-
-
-
-
-
-
-	h1.addComponent(notifylistScroller, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE);
-	hGroup.addGroup(GroupLayout.Alignment.TRAILING, h1);// was trailing
-	//Create the horizontal group
-	layout.setHorizontalGroup(hGroup);
-
-
-	//Create a parallel group for the vertical axis
-	ParallelGroup vGroup = layout.createParallelGroup(GroupLayout.Alignment.LEADING, true);// was leading
-
-
-
-
-	vGroup.addComponent(notifylistScroller,GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE);
-
-	layout.setVerticalGroup(vGroup);
-
-
-  }
-
-
-
-
-}//end class
+					boolean supressLogins = sharedVariables.getNotifyControllerState(watchName);
+					final notifyOnTabs tabsNotify = sharedVariables.getNotifyOnTabs(watchName);
+
+					JPopupMenu menu2 = new JPopupMenu("Popup2");
+					JMenuItem itemobserve = new JMenuItem("Observe " + watchName);
+					itemobserve.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+
+							String action = "`c0`" + "Observe " + watchName + "\n";
+							if (channels.fics) {
+								action = "$Observe " + watchName + "\n";
+							}
+
+							myoutput output = new myoutput();
+							output.data = action;
+							output.consoleNumber = 0;
+							queue.add(output);
+						}
+					});
+					menu2.add(itemobserve);
+
+					JMenuItem item1;
+					if (supressLogins == false) {
+
+						item1 = new JMenuItem("Suppress Login Logout Messages");
+						item1.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								sharedVariables.notifyControllerScript.add(watchName);
+								sharedVariables.setNotifyControllerState();
+							}
+						});
+						menu2.add(item1);
+
+						JMenu tabsnot = new JMenu("Tabs To Show Notify On If Channels On Tab");
+						menu2.add(tabsnot);
+						for (int z = 0; z < tabsNotify.notifyControllerTabs.size(); z++) {
+							final JCheckBoxMenuItem tempo = new JCheckBoxMenuItem("Show Notifications on Tab " + z);
+							if (tabsNotify.notifyControllerTabs.get(z).equals("T"))
+								tempo.setSelected(true);
+							else
+								tempo.setSelected(false);
+							final int num = z;
+							tempo.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									if (tabsNotify.notifyControllerTabs.get(num).equals("T")) {
+										tempo.setSelected(false);
+										tabsNotify.notifyControllerTabs.set(num, "F");
+										sharedVariables.setNotifyOnTabsState();
+									} else {
+										tempo.setSelected(true);
+										tabsNotify.notifyControllerTabs.set(num, "T");
+										sharedVariables.setNotifyOnTabsState();
+									}
+								}
+							});
+							tabsnot.add(tempo);
+						} // end for
+
+						final JMenuItem tempo2 = new JMenuItem("Deselect All");
+
+						tempo2.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+
+								for (int c = 0; c < tabsNotify.notifyControllerTabs.size(); c++)
+									tabsNotify.notifyControllerTabs.set(c, "F");
+								sharedVariables.setNotifyOnTabsState();
+
+							}
+						});
+						tabsnot.add(tempo2);
+
+						final JMenuItem tempo3 = new JMenuItem("Select All");
+
+						tempo3.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+
+								for (int c = 0; c < tabsNotify.notifyControllerTabs.size(); c++)
+									tabsNotify.notifyControllerTabs.set(c, "T");
+								sharedVariables.setNotifyOnTabsState();
+
+							}
+						});
+						tabsnot.add(tempo3);
+
+					} // end if supress logins false
+					else {
+						item1 = new JMenuItem("Enable Login Logout Messages");
+						item1.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								sharedVariables.notifyControllerScript.remove(watchName);
+								sharedVariables.setNotifyControllerState();
+
+							}
+						});
+						menu2.add(item1);
+
+					}
+
+					JMenuItem item2 = new JMenuItem("History " + watchName);
+					item2.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+
+							String action = "`c0`" + "History " + watchName + "\n";
+							if (channels.fics) {
+								action = "$History " + watchName + "\n";
+							}
+							myoutput output = new myoutput();
+							output.data = action;
+							output.consoleNumber = 0;
+							queue.add(output);
+						}
+					});
+					menu2.add(item2);
+					JMenuItem item3 = new JMenuItem("Finger " + watchName);
+					item3.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+
+							String action = "`c0`" + "Finger " + watchName + "\n";
+							if (channels.fics) {
+								action = "$Finger " + watchName + "\n";
+							}
+							myoutput output = new myoutput();
+							output.data = action;
+							output.consoleNumber = 0;
+							queue.add(output);
+						}
+					});
+					menu2.add(item3);
+
+					JMenuItem item4 = new JMenuItem("Games " + watchName);
+					item4.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+
+							String action = "`c0`" + "Games " + watchName + "\n";
+							if (channels.fics) {
+								action = "$Games " + watchName + "\n";
+							}
+							myoutput output = new myoutput();
+							output.data = action;
+							output.consoleNumber = 0;
+							queue.add(output);
+						}
+					});
+					menu2.add(item4);
+
+					JMenuItem item5 = new JMenuItem("Ping " + watchName);
+					item5.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+
+							String action = "`c0`" + "Ping " + watchName + "\n";
+							if (channels.fics) {
+								action = "$Ping " + watchName + "\n";
+							}
+							myoutput output = new myoutput();
+							output.data = action;
+							output.consoleNumber = 0;
+							queue.add(output);
+						}
+					});
+					menu2.add(item5);
+
+					add(menu2);
+					menu2.show(e.getComponent(), e.getX(), e.getY());
+
+				} // end if right click
+				else if (e.getClickCount() == 2) {
+
+					String watch = "Observe " + watchName + "\n";
+
+					myoutput output = new myoutput();
+					output.data = watch;
+
+					output.consoleNumber = 0;
+					queue.add(output);
+
+					// seekDialog aDialog;
+					// aDialog= new seekDialog(homeFrame, false,"Selected from " + index );
+					// aDialog.setVisible(true);
+
+				}
+				if (index == lastSelectedIndex && e.getButton() != MouseEvent.BUTTON3) {
+					theNotifyList.clearSelection();
+					lastSelectedIndex = -1;
+				} else if (e.getButton() != MouseEvent.BUTTON3)
+					lastSelectedIndex = index;
+			}
+		};
+		theNotifyList.addMouseListener(mouseListenerNotify);
+		theNotifyList.setBackground(sharedVariables.listColor);
+		notifylistScroller = new JScrollPane(theNotifyList);
+		makeLayout();
+	} // end init components
+
+	void makeLayout() {
+		GroupLayout layout = new GroupLayout(this);
+		setLayout(layout);
+		// Create a parallel group for the horizontal axis
+		ParallelGroup hGroup = layout.createParallelGroup(GroupLayout.Alignment.LEADING, true);
+		ParallelGroup h1 = layout.createParallelGroup(GroupLayout.Alignment.LEADING, true);
+
+		h1.addComponent(notifylistScroller, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE);
+		hGroup.addGroup(GroupLayout.Alignment.TRAILING, h1);// was trailing
+		// Create the horizontal group
+		layout.setHorizontalGroup(hGroup);
+
+		// Create a parallel group for the vertical axis
+		ParallelGroup vGroup = layout.createParallelGroup(GroupLayout.Alignment.LEADING, true);// was leading
+
+		vGroup.addComponent(notifylistScroller, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE);
+
+		layout.setVerticalGroup(vGroup);
+
+	}
+
+}// end class

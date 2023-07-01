@@ -14,8 +14,7 @@ package lantern;
 *  General Public License for more details.
 */
 
-class newBoardData
-{
+class newBoardData {
 	String pass;
 	String arg1;
 	String arg2;
@@ -40,33 +39,30 @@ class newBoardData
 	int type;
 	int dg;
 
-	newBoardData()
-	{
+	newBoardData() {
 
-		pass="";
-		arg1="";
-		arg2="";
-		arg3="";
-		arg4="";
-		arg5="";
-		arg6="";
-		arg7="";
-		arg8="";
-		arg9="";
-		arg10="";
-		arg11="";
-		arg12="";
-		arg13="";
-		arg14="";
-		arg15="";
-		arg16="";
-		arg17="";
-		arg18="";
-		arg19="";
+		pass = "";
+		arg1 = "";
+		arg2 = "";
+		arg3 = "";
+		arg4 = "";
+		arg5 = "";
+		arg6 = "";
+		arg7 = "";
+		arg8 = "";
+		arg9 = "";
+		arg10 = "";
+		arg11 = "";
+		arg12 = "";
+		arg13 = "";
+		arg14 = "";
+		arg15 = "";
+		arg16 = "";
+		arg17 = "";
+		arg18 = "";
+		arg19 = "";
 
-
-		type=0;
-		dg=0;
+		type = 0;
+		dg = 0;
 	}
 }
-

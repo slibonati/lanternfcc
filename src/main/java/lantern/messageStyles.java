@@ -45,18 +45,16 @@ import free.util.*;
 import java.util.concurrent.locks.*;
 
 class messageStyles {
-   // if no data blocks[0] is tell.length() and top is 1. we presume spot 0 is end spot starting from 0
-  int [] blocks = new int[100];
-  int top;
-  int [] boldSpots = new int[100];
-  int [] italicSpots = new int[100];
-  int [] underlineSpots = new int[100];
-  Color [] colors = new Color[100];
-  
-  int start;
-  int stop;
-  
+	// if no data blocks[0] is tell.length() and top is 1. we presume spot 0 is end
+	// spot starting from 0
+	int[] blocks = new int[100];
+	int top;
+	int[] boldSpots = new int[100];
+	int[] italicSpots = new int[100];
+	int[] underlineSpots = new int[100];
+	Color[] colors = new Color[100];
+
+	int start;
+	int stop;
+
 }
-
-
-

@@ -1,4 +1,5 @@
 package lantern;
+
 /*
 *  Copyright (C) 2010 Michael Ronald Adams.
 *  All rights reserved.
@@ -16,14 +17,13 @@ package lantern;
 /* for a single game board just set these both to 0 and use gamestate array index 0 and forget about it. the idea is board 1 or boardindex 0 can be looking at any game in the game state array not just one to one.
 */
 class gamestuff {
-int BoardIndex;// our board index starts at 0 for game board 1
-int LookingAt;// the  board this  board is looking at
+	int BoardIndex;// our board index starts at 0 for game board 1
+	int LookingAt;// the board this board is looking at
 
-gamestuff()
-{
-BoardIndex=-1;
-LookingAt=-1;
+	gamestuff() {
+		BoardIndex = -1;
+		LookingAt = -1;
 
-}
+	}
 
 }

@@ -17,95 +17,78 @@ package lantern;
 import java.awt.*;
 import java.util.ArrayList;
 
+class highScoreManagement {
+	ArrayList<scores> list;
+	int top;
+	int max;
 
-class highScoreManagement
-{
- ArrayList<scores> list;
- int top;
- int max;
+	highScoreManagement() {
+		list = new ArrayList();
+		max = 10;
+		top = 0;
+	}
 
+	void addScore(int score, String date, String name) {
+		int spot = 0;
 
- highScoreManagement()
- {
-  list = new ArrayList();
- max=10;
- top=0;
- }
-
- void addScore(int score, String date, String name)
- {
-	 int spot=0;
-
-	 //  handle  first score
-	 if(top == 0)
-	 {
-		scores myscore = new scores();
-		myscore.score = score;
-		myscore.date=date;
-		myscore.name=name;
-		list.add(myscore);
-		top++;
-		return;
-
-
-	 }
-
-	 for(int a=0; a<top; a++)
-	 {
-		if( list.get(a).score > score)
-		{
-			reorder(score, date, name,  a);
+		// handle first score
+		if (top == 0) {
+			scores myscore = new scores();
+			myscore.score = score;
+			myscore.date = date;
+			myscore.name = name;
+			list.add(myscore);
+			top++;
 			return;
+
 		}
-	 }
 
-	 if(top < max)
-	 {
-		scores myscore = new scores();
-		myscore.score = score;
-		myscore.date=date;
-		myscore.name=name;
-		list.add(myscore);
-		top++;
+		for (int a = 0; a < top; a++) {
+			if (list.get(a).score > score) {
+				reorder(score, date, name, a);
+				return;
+			}
+		}
 
-	 }
- }
+		if (top < max) {
+			scores myscore = new scores();
+			myscore.score = score;
+			myscore.date = date;
+			myscore.name = name;
+			list.add(myscore);
+			top++;
 
-void reorder(int score, String date, String name, int spot)
-{
-
-	if(top < max)
-	{
-		scores ascore = new scores();
-		list.add(ascore);
+		}
 	}
-for(int a=max-1; a>spot; a--)
-{
-	if(a-1 < top)
-	{
-		list.get(a).score = list.get(a-1).score;
-		list.get(a).date=list.get(a-1).date;
-		list.get(a).name=list.get(a-1).name;
+
+	void reorder(int score, String date, String name, int spot) {
+
+		if (top < max) {
+			scores ascore = new scores();
+			list.add(ascore);
+		}
+		for (int a = max - 1; a > spot; a--) {
+			if (a - 1 < top) {
+				list.get(a).score = list.get(a - 1).score;
+				list.get(a).date = list.get(a - 1).date;
+				list.get(a).name = list.get(a - 1).name;
+
+			}
+		}
+		list.get(spot).score = score;
+		list.get(spot).date = date;
+		list.get(spot).name = name;
+
+		if (top < max)
+			top++;
 
 	}
+
+	class scores {
+		int score;
+		String date;
+		String name;
+
+	}
+
 }
-list.get(spot).score=score;
-list.get(spot).date=date;
-list.get(spot).name=name;
-
-
-if(top < max)
-top++;
-
-}
-
- class scores
- {
-	 int score;
-	 String date;
-	 String name;
-
-
- }
-
- }

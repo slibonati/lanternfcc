@@ -38,55 +38,47 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 class notifyFrame extends JDialog// implements InternalFrameListener
 {
 
-	//subframe [] consoleSubframes;
-channels sharedVariables;
-JCheckBoxMenuItem notontop;
- listClass notifyList;
- ConcurrentLinkedQueue queue;
-notifyPanel notifylistScrollerPanel;
+	// subframe [] consoleSubframes;
+	channels sharedVariables;
+	JCheckBoxMenuItem notontop;
+	listClass notifyList;
+	ConcurrentLinkedQueue queue;
+	notifyPanel notifylistScrollerPanel;
 
+	notifyFrame(JFrame master, channels sharedVariables1, ConcurrentLinkedQueue queue1, listClass notifyList1) {
+		super(master, false);
+		sharedVariables = sharedVariables1;
+		queue = queue1;
+		notifyList = notifyList1;
 
-notifyFrame(JFrame master, channels sharedVariables1, ConcurrentLinkedQueue queue1,  listClass notifyList1)
-{     super(master, false);
-sharedVariables=sharedVariables1;
-queue=queue1;
-notifyList=notifyList1;
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
 
- setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
- addWindowListener(new WindowAdapter() {
-    public void windowClosing(WindowEvent we) {
+				setVisible(false);
+			}
+		});
 
-         setVisible(false);
-    }
-});
+		setTitle("Notify");
+		setSize(130, 240);
+		notifylistScrollerPanel = new notifyPanel(sharedVariables, queue, notifyList);
 
-setTitle("Notify");
-setSize(130,240);
- notifylistScrollerPanel = new notifyPanel(sharedVariables, queue,  notifyList);
+		notifylistScrollerPanel.notifylistScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
- notifylistScrollerPanel.notifylistScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		add(notifylistScrollerPanel);
 
+	}// end constructor
 
- add(notifylistScrollerPanel);
+	void saveSize() {
+		int width = getWidth();
+		int height = getHeight();
+		if (width > 40 && width < 600) {
+			sharedVariables.notifyWindowWidth = width;
+		}
 
+		if (height > 40 && height < 600) {
+			sharedVariables.notifyWindowHeight = height;
+		}
+	}
 
-}// end constructor
-
-
-void saveSize()
-{
- int width  = getWidth();
- int height = getHeight();
- if(width > 40 && width < 600) {
-  sharedVariables.notifyWindowWidth = width;
- }
- 
- if(height > 40 && height < 600)
- {
-   sharedVariables.notifyWindowHeight = height;
- }
-}
-
-
-
-}//end class
+}// end class

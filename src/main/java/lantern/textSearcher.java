@@ -1,4 +1,5 @@
 package lantern;
+
 /*
 *  Copyright (C) 2010 Michael Ronald Adams.
 *  All rights reserved.
@@ -37,65 +38,54 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.awt.datatransfer.Clipboard;
 import java.lang.reflect.Method;
 
+class textSearcher {
 
+	void find(String word, JTextPane pane) {
+		int offset = -1;
+		Highlighter highlighter = pane.getHighlighter();
 
-class textSearcher
-{
+		// Remove any existing highlights for last search
+		Highlighter.Highlight[] highlights = highlighter.getHighlights();
+		for (int a = 0; a < highlights.length; a++) {
+			Highlighter.Highlight h = highlights[a];
+			try {
+				highlighter.removeHighlight(h);
+			} catch (Exception dui) {
+			}
+		}
 
-void find(String word, JTextPane pane)
-{
-int offset = -1;
-    Highlighter highlighter = pane.getHighlighter();
+		if (word == null || word.equals("")) {
+			return;
+		}
 
-    // Remove any existing highlights for last search
-    Highlighter.Highlight[] highlights = highlighter.getHighlights();
-    for (int a = 0; a < highlights.length; a++) {
-      Highlighter.Highlight h = highlights[a];
-      try  {
-        highlighter.removeHighlight(h);
-      }
-      catch(Exception dui){}
-    }
+		String text = "";
+		try {
+			StyledDocument doc = pane.getStyledDocument();
+			text = doc.getText(0, doc.getLength()).toLowerCase();
+		} catch (Exception e) {
 
-    if (word == null || word.equals("")) {
-      return;
-    }
+			return;
+		}
 
-String text = "";
-    try {
-      StyledDocument doc = pane.getStyledDocument();
-      text = doc.getText(0, doc.getLength()).toLowerCase();
-    } catch (Exception e) {
+		word = word.toLowerCase();
+		int lastIndex = 0;
+		int wordSize = word.length();
 
-      return;
-    }
+		while ((lastIndex = text.indexOf(word, lastIndex)) > -1) {
+			int endIndex = lastIndex + wordSize;
+			try {
 
-    word = word.toLowerCase();
-    int lastIndex = 0;
-    int wordSize = word.length();
+				highlighter.addHighlight(lastIndex, endIndex, DefaultHighlighter.DefaultPainter);
 
-    while ((lastIndex = text.indexOf(word, lastIndex)) > -1) {
-      int endIndex = lastIndex + wordSize;
-      try {
+			} catch (BadLocationException e) {
+				// Nothing to do
+			}
+			if (offset == -1) {
+				offset = lastIndex;
+			}
+			lastIndex = endIndex;
+		}
 
-
-      highlighter.addHighlight(lastIndex, endIndex, DefaultHighlighter.DefaultPainter);
-
-
-      } catch (BadLocationException e) {
-        // Nothing to do
-      }
-      if (offset == -1) {
-        offset = lastIndex;
-      }
-      lastIndex = endIndex;
-    }
-
-
-
-}// end method
-
+	}// end method
 
 }// end class
-
-

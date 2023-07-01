@@ -1,4 +1,5 @@
 package lantern;
+
 /*
 *  Copyright (C) 2010 Michael Ronald Adams.
 *  All rights reserved.
@@ -40,122 +41,123 @@ import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import javax.swing.event.ChangeEvent.*;
 
+public class JPaintedLabel extends JLabel {
 
-
-public class JPaintedLabel extends JLabel
-{
-
-
-
-	protected void paintBorder(Graphics g){
+	protected void paintBorder(Graphics g) {
 		try {
-         //  if(tabNumber == sharedVariables.tellTab && sharedVariables.tellsToTab == true)
-           //             super.setBackground(mybackground.brighter());
-           //else
-                        super.setBackground(mybackground);
+			// if(tabNumber == sharedVariables.tellTab && sharedVariables.tellsToTab ==
+			// true)
+			// super.setBackground(mybackground.brighter());
+			// else
+			super.setBackground(mybackground);
 			int width = getWidth();
 
-		int height = getHeight();
-		Graphics2D g2 = (Graphics2D) g;
+			int height = getHeight();
+			Graphics2D g2 = (Graphics2D) g;
 
+			super.setBackground(mybackground);
 
-		super.setBackground(mybackground);
+			if (fontType == 1)
+				super.setFont(sharedVariables.myTabFont);
+			else
+				super.setFont(sharedVariables.myFont);
 
-		if(fontType == 1)
-		super.setFont(sharedVariables.myTabFont);
-		else
-		super.setFont(sharedVariables.myFont);
+			if (tabNumber == sharedVariables.tellTab && sharedVariables.tellsToTab == true)
+				g2.setColor(sharedVariables.tellTabBorderColor);
+			else
+				g2.setColor(sharedVariables.tabBorderColor);
+			// paint 4 lines
+			g2.draw(new Line2D.Double(0, 0, (double) width, 0)); // across
+			g2.draw(new Line2D.Double(0, (double) height - 1, (double) width - 1, (double) height - 1)); // across
+																											// bottom
+			g2.draw(new Line2D.Double(0, 0, 0, (double) height)); // down
+			g2.draw(new Line2D.Double((double) width - 1, 0, (double) width - 1, (double) height - 1)); // down right
+																										// side
+		} catch (Exception e) {
+		}
 
-	    if(tabNumber == sharedVariables.tellTab && sharedVariables.tellsToTab == true)
-            g2.setColor(sharedVariables.tellTabBorderColor);
-            else
-            g2.setColor(sharedVariables.tabBorderColor);
-	    // paint 4 lines
-	    g2.draw(new Line2D.Double(0, 0, (double) width, 0)); // across
-	    g2.draw(new Line2D.Double(0, (double)height-1, (double) width-1, (double) height-1)); // across bottom
-	    g2.draw(new Line2D.Double(0, 0, 0, (double) height)); // down
-	    g2.draw(new Line2D.Double((double) width-1, 0, (double) width-1, (double) height-1)); // down right side
-}
-catch(Exception e)
-{}
+	}
 
-	  }
-
-	JPaintedLabel()
-	{
+	JPaintedLabel() {
 		super();
 
 	}
-	JPaintedLabel(String title, channels sharedVariables1, int tabNumber1) // tabNumber -1 for game, 0-maxConsoleTabs-1 for console
+
+	JPaintedLabel(String title, channels sharedVariables1, int tabNumber1) // tabNumber -1 for game, 0-maxConsoleTabs-1
+																			// for console
 	{
 		super(title, (int) CENTER_ALIGNMENT);
-		mybackground = new Color(0,0,0);
-		sharedVariables=sharedVariables1;
-		fontInUse=0;
-		fontType=1;
+		mybackground = new Color(0, 0, 0);
+		sharedVariables = sharedVariables1;
+		fontInUse = 0;
+		fontType = 1;
 		setFullText(title);
-		tabNumber=tabNumber1;
+		tabNumber = tabNumber1;
 	}
-		JPaintedLabel(String title, channels sharedVariables1)
-	{
+
+	JPaintedLabel(String title, channels sharedVariables1) {
 		super(title, (int) CENTER_ALIGNMENT);
-		mybackground = new Color(0,0,0);
-		sharedVariables=sharedVariables1;
-		fontInUse=0;
-		fontType=1;
+		mybackground = new Color(0, 0, 0);
+		sharedVariables = sharedVariables1;
+		fontInUse = 0;
+		fontType = 1;
 		setFullText(title);
-		tabNumber=-1;
+		tabNumber = -1;
 	}
 
-
-
-	public void setForeground(Color c)
-	{
-		try { super.setForeground(c);}
-		catch(Exception e){}
+	public void setForeground(Color c) {
+		try {
+			super.setForeground(c);
+		} catch (Exception e) {
+		}
 	}
-	public void setBackground(Color c)
-	{
-		try {mybackground = c;
-		repaint();}
-		catch(Exception e){}
+
+	public void setBackground(Color c) {
+		try {
+			mybackground = c;
+			repaint();
+		} catch (Exception e) {
+		}
 	}
-	public void setFullText(String s)
-	{
-		try {super.setText(s);}
-		catch(Exception e){}
 
-
+	public void setFullText(String s) {
+		try {
+			super.setText(s);
+		} catch (Exception e) {
+		}
 
 	}
-	public void setText(String s)
-	{
+
+	public void setText(String s) {
 
 		try {
 
-			if(s.length() < 11)
-			setFullText(s);
+			if (s.length() < 11)
+				setFullText(s);
 			else
-			super.setText(s.substring(0, 11));}
-		catch(Exception e){
-		try {super.setText(s);}
-		catch(Exception e2){}
-
+				super.setText(s.substring(0, 11));
+		} catch (Exception e) {
+			try {
+				super.setText(s);
+			} catch (Exception e2) {
 			}
-	}
-	public void setVisible(boolean statement)
-	{
-		try {super.setVisible(statement);}
-		catch(Exception e){}
+
+		}
 	}
 
-	public void setOpaque(boolean statement)
-	{
-		try {super.setOpaque(statement);}
-		catch(Exception e){}
+	public void setVisible(boolean statement) {
+		try {
+			super.setVisible(statement);
+		} catch (Exception e) {
+		}
 	}
 
-
+	public void setOpaque(boolean statement) {
+		try {
+			super.setOpaque(statement);
+		} catch (Exception e) {
+		}
+	}
 
 	Color mybackground;
 

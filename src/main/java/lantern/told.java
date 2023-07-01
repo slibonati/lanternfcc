@@ -30,16 +30,15 @@ class told {
 
 	String name;
 	int console; // 0 for console 1 for board
-    int tab;
-    boolean sound;
-    boolean blockChannels;
+	int tab;
+	boolean sound;
+	boolean blockChannels;
 
-	told()
-	{
-		name="nobody";
-		console=0;
-		tab=0;
-		sound=true;
+	told() {
+		name = "nobody";
+		console = 0;
+		tab = 0;
+		sound = true;
 		blockChannels = false;
 	}
 }

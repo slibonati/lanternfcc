@@ -1,4 +1,5 @@
 package lantern;
+
 /*
 *  Copyright (C) 2010 Michael Ronald Adams.
 *  All rights reserved.
@@ -48,46 +49,40 @@ import java.util.ArrayList;
 
 class FocusOwner {
 
-boolean console;
-boolean board;
-int number;
+	boolean console;
+	boolean board;
+	int number;
 
-FocusOwner(channels sharedVariables, subframe [] consoleSubframes, gameboard [] myboards)
-{
+	FocusOwner(channels sharedVariables, subframe[] consoleSubframes, gameboard[] myboards) {
 
-    console=false;/// if it doesnt set one of these to true nobody gets it
-    number=0;
-    board=false;
+		console = false;/// if it doesnt set one of these to true nobody gets it
+		number = 0;
+		board = false;
 
-    try {
+		try {
 
+			for (int a = 0; a < sharedVariables.openConsoleCount; a++) {
+				if (consoleSubframes[a].overall.Input.hasFocus()) {
+					console = true;
+					number = a;
+					// writeToConsole("console is true and number is " + a + "\n");
+					return;
+				}
+			} // end for
 
-    for(int a=0; a<sharedVariables.openConsoleCount; a++)
-    {
-        if(consoleSubframes[a].overall.Input.hasFocus())
-        {
-            console=true;
-            number=a;
-            //writeToConsole("console is true and number is " + a + "\n");
-            return;
-        }
-    }// end for
+			for (int a = 0; a < sharedVariables.openBoardCount; a++) {
+				if (myboards[a].myconsolepanel.Input.hasFocus()) {
+					board = true;
+					number = a;
+					return;
 
-    for(int a=0; a<sharedVariables.openBoardCount; a++)
-    {
-        if(myboards[a].myconsolepanel.Input.hasFocus())
-        {
-            board=true;
-            number=a;
-            return;
+				}
+			}
 
-        }
-    }
+		} // end try
+		catch (Exception e) {
+		}
 
-}// end try
-catch(Exception e){}
-
-}// end constructor
-
+	}// end constructor
 
 }// end class focus owner.

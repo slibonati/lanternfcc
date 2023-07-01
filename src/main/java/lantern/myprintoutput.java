@@ -15,7 +15,6 @@ package lantern;
 *  General Public License for more details.
 */
 
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -43,21 +42,20 @@ import java.util.Vector;
 import free.freechess.*;
 import free.util.*;
 import java.util.concurrent.locks.*;
+
 class myprintoutput {
 
-StyledDocument doc;
-int end;
-String mystring;
-SimpleAttributeSet attrs;
+	StyledDocument doc;
+	int end;
+	String mystring;
+	SimpleAttributeSet attrs;
 
-void patchedInsertString(StyledDocument doc1, int end1, String mystring1, SimpleAttributeSet attrs1)
-{
-  doc=doc1;
-  end=end1;
-  mystring=mystring1;
-  attrs=attrs1;
+	void patchedInsertString(StyledDocument doc1, int end1, String mystring1, SimpleAttributeSet attrs1) {
+		doc = doc1;
+		end = end1;
+		mystring = mystring1;
+		attrs = attrs1;
 
-
-}
+	}
 
 }// end class

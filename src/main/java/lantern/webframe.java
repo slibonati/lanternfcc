@@ -46,13 +46,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+class webframe extends JInternalFrame {
 
-class webframe extends JInternalFrame
-{
-
-
-
-    //private sharedVariables.ConsoleScrollPane[BoardIndex] sharedVariables.ConsoleScrollPane[BoardIndex];
+	// private sharedVariables.ConsoleScrollPane[BoardIndex]
+	// sharedVariables.ConsoleScrollPane[BoardIndex];
 	JScrollPane myscrollpane;
 	int consoleNumber;
 	JPopupMenu menu;
@@ -63,229 +60,197 @@ class webframe extends JInternalFrame
 	int madeTextPane;
 
 	channels sharedVariables;
-	JEditorPane [] consoles;
+	JEditorPane[] consoles;
 	ConcurrentLinkedQueue<myoutput> queue;
 	String incomingUrl;
 
-	//subframe [] consoleSubframes;
+	// subframe [] consoleSubframes;
 
 //subframe(JFrame frame, boolean mybool)
-webframe(channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, String incomingUrl1)
-{
+	webframe(channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, String incomingUrl1) {
 
 //super(frame, mybool);
- super("Web View",
-          true, //resizable
-          true, //closable
-          true, //maximizable
-          true);//iconifiable
+		super("Web View", true, // resizable
+				true, // closable
+				true, // maximizable
+				true);// iconifiable
 
 //consoleSubframes=consoleSubframes1;
-consoles= new JEditorPane[10];
-sharedVariables=sharedVariables1;
-queue=queue1;
-incomingUrl=incomingUrl1;
+		consoles = new JEditorPane[10];
+		sharedVariables = sharedVariables1;
+		queue = queue1;
+		incomingUrl = incomingUrl1;
 
-setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-consoleNumber = 0;
+		consoleNumber = 0;
 
-menu=new JPopupMenu("Popup");
-JMenuItem item = new JMenuItem("Copy");
-item.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            consoles[consoleNumber].copy();}
-      });
-      menu.add(item);
+		menu = new JPopupMenu("Popup");
+		JMenuItem item = new JMenuItem("Copy");
+		item.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				consoles[consoleNumber].copy();
+			}
+		});
+		menu.add(item);
 
+		add(menu);
 
+		setupMenu();
 
+		initComponents();
+	}
 
-      add(menu);
+	private void initComponents() {
 
-setupMenu();
+		consoles[consoleNumber] = new JEditorPane();
+		consoles[consoleNumber].setEditable(false);
 
-initComponents();
-}
+		consoles[consoleNumber].addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				try {
+					if (e.isPopupTrigger())
 
+						if (consoles[consoleNumber].getSelectedText().indexOf(" ") == -1)
+							menu3.show(e.getComponent(), e.getX(), e.getY());
+						else
+							menu.show(e.getComponent(), e.getX(), e.getY());
+				} catch (Exception dui) {
+				}
 
-   private void initComponents() {
+			}
 
+			public void mouseReleased(MouseEvent e) {
+				try {
+					if (e.isPopupTrigger())
+						if (consoles[consoleNumber].getSelectedText().indexOf(" ") == -1)
+							menu3.show(e.getComponent(), e.getX(), e.getY());
+						else
+							menu.show(e.getComponent(), e.getX(), e.getY());
+				} catch (Exception dui) {
+				}
+			}
 
+			public void mouseEntered(MouseEvent me) {
+			}
 
-        consoles[consoleNumber] = new JEditorPane();
-        consoles[consoleNumber].setEditable(false);
+			public void mouseExited(MouseEvent me) {
+			}
 
+			public void mouseClicked(MouseEvent me) {
 
+			}
 
-consoles[consoleNumber].addMouseListener(new MouseAdapter() {
-         public void mousePressed(MouseEvent e) { try {
-            if(e.isPopupTrigger())
+		});
 
-               if(consoles[consoleNumber].getSelectedText().indexOf(" ") == -1)
-               menu3.show(e.getComponent(),e.getX(),e.getY());
-               else
-               menu.show(e.getComponent(),e.getX(),e.getY());
-         }catch(Exception dui) { }
+		consoles[consoleNumber].addPropertyChangeListener("page", new MyPropertyChangedClass());
 
+		consoles[consoleNumber].addHyperlinkListener(new HyperlinkListener() {
+			public void hyperlinkUpdate(HyperlinkEvent r) {
+				try {
+					if (r.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {// finalpane.setPage(r.getURL());
+																					// String cmdLine = "start " +
+																					// r.getURL();
+																					// Process p =
+																					// Runtime.getRuntime().exec(cmdLine);
+						String myurl = "" + r.getURL();
+						consoles[consoleNumber].setContentType("text/html");
+						consoles[consoleNumber].setPage(myurl);
 
-         }
-         public void mouseReleased(MouseEvent e) {
-           try {
-            if(e.isPopupTrigger())
-               if(consoles[consoleNumber].getSelectedText().indexOf(" ") == -1)
-               menu3.show(e.getComponent(),e.getX(),e.getY());
-               else
-               menu.show(e.getComponent(),e.getX(),e.getY());
-           }catch(Exception dui) { }
-        }
+					}
 
+				} catch (Exception e) {
+				}
+			}
+		});
 
-public void mouseEntered (MouseEvent me) {}
+		consoles[consoleNumber].setEditable(false);
+		JScrollPane myscrollpane = new JScrollPane(consoles[consoleNumber]);
 
+		GroupLayout layout = new GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
 
-public void mouseExited (MouseEvent me) {}
-public void mouseClicked (MouseEvent me) {
+		// Create a parallel group for the horizontal axis
+		ParallelGroup hGroup = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+		hGroup.addComponent(myscrollpane);
+		layout.setHorizontalGroup(hGroup);
+
+		ParallelGroup vGroup = layout.createParallelGroup(GroupLayout.Alignment.LEADING);// was leading
+
+		vGroup.addComponent(myscrollpane);
+
+		// Create the vertical group
+		layout.setVerticalGroup(vGroup);
+
+		try {
+			if (incomingUrl.startsWith("<")) {
+				consoles[consoleNumber].setContentType("text/html");
+				consoles[consoleNumber].setText(incomingUrl);
+			} else {
+				LanternPageSetter _setter = new LanternPageSetter();
+				Thread mythread = new Thread(_setter);
+				mythread.start();
+			}
+		} catch (Exception e2) {
+		}
+		pack();
 
 	}
 
+	class MyPropertyChangedClass implements PropertyChangeListener {
+		public void propertyChange(PropertyChangeEvent evt) {
+			if (!evt.getPropertyName().equals("page"))
+				return;
+			try {
+				HTMLDocument doc = (HTMLDocument) consoles[consoleNumber].getDocument();
+				String title = (String) doc.getProperty(Document.TitleProperty);
+				// System.out.println("change update and title is " + title);
+				if (title.length() > 0) {
+					setTitle(title);
+				} else {
+					setTitle("Web View");
+				}
 
-      });
+			} catch (Exception dui) {
+				try {
+					setTitle("Web View");
 
-consoles[consoleNumber].addPropertyChangeListener("page", new MyPropertyChangedClass());
-
-
-consoles[consoleNumber].addHyperlinkListener(new HyperlinkListener()
-        {
-            public void hyperlinkUpdate(HyperlinkEvent r)
-            {
-                try
-                {
-             if(r.getEventType() == HyperlinkEvent.EventType.ACTIVATED)
-             {//finalpane.setPage(r.getURL());
-				//String cmdLine = "start " + r.getURL();
-				//Process p = Runtime.getRuntime().exec(cmdLine);
-				String myurl="" + r.getURL();
-				consoles[consoleNumber].setContentType("text/html");
-				consoles[consoleNumber].setPage(myurl);
-
-		 	}
-
-             }catch(Exception e)
-                {}
-            }
-        });
-
-
-
-      
-        consoles[consoleNumber].setEditable(false);
-        JScrollPane myscrollpane = new JScrollPane(consoles[consoleNumber]);
-
-
-
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-
-	//Create a parallel group for the horizontal axis
-	ParallelGroup hGroup = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
-	hGroup.addComponent(myscrollpane);
-	layout.setHorizontalGroup(hGroup);
-
-
-	
-	ParallelGroup vGroup = layout.createParallelGroup(GroupLayout.Alignment.LEADING);// was leading
-
-	vGroup.addComponent(myscrollpane);
-
-	//Create the vertical group
-	layout.setVerticalGroup(vGroup);
-
-
-
-
-		try {
-                         if(incomingUrl.startsWith("<"))
-			{
-                         consoles[consoleNumber].setContentType("text/html");
-                         consoles[consoleNumber].setText(incomingUrl);
+				} catch (Exception duio) {
+				}
+				;
 			}
-                        else {
-                          LanternPageSetter _setter = new LanternPageSetter();
-                         Thread mythread = new Thread(_setter);
-                         mythread.start();
-                         }
 		}
-		catch(Exception e2){}
-			pack();
+	}
 
-}
+	void setupMenu() {
 
-class MyPropertyChangedClass implements PropertyChangeListener {
- public void propertyChange(PropertyChangeEvent evt) {
-            if (!evt.getPropertyName().equals("page")) return;
-             try {
-        HTMLDocument doc = (HTMLDocument) consoles[consoleNumber].getDocument();
-        String title = (String) doc.getProperty(Document.TitleProperty);
-        //System.out.println("change update and title  is " + title);
-        if(title.length() > 0) {
-         setTitle(title);
-        } else {
-         setTitle("Web View");
-        }
+		menu3 = new JPopupMenu("Popup");
 
-        } catch(Exception dui) {
-          try {
-            setTitle("Web View");
+		JMenuItem item12 = new JMenuItem("Copy");
+		item12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				consoles[consoleNumber].copy();
 
-          } catch(Exception duio) { };
-        }
- }
-}
+			}
+		});
+		menu3.add(item12);
 
+		add(menu3);
 
+	}// end menu setup
 
-void setupMenu()
-{
+	class LanternPageSetter implements Runnable {
 
-menu3=new JPopupMenu("Popup");
+		LanternPageSetter() {
 
- JMenuItem item12 = new JMenuItem("Copy");
- item12.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-          consoles[consoleNumber].copy();
+		}
 
-            }
-       });
-       menu3.add(item12);
-
-
-
-
-
-
- add(menu3);
-
-}// end menu setup
-
-
-class LanternPageSetter implements Runnable
-{
-
- LanternPageSetter()
- {
-
- }
-
-public void run()
- {
-                        try {
-                           consoles[consoleNumber].setPage(incomingUrl);
-                        }catch(Exception dd){}
- }
-}
-
-
-
+		public void run() {
+			try {
+				consoles[consoleNumber].setPage(incomingUrl);
+			} catch (Exception dd) {
+			}
+		}
+	}
 
 }// end subframe

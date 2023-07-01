@@ -28,36 +28,30 @@ import java.util.ArrayList;
 
 public class scriptLoader {
 
+	scriptLoader() {
 
-scriptLoader()
-{
+	}
 
+	/* opens file and loads line by line into array list */
+	/* connect can run script */
+	void loadScript(ArrayList<String> myArray, String fileName) {
+		try {
 
-}
-/* opens file and loads line by line into array list */
-/* connect can run script */
-void loadScript(ArrayList<String> myArray, String fileName)
-{
-      try{
+			FileInputStream fstream = new FileInputStream(fileName);
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String strLine;
+			// Read File Line By Line
+			while ((strLine = br.readLine()) != null) {
+				myArray.add(strLine.trim());
+			}
+			// Close the input stream
+			in.close();
+		} catch (Exception e) {// do nothing on exception
 
-    FileInputStream fstream = new FileInputStream(fileName);
-    // Get the object of DataInputStream
-    DataInputStream in = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-    String strLine;
-    //Read File Line By Line
-    while ((strLine = br.readLine()) != null)   {
-      myArray.add(strLine.trim());
-    }
-    //Close the input stream
-    in.close();
-    }catch (Exception e){// do nothing on exception
+		}
 
-    }
-
-}
-
-
-
+	}
 
 }

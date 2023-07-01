@@ -87,7 +87,7 @@ public class Pearl {
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.SystemLookAndFeel");
 
     } catch (Exception d) {
-    	logger.error("exception encountered: ", d);
+		logger.error("exception encountered: ", d);
     }
     SwingUtilities.invokeLater(new Runnable() {
         @Override

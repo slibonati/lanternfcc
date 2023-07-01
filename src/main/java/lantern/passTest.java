@@ -25,64 +25,62 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Queue;
 
+class passTest extends JDialog {
+	JTextField input1;
+	JTextField input2;
+	JButton button1;
+	JButton button2;
+	JButton button3;
+	JLabel label1;
+	JLabel label2;
+	credentials util;
 
-class passTest extends JDialog
-{
-JTextField input1;
-JTextField input2;
-JButton button1;
-JButton button2;
-JButton button3;
-JLabel label1;
-JLabel label2;
-credentials util;
-passTest()
-{
-input1 = new JTextField(20);
-input2 = new JTextField(20);
-button1 = new JButton("ok");
-button2= new JButton("get");
-button3= new JButton("reset");
+	passTest() {
+		input1 = new JTextField(20);
+		input2 = new JTextField(20);
+		button1 = new JButton("ok");
+		button2 = new JButton("get");
+		button3 = new JButton("reset");
 
-label1 = new JLabel("name");
-label2 = new JLabel("pass");
-util = new credentials();
+		label1 = new JLabel("name");
+		label2 = new JLabel("pass");
+		util = new credentials();
 
-button1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent event)
-				{          String name = input1.getText();
-                                           String pass = input2.getText();
-					util.saveNamePass(name, pass);
-				}});
+		button1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				String name = input1.getText();
+				String pass = input2.getText();
+				util.saveNamePass(name, pass);
+			}
+		});
 
-button2.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent event)
-				{
-                                             String name = util.getName();
-                                             String pass = util.getPass();
-                                             label1.setText(name);
-                                             label2.setText(pass);
-				}});
+		button2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				String name = util.getName();
+				String pass = util.getPass();
+				label1.setText(name);
+				label2.setText(pass);
+			}
+		});
 
-button3.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent event)
-				{
-					util.resetNamePass();
-				}});
+		button3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				util.resetNamePass();
+			}
+		});
 
+		JPanel panel = new JPanel();
+		panel.add(input1);
+		panel.add(input2);
+		panel.add(button1);
+		panel.add(button2);
+		panel.add(button3);
+		panel.add(label1);
+		panel.add(label2);
+		add(panel);
+		setSize(500, 500);
+		setVisible(true);
 
-JPanel panel = new JPanel();
-panel.add(input1);
-panel.add(input2);
-panel.add(button1);
-panel.add(button2);
-panel.add(button3);
-panel.add(label1);
-panel.add(label2);
-add(panel);
-setSize(500,500);
-setVisible(true);
-
-}// end contstrutor
+	}// end contstrutor
 
 } // end class

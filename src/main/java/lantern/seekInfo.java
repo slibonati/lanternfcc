@@ -44,197 +44,180 @@ import free.freechess.*;
 import free.util.*;
 import java.util.concurrent.locks.*;
 
-
 class seekInfo {
 
-int eTimeType;// 0 bullet 1 blitz 2 Standard
-int gridSpot;
-double etime;
-int listIndex;
-String index;
-String name;
-String rating;
-String wild;
-String time;
-String inc;
-String rated;
-String range;
-String color;
-String formula;
-String manual;
-Color col;
-Color compCol;
-String seekText;
-boolean computer;
-listClass notifyList;
-boolean onNotify;
+	int eTimeType;// 0 bullet 1 blitz 2 Standard
+	int gridSpot;
+	double etime;
+	int listIndex;
+	String index;
+	String name;
+	String rating;
+	String wild;
+	String time;
+	String inc;
+	String rated;
+	String range;
+	String color;
+	String formula;
+	String manual;
+	Color col;
+	Color compCol;
+	String seekText;
+	boolean computer;
+	listClass notifyList;
+	boolean onNotify;
 
-seekInfo(String sIndex, String sName, String sTitles, String sRating, String sProvisional, String sWild, String sRatingType, String sTime, String sInc, String sRated, String sRange, String sColor, String sFormula, String sManual, listClass snotifyList)
-{
+	seekInfo(String sIndex, String sName, String sTitles, String sRating, String sProvisional, String sWild,
+			String sRatingType, String sTime, String sInc, String sRated, String sRange, String sColor, String sFormula,
+			String sManual, listClass snotifyList) {
 //col= new Color(255,0,0);
-/*
-computer: blue
-normal: green
-wild: red
-losers: orange
-crazyhouse pink
-above are possible values of col
-computerCol is null or one of the wild colors if its going to be half and half
-*/
+		/*
+		 * computer: blue normal: green wild: red losers: orange crazyhouse pink above
+		 * are possible values of col computerCol is null or one of the wild colors if
+		 * its going to be half and half
+		 */
 
+		computer = false;
+		try {
+			if (sTitles.contains("C"))
+				computer = true;
+		} catch (Exception d) {
+		}
+		compCol = null;
+		notifyList = snotifyList;
+		try {
+			if (isNotified(sName))
+				onNotify = true;
+			else
+				onNotify = false;
 
-computer=false;
-try {
-	if(sTitles.contains("C"))
-computer=true;
-}catch(Exception d){}
-compCol=null;
-notifyList=snotifyList;
-try {
-if(isNotified(sName))
-onNotify=true;
-else
-onNotify=false;
+		} catch (Exception badnot) {
+			onNotify = false;
+		}
+		Color notifyComputerColor = new Color(0, 144, 255);
 
-}
-catch(Exception badnot){ onNotify=false;}
-Color notifyComputerColor = new Color(0,144,255);
-
-if(sWild.equals("0") && computer==true)
-{
-  col=new Color(0,0,255); // blue
-  if(onNotify == true)
-  col=notifyComputerColor;
-}
-else if(sWild.equals("0") && computer==false)
-{
-col=new Color(34,139,34);  // forest green
-if(onNotify == true)
-col=new Color(0, 255, 127); // spring green
-}
-else // wild
-{
-	if(computer == true)
-	{
-		col=new Color(0,0,255); // blue
-		if(onNotify == true)
-                col=notifyComputerColor; // notify blue
-
-		if(sWild.equals("17") || sWild.equals("26"))// losers orange
+		if (sWild.equals("0") && computer == true) {
+			col = new Color(0, 0, 255); // blue
+			if (onNotify == true)
+				col = notifyComputerColor;
+		} else if (sWild.equals("0") && computer == false) {
+			col = new Color(34, 139, 34); // forest green
+			if (onNotify == true)
+				col = new Color(0, 255, 127); // spring green
+		} else // wild
 		{
-                  compCol= new Color(255,140,0 );
-	         if(onNotify == true)
-                  compCol= new Color(255,165,0 );
-                }
-                else if(sWild.equals("23"))// crazyhouse pink
-		{ 	compCol = new Color(255,20,147 );
-		 if(onNotify == true)
-		 compCol = new Color(238, 130, 238);
-                }
-                 else
-		{  compCol= new Color(255,0,0);
-		  if(onNotify == true)
-                  compCol = new Color(255, 99, 71);
-                }
-	}
-	else
-	{
-		if(sWild.equals("17") || sWild.equals("26"))// losers orange
-		{
-                  col= new Color(255,140,0 );
-	         if(onNotify == true)
-                 { col= new Color(255,165,0 );
-                 compCol= new Color(255,140,0 );
-                 }
-                   }
-        	else if(sWild.equals("23"))// crazyhouse pink
-		{
-                  col = new Color(255,20,147 );
-		 if(onNotify == true)
-		 {
-                   col = new Color(238, 130, 238);
-                   compCol = new Color(255,20,147 );
-	           }
-        	}
-                 else
-		{  col= new Color(255,0,0);
- 		  if(onNotify == true)
-                  {
-                    col = new Color(255, 99, 71);
-                    compCol= new Color(255,0,0);
-                  }
+			if (computer == true) {
+				col = new Color(0, 0, 255); // blue
+				if (onNotify == true)
+					col = notifyComputerColor; // notify blue
 
-                  }
-	}
-}
+				if (sWild.equals("17") || sWild.equals("26"))// losers orange
+				{
+					compCol = new Color(255, 140, 0);
+					if (onNotify == true)
+						compCol = new Color(255, 165, 0);
+				} else if (sWild.equals("23"))// crazyhouse pink
+				{
+					compCol = new Color(255, 20, 147);
+					if (onNotify == true)
+						compCol = new Color(238, 130, 238);
+				} else {
+					compCol = new Color(255, 0, 0);
+					if (onNotify == true)
+						compCol = new Color(255, 99, 71);
+				}
+			} else {
+				if (sWild.equals("17") || sWild.equals("26"))// losers orange
+				{
+					col = new Color(255, 140, 0);
+					if (onNotify == true) {
+						col = new Color(255, 165, 0);
+						compCol = new Color(255, 140, 0);
+					}
+				} else if (sWild.equals("23"))// crazyhouse pink
+				{
+					col = new Color(255, 20, 147);
+					if (onNotify == true) {
+						col = new Color(238, 130, 238);
+						compCol = new Color(255, 20, 147);
+					}
+				} else {
+					col = new Color(255, 0, 0);
+					if (onNotify == true) {
+						col = new Color(255, 99, 71);
+						compCol = new Color(255, 0, 0);
+					}
 
-String theTitles="";
-if(sProvisional.equals("0") || sProvisional.equals("1"))
-	sTitles = sTitles + " P";
-if(sTitles.length() > 0)
-theTitles="("+ sTitles + ")";
+				}
+			}
+		}
 
-String category=sRatingType;
-if(sWild.equals("0"))
-category=category + " ";
-else
-category =category + " w" + sWild + " ";
+		String theTitles = "";
+		if (sProvisional.equals("0") || sProvisional.equals("1"))
+			sTitles = sTitles + " P";
+		if (sTitles.length() > 0)
+			theTitles = "(" + sTitles + ")";
 
-String isNotified = "";
-if(onNotify == true)
-isNotified = "Notified: ";
+		String category = sRatingType;
+		if (sWild.equals("0"))
+			category = category + " ";
+		else
+			category = category + " w" + sWild + " ";
 
-String ratedType = sRated;
-if(sRated.equals("r"))
-ratedType = "rated";
-else if(sRated.equals("u"))
-ratedType = "unrated";
+		String isNotified = "";
+		if (onNotify == true)
+			isNotified = "Notified: ";
 
-seekText=isNotified + sName + theTitles + " " + sRating + " seeks " + category + sTime + " " + sInc + " " + ratedType + " " + sRange;
-if(sManual.equals("m"))
-seekText = seekText + " " + sManual;
-if(sFormula.equals("f"))
-seekText =seekText + " " + sFormula;
-if(sColor.equals("black") || sColor.equals("white"))
-   seekText = seekText + " " + sColor;
+		String ratedType = sRated;
+		if (sRated.equals("r"))
+			ratedType = "rated";
+		else if (sRated.equals("u"))
+			ratedType = "unrated";
 
-index=sIndex;
-name=sName;
-rating=sRating;
-wild=sWild;
-time=sTime;
-inc=sInc;
-rated=sRated;
-range=sRange;
-color=sColor;
-formula=sFormula;
-manual=sManual;
-listIndex=0;
-eTimeType=0;
-try {
-int iTime = Integer.parseInt(time);
-int iInc = Integer.parseInt(inc);
-etime = (double) (iTime + (double) 2/3 * iInc);
-if(etime >= 3 && etime < 15 )
-eTimeType=1;
-else if(etime >=15)
-eTimeType=2;
+		seekText = isNotified + sName + theTitles + " " + sRating + " seeks " + category + sTime + " " + sInc + " "
+				+ ratedType + " " + sRange;
+		if (sManual.equals("m"))
+			seekText = seekText + " " + sManual;
+		if (sFormula.equals("f"))
+			seekText = seekText + " " + sFormula;
+		if (sColor.equals("black") || sColor.equals("white"))
+			seekText = seekText + " " + sColor;
 
-}
-catch(Exception d){}
+		index = sIndex;
+		name = sName;
+		rating = sRating;
+		wild = sWild;
+		time = sTime;
+		inc = sInc;
+		rated = sRated;
+		range = sRange;
+		color = sColor;
+		formula = sFormula;
+		manual = sManual;
+		listIndex = 0;
+		eTimeType = 0;
+		try {
+			int iTime = Integer.parseInt(time);
+			int iInc = Integer.parseInt(inc);
+			etime = (double) (iTime + (double) 2 / 3 * iInc);
+			if (etime >= 3 && etime < 15)
+				eTimeType = 1;
+			else if (etime >= 15)
+				eTimeType = 2;
 
-}// end constructor
+		} catch (Exception d) {
+		}
 
+	}// end constructor
 
+	boolean isNotified(String sName) {
 
-boolean isNotified(String sName)
-{
+		for (int i = 0; i < notifyList.model.size(); i++)
+			if (notifyList.modeldata.elementAt(i).equals(sName))
+				return true;
 
-        for(int i=0; i < notifyList.model.size(); i++)
-	if(notifyList.modeldata.elementAt(i).equals(sName))
-	return true;
+		return false;
 
-	return false;
-
-}//end method is notified
+	}// end method is notified
 }// end class

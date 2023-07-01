@@ -38,238 +38,194 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 class listFrame extends JDialog// implements InternalFrameListener
 {
 
-	//subframe [] consoleSubframes;
-channels sharedVariables;
-JCheckBoxMenuItem notontop;
-ConcurrentLinkedQueue queue;
+	// subframe [] consoleSubframes;
+	channels sharedVariables;
+	JCheckBoxMenuItem notontop;
+	ConcurrentLinkedQueue queue;
+
 //subframe(JFrame frame, boolean mybool)
-listFrame(Multiframe master, channels sharedVariables1, ConcurrentLinkedQueue queue1)
-{     super(master, false);
-sharedVariables=sharedVariables1;
-queue=queue1;
+	listFrame(Multiframe master, channels sharedVariables1, ConcurrentLinkedQueue queue1) {
+		super(master, false);
+		sharedVariables = sharedVariables1;
+		queue = queue1;
 //super(frame, mybool);
-/* super("Activities Window- double click to select",
-          true, //resizable
-          true, //closable
-          true, //maximizable
-          true);//iconifiable
-  */
+		/*
+		 * super("Activities Window- double click to select", true, //resizable true,
+		 * //closable true, //maximizable true);//iconifiable
+		 */
 
- setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
- addWindowListener(new WindowAdapter() {
-    public void windowClosing(WindowEvent we) {
-	if(isVisible() && getMaximumSize() != getSize() && getMinimumSize() != getSize())
-	{
-		setBoardSize();
-	}
-         setVisible(false);
-    }
-});
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				if (isVisible() && getMaximumSize() != getSize() && getMinimumSize() != getSize()) {
+					setBoardSize();
+				}
+				setVisible(false);
+			}
+		});
 
-setTitle("Activities Window");
+		setTitle("Activities Window");
 // make menu
-JMenuBar myMenu = new JMenuBar();
+		JMenuBar myMenu = new JMenuBar();
 
- JMenu mymenu1 = new JMenu("Window");
+		JMenu mymenu1 = new JMenu("Window");
 
-   notontop = new JCheckBoxMenuItem("On Top Window");
-   notontop.setSelected(true);
-  notontop.addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-            myoutput data = new myoutput();
-            data.swapActivities=1;
-            queue.add(data);
+		notontop = new JCheckBoxMenuItem("On Top Window");
+		notontop.setSelected(true);
+		notontop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				myoutput data = new myoutput();
+				data.swapActivities = 1;
+				queue.add(data);
 
-            }
-       });
-  mymenu1.add(notontop);
+			}
+		});
+		mymenu1.add(notontop);
 
+		myMenu.add(mymenu1);
 
-myMenu.add(mymenu1);
-    
-    JMenu mymenu2 = new JMenu("Font");
+		JMenu mymenu2 = new JMenu("Font");
 
-    JMenuItem fontchange = new JMenuItem("Set Event List/Tournaments Font");
-    if(channels.fics) {
-        fontchange = new JMenuItem("Set Activites Font");
-    }
-    fontchange.addActionListener(new ActionListener() {
-             public void actionPerformed(ActionEvent e) {
-              master.setEventListFont();
+		JMenuItem fontchange = new JMenuItem("Set Event List/Tournaments Font");
+		if (channels.fics) {
+			fontchange = new JMenuItem("Set Activites Font");
+		}
+		fontchange.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				master.setEventListFont();
 
+			}
+		});
+		mymenu2.add(fontchange);
 
-               }
-          });
-     mymenu2.add(fontchange);
+		myMenu.add(mymenu2);
 
+		JMenu mymenu3 = new JMenu("Actions");
 
-   myMenu.add(mymenu2);
-    
-    
-    JMenu mymenu3 = new JMenu("Actions");
+		JMenuItem placeSeek = new JMenuItem("Place a Seek");
+		placeSeek.setSelected(true);
+		placeSeek.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				master.openSeekAGame();
 
-    JMenuItem placeSeek = new JMenuItem("Place a Seek");
-    placeSeek.setSelected(true);
-    placeSeek.addActionListener(new ActionListener() {
-             public void actionPerformed(ActionEvent e) {
-              master.openSeekAGame();
+			}
+		});
+		JMenuItem addFriend = new JMenuItem("Add a Friend");
+		addFriend.setSelected(true);
+		addFriend.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				master.openAddAFriend();
 
+			}
+		});
+		mymenu3.add(placeSeek);
+		mymenu3.add(addFriend);
 
-               }
-          });
-    JMenuItem addFriend = new JMenuItem("Add a Friend");
-    addFriend.setSelected(true);
-    addFriend.addActionListener(new ActionListener() {
-             public void actionPerformed(ActionEvent e) {
-              master.openAddAFriend();
+		myMenu.add(mymenu3);
 
-
-               }
-          });
-     mymenu3.add(placeSeek);
-    mymenu3.add(addFriend);
-
-
-    myMenu.add(mymenu3);
-    
-    
-setJMenuBar(myMenu);
-myMenu.setVisible(true);
+		setJMenuBar(myMenu);
+		myMenu.setVisible(true);
 
 //addInternalFrameListener(this);
-}// end constructor
+	}// end constructor
 
+	/************** jinternal frame listener ******************************/
 
-/************** jinternal frame listener ******************************/
+	void setBoardSize() {
+		if (isVisible() == false)
+			return;
+		sharedVariables.myActivitiesSizes.point0 = getLocation();
+		// set_string = set_string + "" + point0.x + " " + point0.y + " ";
+		sharedVariables.myActivitiesSizes.con0x = getWidth();
+		sharedVariables.myActivitiesSizes.con0y = getHeight();
+		// set_string = set_string + "" + con0x + " " + con0y + " ";
 
-    void setBoardSize()
-     {
-	if(isVisible() == false)
-        return;
-		sharedVariables.myActivitiesSizes.point0=getLocation();
-		//set_string = set_string + "" + point0.x + " " + point0.y + " ";
-		sharedVariables.myActivitiesSizes.con0x=getWidth();
-		sharedVariables.myActivitiesSizes.con0y=getHeight();
-		//set_string = set_string + "" + con0x + " " + con0y + " ";
-
-	 }
-/*
-
-      public void internalFrameClosing(InternalFrameEvent e) {
-	if(isVisible() && isMaximum() == false && isIcon() == false)
-	{
-		setBoardSize();
 	}
+	/*
+	 * 
+	 * public void internalFrameClosing(InternalFrameEvent e) { if(isVisible() &&
+	 * isMaximum() == false && isIcon() == false) { setBoardSize(); }
+	 * 
+	 * }
+	 * 
+	 * public void internalFrameClosed(InternalFrameEvent e) {
+	 * 
+	 * }
+	 * 
+	 * public void internalFrameOpened(InternalFrameEvent e) {
+	 * 
+	 * }
+	 * 
+	 * public void internalFrameIconified(InternalFrameEvent e) {
+	 * 
+	 * }
+	 * 
+	 * public void internalFrameDeiconified(InternalFrameEvent e) { if(isVisible()
+	 * && isMaximum() == false && isIcon() == false) { setBoardSize(); } }
+	 * 
+	 * public void internalFrameActivated(final InternalFrameEvent e) { //
+	 * System.out.println("fame activate"); if(isVisible() && isMaximum() == false
+	 * && isIcon() == false) { setBoardSize(); }
+	 * 
+	 * 
+	 * 
+	 * }
+	 * 
+	 * public void internalFrameDeactivated(InternalFrameEvent e) {
+	 * 
+	 * 
+	 * }
+	 * 
+	 */
 
-    }
+	/****************************************************************************************/
+	/*
+	 * void sharedVariables.openUrl(String myurl) {
+	 * 
+	 * try {
+	 * 
+	 * String os = System.getProperty("os.name").toLowerCase();
+	 * 
+	 * //Process p = Runtime.getRuntime().exec(cmdLine); Runtime rt =
+	 * Runtime.getRuntime(); if (os.indexOf( "win" ) >= 0) { String[] cmd = new
+	 * String[4]; cmd[0] = "cmd.exe"; cmd[1] = "/C"; cmd[2] = "start"; cmd[3] =
+	 * myurl;
+	 * 
+	 * rt.exec(cmd); } else if (os.indexOf( "mac" ) >= 0) {
+	 * 
+	 * Runtime runtime = Runtime.getRuntime(); if(myurl.startsWith("www."))
+	 * myurl="http://" + myurl; String[] args = { "osascript", "-e",
+	 * "open location \"" + myurl + "\"" }; try { Process process =
+	 * runtime.exec(args); } catch (IOException e) { // do what you want with this
+	 * // http://www.devdaily.com/java/mac-java-open-url-browser-osascript }
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * // rt.exec( "open " + myurl);
+	 * 
+	 * //String[] commandLine = { "safari", "http://www.javaworld.com/" }; //
+	 * Process process = Runtime.getRuntime().exec(commandLine);
+	 * 
+	 * 
+	 * } else { //prioritized 'guess' of users' preference String[] browsers =
+	 * {"epiphany", "firefox", "mozilla", "konqueror",
+	 * "netscape","opera","links","lynx"};
+	 * 
+	 * StringBuffer cmd = new StringBuffer(); for (int i=0; i<browsers.length; i++)
+	 * cmd.append( (i==0 ? "" : " || " ) + browsers[i] +" \"" + myurl + "\" ");
+	 * 
+	 * rt.exec(new String[] { "sh", "-c", cmd.toString() });
+	 * //rt.exec("firefox http://www.google.com");
+	 * //System.out.println(cmd.toString());
+	 * 
+	 * 
+	 * }// end else }// end try catch(Exception e) {}
+	 * 
+	 * 
+	 * }
+	 */
 
-    public void internalFrameClosed(InternalFrameEvent e) {
-
-    }
-
-    public void internalFrameOpened(InternalFrameEvent e) {
-
-    }
-
-    public void internalFrameIconified(InternalFrameEvent e) {
-
-    }
-
-    public void internalFrameDeiconified(InternalFrameEvent e) {
-	if(isVisible() && isMaximum() == false && isIcon() == false)
-	{
-		setBoardSize();
-	}
-	   }
-
-    public void internalFrameActivated(final InternalFrameEvent e) {
-     // System.out.println("fame activate");
-	if(isVisible() && isMaximum() == false && isIcon() == false)
-	{
-		setBoardSize();
-	}
-
-
-
-    }
-
-    public void internalFrameDeactivated(InternalFrameEvent e) {
-
-
-    }
-
-*/
-
-/****************************************************************************************/
-/*void sharedVariables.openUrl(String myurl)
-{
-
-				try {
-
-				String os = System.getProperty("os.name").toLowerCase();
-
-					//Process p = Runtime.getRuntime().exec(cmdLine);
-				Runtime rt = Runtime.getRuntime();
-				if (os.indexOf( "win" ) >= 0)
-	            {
-				 String[] cmd = new String[4];
-	              cmd[0] = "cmd.exe";
-	              cmd[1] = "/C";
-	              cmd[2] = "start";
-	              cmd[3] = myurl;
-
-	              rt.exec(cmd);
-			  }
-			 else if (os.indexOf( "mac" ) >= 0)
-	           {
-
-	             Runtime runtime = Runtime.getRuntime();
-				   if(myurl.startsWith("www."))
-				   myurl="http://" + myurl;
-				   String[] args = { "osascript", "-e", "open location \"" + myurl + "\"" };
-				   try
-				   {
-				     Process process = runtime.exec(args);
-				   }
-				   catch (IOException e)
-				   {
-				     // do what you want with this
-				     // http://www.devdaily.com/java/mac-java-open-url-browser-osascript
-				   }
-
-
-
-
-
-
-	             // rt.exec( "open " + myurl);
-
-			//String[] commandLine = { "safari", "http://www.javaworld.com/" };
-			//  Process process = Runtime.getRuntime().exec(commandLine);
-
-
-	          }
-				else
-				{             //prioritized 'guess' of users' preference
-	              String[] browsers = {"epiphany", "firefox", "mozilla", "konqueror",
-	                  "netscape","opera","links","lynx"};
-
-	              StringBuffer cmd = new StringBuffer();
-	              for (int i=0; i<browsers.length; i++)
-	                cmd.append( (i==0  ? "" : " || " ) + browsers[i] +" \"" + myurl + "\" ");
-
-	              rt.exec(new String[] { "sh", "-c", cmd.toString() });
-	              //rt.exec("firefox http://www.google.com");
-	              //System.out.println(cmd.toString());
-
-
-				}// end else
-			}// end try
-			catch(Exception e)
-			{}
-
-
-}
- */
-
-}//end class
+}// end class

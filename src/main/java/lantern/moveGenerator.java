@@ -34,7 +34,7 @@ board is current board to generate from, this gets called by current postion but
 
 int generatePawnMoves(int [] from, int [] to, int [] board, int top, int color, int type, int iflipped)
 {
- // this method only does pseudo legality and is only used to check legality
+	// this method only does pseudo legality and is only used to check legality
  for(int a=0; a<64; a++)
 {
 
