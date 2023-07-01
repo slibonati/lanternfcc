@@ -1,2 +1,0 @@
-Main-Class: lantern.Lantern
-Class-Path: lantern_graphics_3_6_11.jar
