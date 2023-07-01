@@ -48,7 +48,7 @@ class docWriter {
 	subframe[] consoleSubframes;
 	chatframe[] consoleChatframes;
 	JTextPane consoles[];
-	gameboard myboards[];
+	Gameboard myboards[];
 	JTextPane[] gameconsoles;
 	int SUBFRAME_CONSOLES = 0;
 	int GAME_CONSOLES = 1;
@@ -56,7 +56,7 @@ class docWriter {
 	int[] allTabs;
 
 	docWriter(channels sharedVariables1, subframe[] consoleSubframes1, JTextPane[] consoles1, JTextPane[] gameconsoles1,
-			gameboard[] myboards1, chatframe[] consoleChatframes1) {
+			Gameboard[] myboards1, chatframe[] consoleChatframes1) {
 		consoles = consoles1;
 		sharedVariables = sharedVariables1;
 		consoleSubframes = consoleSubframes1;

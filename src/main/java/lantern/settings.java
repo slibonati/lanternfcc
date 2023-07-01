@@ -34,7 +34,7 @@ import java.util.StringTokenizer;
 
 class settings {
 
-	gameboard myboards[];
+	Gameboard myboards[];
 
 	subframe[] consoleSubframes;
 	String aFile;
@@ -54,7 +54,7 @@ class settings {
 		aFileLinux = "/multiframe/multi_settings.txt";
 	} // constructor
 
-	void saveNow(gameboard boards[], subframe frames[], channels sharedVariables) {
+	void saveNow(Gameboard boards[], subframe frames[], channels sharedVariables) {
 		myboards = boards;
 		consoleSubframes = frames;
 
@@ -1374,7 +1374,7 @@ class settings {
 
 	}// end method
 
-	boolean readNow(gameboard boards[], subframe frames[], channels sharedVariables, JTextPane consoles[],
+	boolean readNow(Gameboard boards[], subframe frames[], channels sharedVariables, JTextPane consoles[],
 			JTextPane gameconsoles[], String settingsComboMemory[][]) {
 		String fontStyle;
 		String fontSize;
@@ -2855,7 +2855,7 @@ class settings {
 								final int ch = Integer.parseInt(tokens.nextToken());
 								if (boar == 0) {
 
-									final gameboard finalboard = boards[boar];
+									final Gameboard finalboard = boards[boar];
 									final boolean useTopGames = sharedVariables.useTopGames;
 									SwingUtilities.invokeLater(new Runnable() {
 										@Override

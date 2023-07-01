@@ -78,14 +78,14 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 	JList myNameList;
 	JScrollPane listScroller;
 	JCheckBoxMenuItem listChoice;
-	gameboard[] myboards;
+	Gameboard[] myboards;
 	int blockInc = 23;
 	// subframe [] consoleSubframes;
 	docWriter myDocWriter;
 	// subframe(JFrame frame, boolean mybool)
 
 	subframe(channels sharedVariables1, JTextPane[] consoles1, ConcurrentLinkedQueue<myoutput> queue1,
-			docWriter myDocWriter1, gameboard[] myboards1, createWindows mycreator1) {
+			docWriter myDocWriter1, Gameboard[] myboards1, createWindows mycreator1) {
 
 		// super(frame, mybool);
 		super("Main Console " + (sharedVariables1.openConsoleCount), true, // resizable

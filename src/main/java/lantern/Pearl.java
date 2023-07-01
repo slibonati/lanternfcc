@@ -51,123 +51,112 @@ import javax.swing.filechooser.FileFilter;
 
 //import javax.jnlp.*;
 
-
 //make this Pearl for a pearl build and rename file Pearl.java. or Lantern for an icc build and rename file Lantern.java if you see it other way around
 // more instructons on fics vs icc build in channels.java were the static variable fics is declared.
 public class Pearl {
 	static Logger logger = org.slf4j.LoggerFactory.getLogger(Pearl.class);
 
-  public static void createFrame() {
-    Frame frame = new Frame();
-    frame.setBounds(100, 100, 300, 300);
-    frame.show();
+	public static void createFrame() {
+		Frame frame = new Frame();
+		frame.setBounds(100, 100, 300, 300);
+		frame.show();
 
-    double size[][] =
-      {{0.25, 0.25, 0.25, 0.25},
-       {50, TableLayout.FILL, 40, 40, 40}};
+		double size[][] = { { 0.25, 0.25, 0.25, 0.25 }, { 50, TableLayout.FILL, 40, 40, 40 } };
 
-    frame.setLayout (new TableLayout(size));
-  }
+		frame.setLayout(new TableLayout(size));
+	}
 
-  public static void main(String[] args) {
-    //public void init()
+	public static void main(String[] args) {
+		// public void init()
 
-    //{
-    try {
+		// {
+		try {
 
-      String os = System.getProperty("os.name").toLowerCase();
-      if (os.indexOf( "mac" ) >= 0) {
-        System.setProperty("apple.eawt.quitStrategy", "CLOSE_ALL_WINDOWS");
-        }
+			String os = System.getProperty("os.name").toLowerCase();
+			if (os.indexOf("mac") >= 0) {
+				System.setProperty("apple.eawt.quitStrategy", "CLOSE_ALL_WINDOWS");
+			}
 
-      if (os.indexOf( "win" ) >= 0)
-	UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-	// UIManager.setLookAndFeel( "com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-      else
-        UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.SystemLookAndFeel");
+			if (os.indexOf("win") >= 0)
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			else
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.SystemLookAndFeel");
 
-    } catch (Exception d) {
-		logger.error("exception encountered: ", d);
-    }
-    SwingUtilities.invokeLater(new Runnable() {
-        @Override
-          public void run() {
-          try {
-    final Multiframe frame = new Multiframe();
-    frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-    //DO_NOTHING_ON_CLOSE
-    if(channels.fics) {
-        frame.setTitle("Pearl Chess on FICS " + frame.sharedVariables.version);
-    } else {
-        frame.setTitle("Lantern Chess " + frame.sharedVariables.version);
-    }
-    
-    frame.setVisible(true);
+		} catch (Exception d) {
+			logger.error("exception encountered: ", d);
+		}
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					final Multiframe frame = new Multiframe();
+					frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+					
+					if (channels.fics) {
+						frame.setTitle("Pearl Chess on FICS " + frame.sharedVariables.version);
+					} else {
+						frame.setTitle("Lantern Chess " + frame.sharedVariables.version);
+					}
 
-    // uncomment below line to test name and pass saving
-    //passTest tester = new passTest();
+					frame.setVisible(true);
 
+					// uncomment below line to test name and pass saving
+					// passTest tester = new passTest();
 
-    //frame.setDefaultLookAndFeelDecorated(false);
+					// frame.setDefaultLookAndFeelDecorated(false);
 
+					frame.repaintTabs();
 
+					try {
+						frame.consoleSubframes[0].setSelected(true);
+					} catch (Exception dd) {
+						logger.error("exception encountered: ", dd);
+					}
 
+					// warning dialogue
 
-      
-      frame.repaintTabs();
+					String swarning = "This is a beta version of Mike's new Interface.  Game "
+							+ "play is possible but it's highly recommended you play unrated.  I want"
+							+ " more testing before rated play can happen.  Not all wilds are supported.";
 
+					if (frame.sharedVariables.ActivitiesOnTop) {
+						frame.myfirstlist.add(frame.sharedVariables.activitiesPanel);
+						frame.myfirstlist.notontop.setSelected(true);
+					} else {
+						frame.mysecondlist.add(frame.sharedVariables.activitiesPanel);
+						frame.mysecondlist.notontop.setSelected(false);
+					}
+					// Popup pframe = new Popup((JFrame) frame, true, swarning);
+					// pframe.setVisible(true);
+					try {
+						if (frame.sharedVariables.activitiesOpen && !frame.sharedVariables.activitiesNeverOpen)
+							frame.openActivities();
+					} catch (Exception badopen) {
+					}
 
-    try {
-      frame.consoleSubframes[0].setSelected(true);
-    } catch (Exception dd) {
-    	logger.error("exception encountered: ", dd);
-    }
+					try {
+						if (frame.sharedVariables.seeksOpen && !frame.sharedVariables.activitiesNeverOpen)
+							frame.openSeekGraph();
+					} catch (Exception badopen) {
+					}
 
-    // warning dialogue
+					try {
+						frame.myConnection = new connectionDialog(frame, frame.sharedVariables, frame.queue, false);
+						frame.myConnection.setLocation(frame.getLocation().x, frame.getLocation().y);
+						frame.myConnection.setVisible(true);
 
-    String swarning = "This is a beta version of Mike's new Interface.  Game " +
-      "play is possible but it's highly recommended you play unrated.  I want" +
-      " more testing before rated play can happen.  Not all wilds are supported.";
+					} catch (Exception bfocus) {
+					}
 
-    if (frame.sharedVariables.ActivitiesOnTop) {
-      frame.myfirstlist.add(frame.sharedVariables.activitiesPanel);
-      frame.myfirstlist.notontop.setSelected(true);
-    } else {
-      frame.mysecondlist.add(frame.sharedVariables.activitiesPanel);
-      frame.mysecondlist.notontop.setSelected(false);
-    }
-    //Popup pframe = new Popup((JFrame) frame, true, swarning);
-    //pframe.setVisible(true);
-    try {
-      if (frame.sharedVariables.activitiesOpen &&
-          !frame.sharedVariables.activitiesNeverOpen)
-        frame.openActivities();
-    } catch (Exception badopen) {}
+					try {
+						frame.sharedVariables.setDefaultWebBoardSize();
+					} catch (Exception duiii) {
+					}
+				} catch (Exception e1) {
+					logger.error("exception encountered: ", e1);
+				}
+			}
+		});
+	}
 
-    try {
-      if (frame.sharedVariables.seeksOpen &&
-          !frame.sharedVariables.activitiesNeverOpen)
-        frame.openSeekGraph();
-    } catch (Exception badopen) {}
-
-    try {
-      frame.myConnection =
-        new connectionDialog(frame, frame.sharedVariables, frame.queue, false);
-        frame.myConnection.setLocation(frame.getLocation().x, frame.getLocation().y);
-      frame.myConnection.setVisible(true);
-
-    } catch (Exception bfocus) {}
-
-    try {
-      frame.sharedVariables.setDefaultWebBoardSize();
-    }
-    catch(Exception duiii){}
-     } catch (Exception e1) {
-    	 logger.error("exception encountered: ", e1);
-          }
-        }
-      });
-  }
-
-}// end main class
-
+}

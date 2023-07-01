@@ -47,9 +47,7 @@ import java.math.BigInteger;
 
 import layout.TableLayout;
 
-//class gameboard extends JFrame implements ComponentListener,
-//WindowListener
-class gameboard extends JInternalFrame implements InternalFrameListener, ComponentListener {
+class Gameboard extends JInternalFrame implements InternalFrameListener, ComponentListener {
 	/*
 	 * void setSelected(boolean home) { return; } boolean isSelected() { return
 	 * false; }
@@ -72,7 +70,7 @@ class gameboard extends JInternalFrame implements InternalFrameListener, Compone
 	Timer autotimer;
 
 	Timer generalTimer;
-	gameboard passboard = this;
+	Gameboard passboard = this;
 	ConcurrentLinkedQueue<myoutput> queue;
 
 	ConcurrentLinkedQueue<newBoardData> gamequeue;
@@ -157,7 +155,7 @@ class gameboard extends JInternalFrame implements InternalFrameListener, Compone
 		}
 	}
 
-	gameboard(JTextPane consoles1[], subframe consoleSubframes1[], JTextPane gameconsoles1[],
+	Gameboard(JTextPane consoles1[], subframe consoleSubframes1[], JTextPane gameconsoles1[],
 			ConcurrentLinkedQueue<newBoardData> gamequeue1, int boardNumber, Image img1[],
 			ConcurrentLinkedQueue<myoutput> queue1, channels sharedVariables1, resourceClass graphics1,
 			docWriter myDocWriter1) {
@@ -399,10 +397,10 @@ class gameboard extends JInternalFrame implements InternalFrameListener, Compone
 			}
 		}// end paint components
 
-		overallpanel(gameboard theBoard) {
+		overallpanel(Gameboard theBoard) {
 		}
 
-		overallpanel(boolean firstTime, gameboard theBoard) {
+		overallpanel(boolean firstTime, Gameboard theBoard) {
 			if (firstTime == true) {
 				mypanel = new gameboardPanel(img, sharedVariables, gameData, queue, graphics);
 

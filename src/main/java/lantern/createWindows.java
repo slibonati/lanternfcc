@@ -45,7 +45,7 @@ class createWindows {
 
 	channels sharedVariables;
 	subframe[] consoleSubframes;
-	gameboard[] myboards;
+	Gameboard[] myboards;
 	JTextPane[] consoles;
 	JTextPane[] gameconsoles;
 	ConcurrentLinkedQueue<myoutput> queue;
@@ -59,7 +59,7 @@ class createWindows {
 	chatframe[] consoleChatframes;
 	Multiframe masterFrame;
 
-	createWindows(channels sharedVariables1, subframe[] consoleSubframes1, gameboard[] myboards1, JTextPane[] consoles1,
+	createWindows(channels sharedVariables1, subframe[] consoleSubframes1, Gameboard[] myboards1, JTextPane[] consoles1,
 			JTextPane[] gameconsoles1, ConcurrentLinkedQueue<myoutput> queue1, Image[] img1,
 			ConcurrentLinkedQueue<newBoardData> gamequeue1, webframe mywebframe1, resourceClass graphics1,
 			listFrame myfirstlist1, listInternalFrame mysecondlist1, docWriter myDocWriter1,
@@ -367,7 +367,7 @@ class createWindows {
 			if (myboards[boardNumber1] != null) {
 				myboards[boardNumber1].timerSafeCancel();
 			}
-			myboards[boardNumber1] = new gameboard(consoles, consoleSubframes, gameconsoles, gamequeue, boardNumber1,
+			myboards[boardNumber1] = new Gameboard(consoles, consoleSubframes, gameconsoles, gamequeue, boardNumber1,
 					img, queue, sharedVariables, graphics, myDocWriter);
 
 			int numb = boardNumber1 + 1;

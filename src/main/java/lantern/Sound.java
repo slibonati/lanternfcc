@@ -14,18 +14,11 @@ package lantern;
 *  General Public License for more details.
 */
 
-import java.applet.*;
-import java.io.*;
-import java.net.*;
-import javax.swing.*;
-
-import org.slf4j.Logger;
-
-import free.util.IOUtilities;
-import free.util.audio.AudioClip;
-
-import java.io.File;
+import java.applet.Applet;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -36,11 +29,13 @@ import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import javax.swing.JApplet;
+
+import org.slf4j.Logger;
 
 class Sound extends JApplet implements LineListener, Runnable {
 	
-	Logger logger = org.slf4j.LoggerFactory.getLogger(Pearl.class);
+	Logger logger = org.slf4j.LoggerFactory.getLogger(Sound.class);
 	
 	private java.applet.AudioClip song; // Sound player
 	private URL songPath; // Sound path
@@ -55,7 +50,7 @@ class Sound extends JApplet implements LineListener, Runnable {
 	 * The queue holding AudioClips for the player thread to play.
 	 */
 
-	ConcurrentLinkedQueue<URL> queue = new ConcurrentLinkedQueue();
+	ConcurrentLinkedQueue<URL> queue = new ConcurrentLinkedQueue<URL>();
 
 	Sound(String filename) {
 		try {
@@ -74,6 +69,7 @@ class Sound extends JApplet implements LineListener, Runnable {
 	Sound(URL songPath1) {
 
 		String os = System.getProperty("os.name").toLowerCase();
+		logger.info("os: {}", os);
 		if (os.indexOf("win") >= 0)
 			operatingSystem = "win";
 		else if (os.indexOf("mac") >= 0)
@@ -87,6 +83,7 @@ class Sound extends JApplet implements LineListener, Runnable {
 				free.util.audio.AudioClip unixClip = new free.util.audio.AudioClip(songPath1);
 				unixClip.play();
 			} catch (Exception dui) {
+				logger.error("exception encountered: ", dui);
 			}
 		} else if (operatingSystem.equals("unix")) {
 
@@ -162,7 +159,7 @@ class Sound extends JApplet implements LineListener, Runnable {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException ex) {
-						ex.printStackTrace();
+						logger.error("exception encountered: ", ex);
 					}
 				}
 
@@ -218,6 +215,6 @@ class Sound extends JApplet implements LineListener, Runnable {
 			song = Applet.newAudioClip(songPath); // Load
 			song.play();
 		}
-	}// end play class
+	}
 
-}// end sound
+}

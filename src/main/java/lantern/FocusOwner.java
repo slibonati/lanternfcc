@@ -53,7 +53,7 @@ class FocusOwner {
 	boolean board;
 	int number;
 
-	FocusOwner(channels sharedVariables, subframe[] consoleSubframes, gameboard[] myboards) {
+	FocusOwner(channels sharedVariables, subframe[] consoleSubframes, Gameboard[] myboards) {
 
 		console = false;/// if it doesnt set one of these to true nobody gets it
 		number = 0;

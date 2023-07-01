@@ -32,11 +32,11 @@ import layout.TableLayout;
 public class autoExamDialog extends JDialog implements ChangeListener, ActionListener {
 
 	private channels sVars;
-	private gameboard[] myboards;
+	private Gameboard[] myboards;
 	private SpinnerNumberModel model;
 	private JCheckBox showf;
 
-	public autoExamDialog(JFrame frame, boolean mybool, channels sVars, gameboard[] myboards) {
+	public autoExamDialog(JFrame frame, boolean mybool, channels sVars, Gameboard[] myboards) {
 		super(frame, "Auto Examine", mybool);
 		this.sVars = sVars;
 		this.myboards = myboards;

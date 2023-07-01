@@ -228,7 +228,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 	// Queue<myoutput> queue;
 
 	chessbot4 client;
-	gameboard[] myboards;
+	Gameboard[] myboards;
 	Image[] img;
 	ConcurrentLinkedQueue<newBoardData> gamequeue;
 	// Andrey says:
@@ -242,7 +242,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 	class MyFocusTraversalPolicy extends ContainerOrderFocusTraversalPolicy {
 
 		protected boolean accept(Component aComp) {
-			if (aComp instanceof subframe || aComp instanceof gameboard)
+			if (aComp instanceof subframe || aComp instanceof Gameboard)
 				return super.accept(aComp);
 
 			return false; // JLabel and JPanel.
@@ -269,7 +269,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		} catch (Exception duiseeek) {
 		}
 
-		myboards = new gameboard[sharedVariables.maxGameTabs];
+		myboards = new Gameboard[sharedVariables.maxGameTabs];
 		for (int bbo = 0; bbo < sharedVariables.maxGameTabs; bbo++)
 			myboards[bbo] = null;
 

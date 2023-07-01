@@ -93,7 +93,7 @@ class chessbot4 implements Runnable {
 	ConcurrentLinkedQueue<newBoardData> gamequeue;
 	ConcurrentLinkedQueue<newBoardData> listqueue = new ConcurrentLinkedQueue();
 	JTextPane consoles[];
-	gameboard myboards[];
+	Gameboard myboards[];
 	channels sharedVariables;
 	subframe[] consoleSubframes;
 	chatframe[] consoleChatframes;
@@ -117,7 +117,7 @@ class chessbot4 implements Runnable {
 
 	chessbot4(JTextPane gameconsoles1[], ConcurrentLinkedQueue<newBoardData> gamequeue1,
 			ConcurrentLinkedQueue<myoutput> queue1, JTextPane consoles1[], channels sharedVariables1,
-			gameboard myboards1[], subframe consoleSubframes1[], createWindows mycreator1, resourceClass graphics1,
+			Gameboard myboards1[], subframe consoleSubframes1[], createWindows mycreator1, resourceClass graphics1,
 			listClass eventsList1, listClass tournamentList1, listClass seeksList1, listClass computerSeeksList1,
 			listClass notifyList1, tableClass gameList1, gameFrame myGameList1, Multiframe masterFrame1,
 			chatframe[] consoleChatframes1, seekGraphFrame seekGraph1, Multiframe theMainFrame1,
@@ -6302,7 +6302,7 @@ class chessbot4 implements Runnable {
 			if (myboards[last] != null) {
 				myboards[last].timerSafeCancel();
 			}
-			myboards[last] = new gameboard(consoles, consoleSubframes, gameconsoles, gamequeue, last,
+			myboards[last] = new Gameboard(consoles, consoleSubframes, gameconsoles, gamequeue, last,
 					sharedVariables.img, queue, sharedVariables, graphics, myDocWriter);
 
 			// writeToConsole("success in making new game board");

@@ -41,9 +41,9 @@ import java.util.Collections;
 
 class toolbarCommands {
 
-	gameboard[] myboards;
+	Gameboard[] myboards;
 
-	toolbarCommands(gameboard[] myboards1) {
+	toolbarCommands(Gameboard[] myboards1) {
 		myboards = myboards1;
 
 	}

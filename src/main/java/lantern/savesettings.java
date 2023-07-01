@@ -33,14 +33,14 @@ import java.awt.event.*;
 
 class savesettings {
 
-	gameboard myboards[];
+	Gameboard myboards[];
 
 	subframe[] consoleSubframes;
 
 	savesettings() {
 	} // constructor we are not using now
 
-	void saveNow(gameboard boards[], subframe frames[], channels sharedVariables) {
+	void saveNow(Gameboard boards[], subframe frames[], channels sharedVariables) {
 		myboards = boards;
 		consoleSubframes = frames;
 
@@ -118,7 +118,7 @@ class savesettings {
 
 	}// end method
 
-	void readNow(gameboard boards[], subframe frames[], channels sharedVariables) {
+	void readNow(Gameboard boards[], subframe frames[], channels sharedVariables) {
 
 	}
 

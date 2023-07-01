@@ -54,12 +54,12 @@ class JDesktopPaneCustom extends JDesktopPane {
 			setBackground(sharedVariables.MainBackColor);
 	}
 
-	gameboard[] myboards;
+	Gameboard[] myboards;
 	JFrame myframe;
 	subframe[] consoleSubframes;
 	channels sharedVariables;
 
-	JDesktopPaneCustom(channels sharedVariables1, gameboard[] myboards1, subframe[] consoleSubframes1,
+	JDesktopPaneCustom(channels sharedVariables1, Gameboard[] myboards1, subframe[] consoleSubframes1,
 			JFrame myframe1) {
 		sharedVariables = sharedVariables1;
 		myboards = myboards1;
