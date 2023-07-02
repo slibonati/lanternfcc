@@ -33,10 +33,10 @@ class CustomizeExcludedBoardsDialog extends JDialog {
 	JCheckBox[] myBoards;
 	int Boards = 1;
 	JPanel checkPanel = new JPanel();
-	channels sharedVariables;
+	Channels sharedVariables;
 	int notIndex;
 
-	CustomizeExcludedBoardsDialog(JFrame frame, boolean mybool, channels sharedVariables1, resourceClass graphics1,
+	CustomizeExcludedBoardsDialog(JFrame frame, boolean mybool, Channels sharedVariables1, resourceClass graphics1,
 			boolean[] excludedBoards1) {
 		super(frame, mybool);
 		sharedVariables = sharedVariables1;

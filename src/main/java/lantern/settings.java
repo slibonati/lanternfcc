@@ -41,20 +41,20 @@ class settings {
 	String aFileLinux;
 	String engineFile;
 
-	settings(channels sharedVariables) {
+	settings(Channels sharedVariables) {
 		aFile = "\\multiframe\\multi_settings.txt";
 
 		if (sharedVariables.standAlone == true) {
 			aFile = "multi_settings.txt";
-			if (channels.macClient) {
-				aFile = channels.privateDirectory + aFile;
+			if (Channels.macClient) {
+				aFile = Channels.privateDirectory + aFile;
 			}
 		}
 
 		aFileLinux = "/multiframe/multi_settings.txt";
 	} // constructor
 
-	void saveNow(Gameboard boards[], subframe frames[], channels sharedVariables) {
+	void saveNow(Gameboard boards[], subframe frames[], Channels sharedVariables) {
 		myboards = boards;
 		consoleSubframes = frames;
 
@@ -88,7 +88,7 @@ class settings {
 		// write engine out if possible
 		if (sharedVariables.engineDirectory != null) {
 			try {
-				engineFile = channels.privateDirectory + "lantern_engine_directory.ini";
+				engineFile = Channels.privateDirectory + "lantern_engine_directory.ini";
 
 				FileWriter efstream = new FileWriter(engineFile);
 				FileWrite out = new FileWrite();
@@ -768,7 +768,7 @@ class settings {
 
 // timestamp24hr
 		set_string = set_string + "[time-24hr] ";
-		if (channels.timeStamp24hr == true)
+		if (Channels.timeStamp24hr == true)
 			set_string = set_string + "1" + " ";
 		else
 			set_string = set_string + "0" + " ";
@@ -1374,7 +1374,7 @@ class settings {
 
 	}// end method
 
-	boolean readNow(Gameboard boards[], subframe frames[], channels sharedVariables, JTextPane consoles[],
+	boolean readNow(Gameboard boards[], subframe frames[], Channels sharedVariables, JTextPane consoles[],
 			JTextPane gameconsoles[], String settingsComboMemory[][]) {
 		String fontStyle;
 		String fontSize;
@@ -1384,7 +1384,7 @@ class settings {
 		String entry = "";
 
 		try {
-			engineFile = channels.privateDirectory + "lantern_engine_directory.ini";
+			engineFile = Channels.privateDirectory + "lantern_engine_directory.ini";
 			FileRead in = new FileRead();
 
 			String engineString = in.read2(engineFile);
@@ -2342,9 +2342,9 @@ class settings {
 					try {
 						int truth = Integer.parseInt(tokens.nextToken());
 						if (truth == 1)
-							channels.timeStamp24hr = true;
+							Channels.timeStamp24hr = true;
 						else
-							channels.timeStamp24hr = false;
+							Channels.timeStamp24hr = false;
 					} catch (Exception zzz) {
 					}
 				}

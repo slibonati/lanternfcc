@@ -69,13 +69,13 @@ class runningengine implements Runnable {
 	double lastCheckTime;
 	int movesInTenSeconds;
 	String lastWinboardLine;
-	channels sharedVariables;
+	Channels sharedVariables;
 	int BoardIndex;
 	JTextPane[] gameconsoles;
 	gamestuff gameData;
 	String pretext = "";
 
-	runningengine(channels sharedVariables1, int board, JTextPane[] gameconsoles1, gamestuff gameData1) {
+	runningengine(Channels sharedVariables1, int board, JTextPane[] gameconsoles1, gamestuff gameData1) {
 		gameconsoles = gameconsoles1;
 		sharedVariables = sharedVariables1;
 		BoardIndex = board;
@@ -344,8 +344,8 @@ class runningengine implements Runnable {
 					sendToEngine("setoption name UCI_AnalyseMode value true\n");
 					// sendToEngine("setoption name MultiPV value 3\n");
 					scriptList.clear();
-					if (channels.macClient) {
-						scripter.loadScript(scriptList, channels.publicDirectory + "lantern_uci_script.txt");
+					if (Channels.macClient) {
+						scripter.loadScript(scriptList, Channels.publicDirectory + "lantern_uci_script.txt");
 					} else {
 						scripter.loadScript(scriptList, "lantern_uci_script.txt");
 					}
@@ -364,7 +364,7 @@ class runningengine implements Runnable {
 					}
 					cachedMultipleLines = sharedVariables.uciMultipleLines;
 
-					if (sharedVariables.mygame[BoardIndex].engineFen.length() > 2 && !channels.fics) {
+					if (sharedVariables.mygame[BoardIndex].engineFen.length() > 2 && !Channels.fics) {
 						sharedVariables.mygame[sharedVariables.gamelooking[BoardIndex]].engineFen = fixFenIfNeeded(
 								sharedVariables.mygame[sharedVariables.gamelooking[BoardIndex]].engineFen);
 						sendToEngine("position fen "

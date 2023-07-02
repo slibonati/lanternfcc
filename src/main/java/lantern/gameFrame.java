@@ -41,7 +41,7 @@ import javax.swing.filechooser.FileFilter;
 class gameFrame extends JFrame {
 	JTable gametable;
 	tableClass mygametable;
-	channels sharedVariables;
+	Channels sharedVariables;
 	ConcurrentLinkedQueue<myoutput> queue;
 	JScrollPane listScroller;
 	Color listColor;
@@ -57,7 +57,7 @@ class gameFrame extends JFrame {
 	// subframe [] consoleSubframes;
 
 //subframe(JFrame frame, boolean mybool)
-	gameFrame(channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, tableClass mygametable1) {
+	gameFrame(Channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, tableClass mygametable1) {
 
 //super(frame, mybool);
 		/*
@@ -143,7 +143,7 @@ class gameFrame extends JFrame {
 								examineString = "Spos " + gameIndex;
 							else if (type1.equals("stored"))
 								examineString = "Spos " + StoredOpponent + " " + type2;
-							if (channels.fics) {
+							if (Channels.fics) {
 								examineString = examineString.replace("Spos", "Examine");
 								if (DataParsing.inFicsExamineMode) {
 									examineString = "$unexamine\n" + examineString;
@@ -261,7 +261,7 @@ class gameFrame extends JFrame {
 										examineString = "Examine " + type2 + " " + gameIndex;
 									else if (type1.equals("liblist")) {
 										examineString = "Examine " + type2 + " %" + gameIndex;
-										if (channels.fics) {
+										if (Channels.fics) {
 											examineString = "Examine " + type2 + " " + gameIndex;
 										}
 									}
@@ -269,7 +269,7 @@ class gameFrame extends JFrame {
 									else if (type1.equals("search"))
 										examineString = "Examine " + gameIndex;
 									myoutput output = new myoutput();
-									if (channels.fics) {
+									if (Channels.fics) {
 										output.data = examineString + "\n";
 										if (DataParsing.inFicsExamineMode) {
 											output.data = "$unexamine\n" + output.data;
@@ -295,13 +295,13 @@ class gameFrame extends JFrame {
 										examineString = "Sposition " + type2 + " " + gameIndex;
 									else if (type1.equals("liblist")) {
 										examineString = "Sposition " + type2 + " %" + gameIndex;
-										if (channels.fics) {
+										if (Channels.fics) {
 											examineString = "Sposition " + type2 + " " + gameIndex;
 										}
 									} else if (type1.equals("search"))
 										examineString = "Sposition " + gameIndex;
 									myoutput output = new myoutput();
-									if (channels.fics) {
+									if (Channels.fics) {
 										output.data = examineString + "\n";
 									} else {
 										output.data = "`c0`" + examineString + "\n";
@@ -324,7 +324,7 @@ class gameFrame extends JFrame {
 									else if (type1.equals("search"))
 										examineString = "Libappend " + gameIndex;
 									myoutput output = new myoutput();
-									if (channels.fics) {
+									if (Channels.fics) {
 										output.data = examineString + "\n";
 									} else {
 										output.data = "`c0`" + examineString + "\n";
@@ -337,7 +337,7 @@ class gameFrame extends JFrame {
 
 							});
 
-							if (!type1.equals("liblist") && !channels.fics)
+							if (!type1.equals("liblist") && !Channels.fics)
 								menu2.add(item2);
 							JMenuItem item3 = new JMenuItem("libdelete");
 							item3.addActionListener(new ActionListener() {
@@ -348,7 +348,7 @@ class gameFrame extends JFrame {
 										examineString = "Libdelete" + " %" + gameIndex;
 
 									myoutput output = new myoutput();
-									if (channels.fics) {
+									if (Channels.fics) {
 										output.data = examineString + "\n";
 									} else {
 										output.data = "`c0`" + examineString + "\n";
@@ -361,7 +361,7 @@ class gameFrame extends JFrame {
 
 							});
 
-							if (type1.equals("liblist") && !channels.fics)
+							if (type1.equals("liblist") && !Channels.fics)
 								menu2.add(item3);
 
 							JMenuItem item4 = new JMenuItem("savpgn");
@@ -373,7 +373,7 @@ class gameFrame extends JFrame {
 
 							});
 
-							if (!channels.fics) {
+							if (!Channels.fics) {
 								menu2.add(item4);
 							}
 
@@ -383,7 +383,7 @@ class gameFrame extends JFrame {
 
 									myoutput output = new myoutput();
 
-									if (channels.fics) {
+									if (Channels.fics) {
 										output.data = "Finger " + historyOpponent + "\n";
 									} else {
 										output.data = "`f1`" + "Finger " + historyOpponent + "\n";
@@ -404,7 +404,7 @@ class gameFrame extends JFrame {
 								public void actionPerformed(ActionEvent e) {
 
 									myoutput output = new myoutput();
-									if (channels.fics) {
+									if (Channels.fics) {
 										output.data = "History " + historyOpponent + "\n";
 									} else {
 										output.data = "`c0`" + "History " + historyOpponent + "\n";
@@ -465,8 +465,8 @@ class gameFrame extends JFrame {
 
 		try {
 			JFileChooser fc = new JFileChooser();
-			if (channels.macClient) {
-				fc.setCurrentDirectory(new File(channels.publicDirectory));
+			if (Channels.macClient) {
+				fc.setCurrentDirectory(new File(Channels.publicDirectory));
 			} else {
 				fc.setCurrentDirectory(new File("."));
 			}

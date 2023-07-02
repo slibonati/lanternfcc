@@ -25,7 +25,7 @@ class setConsoleTabTitles {
 
 	}
 
-	void createConsoleTabTitle(channels sharedVariables, int conNumber, subframe[] consoleSubframes, String Name) {
+	void createConsoleTabTitle(Channels sharedVariables, int conNumber, subframe[] consoleSubframes, String Name) {
 		String title = "";
 		int space = 0;
 		for (int a = 0; a < 500; a++) {

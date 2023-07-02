@@ -65,9 +65,9 @@ class customizeConsolelColorsDialog extends JDialog {
 	private JTextPane[] consoles;
 	private JTextPane[] gameconsoles;
 
-	channels sharedVariables;
+	Channels sharedVariables;
 
-	customizeConsolelColorsDialog(JFrame frame, boolean mybool, channels sharedVariables1, JTextPane[] consoles1,
+	customizeConsolelColorsDialog(JFrame frame, boolean mybool, Channels sharedVariables1, JTextPane[] consoles1,
 			JTextPane[] gameconsoles1) {
 		super(frame, mybool);
 		sharedVariables = sharedVariables1;
@@ -329,7 +329,7 @@ class customizeConsolelColorsDialog extends JDialog {
 		});
 
 //  non response Text color
-		String responeType = channels.fics ? "Server Text " : "Non Response Text ";
+		String responeType = Channels.fics ? "Server Text " : "Non Response Text ";
 		nonResponseTextLabel = new JPaintedLabel(responeType + "Color", sharedVariables);
 		nonResponseTextLabel.setForeground(sharedVariables.ForColor);
 		nonResponseTextLabel.fontType = 0;
@@ -514,7 +514,7 @@ class customizeConsolelColorsDialog extends JDialog {
 			}
 		});
 		int rows = 11;
-		if (channels.fics) {
+		if (Channels.fics) {
 			rows = 10;
 		}
 		pane.setLayout(new GridLayout(rows, 2)); // rows collums
@@ -581,7 +581,7 @@ class customizeConsolelColorsDialog extends JDialog {
 		pane.add(typedPanel);
 		pane.add(typedLabel);
 
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			JPanel responsePanel = new JPanel();
 			responsePanel.add(responseTextButton);
 			responsePanel.add(italicLabel6);

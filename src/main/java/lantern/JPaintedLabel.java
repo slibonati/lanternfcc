@@ -83,7 +83,7 @@ public class JPaintedLabel extends JLabel {
 
 	}
 
-	JPaintedLabel(String title, channels sharedVariables1, int tabNumber1) // tabNumber -1 for game, 0-maxConsoleTabs-1
+	JPaintedLabel(String title, Channels sharedVariables1, int tabNumber1) // tabNumber -1 for game, 0-maxConsoleTabs-1
 																			// for console
 	{
 		super(title, (int) CENTER_ALIGNMENT);
@@ -95,7 +95,7 @@ public class JPaintedLabel extends JLabel {
 		tabNumber = tabNumber1;
 	}
 
-	JPaintedLabel(String title, channels sharedVariables1) {
+	JPaintedLabel(String title, Channels sharedVariables1) {
 		super(title, (int) CENTER_ALIGNMENT);
 		mybackground = new Color(0, 0, 0);
 		sharedVariables = sharedVariables1;
@@ -161,7 +161,7 @@ public class JPaintedLabel extends JLabel {
 
 	Color mybackground;
 
-	channels sharedVariables;
+	Channels sharedVariables;
 
 	int fontInUse;
 	int fontType;

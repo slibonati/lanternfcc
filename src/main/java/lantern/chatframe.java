@@ -59,7 +59,7 @@ class chatframe extends JFrame implements ComponentListener, ActionListener // A
 	JComboBox tabChooser;
 	Highlighter myHighlighter;
 
-	channels sharedVariables;
+	Channels sharedVariables;
 	JTextPane[] consoles;
 	ConcurrentLinkedQueue<myoutput> queue;
 	String consoleTitle;
@@ -68,7 +68,7 @@ class chatframe extends JFrame implements ComponentListener, ActionListener // A
 	docWriter myDocWriter;
 
 //subframe(JFrame frame, boolean mybool)
-	chatframe(channels sharedVariables1, JTextPane consoles1[], ConcurrentLinkedQueue<myoutput> queue1,
+	chatframe(Channels sharedVariables1, JTextPane consoles1[], ConcurrentLinkedQueue<myoutput> queue1,
 			docWriter myDocWriter1) {
 
 //consoleSubframes=consoleSubframes1;

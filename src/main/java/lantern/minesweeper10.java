@@ -67,10 +67,10 @@ class minesweeper10 extends JInternalFrame implements ActionListener, InternalFr
 	minesweeperpanel panel;
 	Timer timer;
 
-	channels sharedVariables;
+	Channels sharedVariables;
 	JFrame masterFrame;
 
-	minesweeper10(channels sharedVariables1, JFrame masterFrame1) {
+	minesweeper10(Channels sharedVariables1, JFrame masterFrame1) {
 
 		super("MineSweeper", true, // resizable
 				true, // closable

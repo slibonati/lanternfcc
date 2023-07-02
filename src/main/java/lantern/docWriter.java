@@ -44,7 +44,7 @@ import free.util.*;
 import java.util.concurrent.locks.*;
 
 class docWriter {
-	channels sharedVariables;
+	Channels sharedVariables;
 	subframe[] consoleSubframes;
 	chatframe[] consoleChatframes;
 	JTextPane consoles[];
@@ -55,7 +55,7 @@ class docWriter {
 	int maxLinks = 75;
 	int[] allTabs;
 
-	docWriter(channels sharedVariables1, subframe[] consoleSubframes1, JTextPane[] consoles1, JTextPane[] gameconsoles1,
+	docWriter(Channels sharedVariables1, subframe[] consoleSubframes1, JTextPane[] consoles1, JTextPane[] gameconsoles1,
 			Gameboard[] myboards1, chatframe[] consoleChatframes1) {
 		consoles = consoles1;
 		sharedVariables = sharedVariables1;

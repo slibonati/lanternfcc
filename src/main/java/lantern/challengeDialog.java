@@ -42,7 +42,7 @@ class challengeDialog extends JDialog {
 	JCheckBox saveSettingsCheckBox;
 
 	JLabel ratedLabel;
-	channels sharedVariables;
+	Channels sharedVariables;
 
 	int wildarray[] = { 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
 			27, 28, 29, 30 };
@@ -52,7 +52,7 @@ class challengeDialog extends JDialog {
 	JTextField opponentfield;
 	ConcurrentLinkedQueue<myoutput> queue;
 
-	challengeDialog(final JFrame frame, boolean mybool, channels sharedVariables1,
+	challengeDialog(final JFrame frame, boolean mybool, Channels sharedVariables1,
 			ConcurrentLinkedQueue<myoutput> queue1, String opponent) {
 		super(frame, mybool);
 		queue = queue1;
@@ -175,7 +175,7 @@ class challengeDialog extends JDialog {
 
 				// dialouge success
 				// showErrorMessage("success! " + seekString);
-				if (channels.fics) {
+				if (Channels.fics) {
 					sendToIcs("$" + matchString + "\n");
 				} else {
 					sendToIcs("multi " + matchString + "\n");
@@ -243,7 +243,7 @@ class challengeDialog extends JDialog {
 
 	void sendToIcs(String mess) {
 		myoutput data = new myoutput();
-		data.data = channels.fics ? "$" + mess : "`c0`" + mess;
+		data.data = Channels.fics ? "$" + mess : "`c0`" + mess;
 		queue.add(data);
 
 	}
@@ -289,12 +289,12 @@ class challengeDialog extends JDialog {
 
 	void saveToICC() {
 		String serverSetCommand = "multi set-quietly";
-		if (channels.fics) {
+		if (Channels.fics) {
 			serverSetCommand = "$set";
 		}
 		sendToIcs(serverSetCommand + " time " + sharedVariables.myseek.time + "\n");
 		sendToIcs(serverSetCommand + " inc " + sharedVariables.myseek.inc + "\n");
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			sendToIcs(serverSetCommand + " wild " + sharedVariables.myseek.wild + "\n");
 			sendToIcs(serverSetCommand + " color " + sharedVariables.myseek.color + "\n");
 		}

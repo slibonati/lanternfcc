@@ -26,10 +26,10 @@ class LookupUserDialog extends JDialog {
 
 	JButton okButton;
 	JButton cancelButton;
-	channels sharedVariables;
+	Channels sharedVariables;
 	ConcurrentLinkedQueue<myoutput> queue;
 
-	LookupUserDialog(JFrame frame, boolean mybool, ConcurrentLinkedQueue<myoutput> queue1, channels settings) {
+	LookupUserDialog(JFrame frame, boolean mybool, ConcurrentLinkedQueue<myoutput> queue1, Channels settings) {
 		super(frame, mybool);
 		queue = queue1;
 		sharedVariables = settings;
@@ -104,7 +104,7 @@ class LookupUserDialog extends JDialog {
 		try {
 			if (field.getText().length() > 0) {
 				String mess = "`f1`Finger " + field.getText() + "\n";
-				if (channels.fics) {
+				if (Channels.fics) {
 					mess = sharedVariables.addHashWrapperToLookupUser("Finger " + field.getText() + "\n");
 				}
 				myoutput data = new myoutput();

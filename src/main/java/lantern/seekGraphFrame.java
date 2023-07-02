@@ -39,7 +39,7 @@ import java.awt.datatransfer.Clipboard;
 import java.lang.reflect.Method;
 
 class seekGraphFrame extends JInternalFrame implements InternalFrameListener {
-	channels sharedVariables;
+	Channels sharedVariables;
 	JFrame mymultiframe;
 	seekPanel mypanel;
 	ConcurrentLinkedQueue<myoutput> queue;
@@ -47,7 +47,7 @@ class seekGraphFrame extends JInternalFrame implements InternalFrameListener {
 	final JCheckBoxMenuItem humanSeeks;
 	final JCheckBoxMenuItem computerSeeks;
 
-	seekGraphFrame(channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, JFrame mymultiframe1) {
+	seekGraphFrame(Channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, JFrame mymultiframe1) {
 		super("Seek Graph", true, // resizable
 				true, // closable
 				true, // maximizable
@@ -127,7 +127,7 @@ class seekGraphFrame extends JInternalFrame implements InternalFrameListener {
 	}
 
 	void showSeekDialog() {
-		if (channels.fics && DataParsing.inFicsExamineMode) {
+		if (Channels.fics && DataParsing.inFicsExamineMode) {
 			String swarning = "To seek games exit examine mode first. Go to Game Menu / Unexamine at top.";
 			Popup pframe = new Popup((JFrame) mymultiframe, true, swarning, sharedVariables);
 			pframe.setVisible(true);

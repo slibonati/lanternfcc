@@ -39,12 +39,12 @@ class listFrame extends JDialog// implements InternalFrameListener
 {
 
 	// subframe [] consoleSubframes;
-	channels sharedVariables;
+	Channels sharedVariables;
 	JCheckBoxMenuItem notontop;
 	ConcurrentLinkedQueue queue;
 
 //subframe(JFrame frame, boolean mybool)
-	listFrame(Multiframe master, channels sharedVariables1, ConcurrentLinkedQueue queue1) {
+	listFrame(Multiframe master, Channels sharedVariables1, ConcurrentLinkedQueue queue1) {
 		super(master, false);
 		sharedVariables = sharedVariables1;
 		queue = queue1;
@@ -87,7 +87,7 @@ class listFrame extends JDialog// implements InternalFrameListener
 		JMenu mymenu2 = new JMenu("Font");
 
 		JMenuItem fontchange = new JMenuItem("Set Event List/Tournaments Font");
-		if (channels.fics) {
+		if (Channels.fics) {
 			fontchange = new JMenuItem("Set Activites Font");
 		}
 		fontchange.addActionListener(new ActionListener() {

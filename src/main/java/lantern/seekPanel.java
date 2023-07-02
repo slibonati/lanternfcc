@@ -59,14 +59,14 @@ class seekPanel extends JPanel implements MouseMotionListener, MouseListener {
 	Font seekTextFont;
 	int width;
 	int height;
-	channels sharedVariables;
+	Channels sharedVariables;
 	ConcurrentLinkedQueue<myoutput> queue;
 	int displayType;
 	static int aSeeks = 0;
 	static int hSeeks = 1;
 	static int cSeeks = 2;
 
-	seekPanel(channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, int displayType1) {
+	seekPanel(Channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, int displayType1) {
 
 		sharedVariables = sharedVariables1;
 		queue = queue1;
@@ -164,7 +164,7 @@ class seekPanel extends JPanel implements MouseMotionListener, MouseListener {
 			g2.drawString(" 2500", 0,
 					baseHeightBottom - seekGraphData.getHeightAt(2500) * seekHeight + seekTextFont.getSize() / 2);
 
-			if (channels.fics && DataParsing.inFicsExamineMode) {
+			if (Channels.fics && DataParsing.inFicsExamineMode) {
 				g2.drawString("Seeks show when not examining. Game / Unexamine", 65,
 						baseHeightBottom - seekGraphData.getHeightAt(1500) * seekHeight + seekTextFont.getSize() / 3);
 			}
@@ -423,7 +423,7 @@ class seekPanel extends JPanel implements MouseMotionListener, MouseListener {
 			else {
 
 				String play = "`c0`" + "play " + over.index + "\n";
-				if (channels.fics) {
+				if (Channels.fics) {
 					play = "$play " + over.index + "\n";
 				}
 				myoutput temp = new myoutput();
@@ -444,7 +444,7 @@ class seekPanel extends JPanel implements MouseMotionListener, MouseListener {
 			public void actionPerformed(ActionEvent e) {
 
 				String action = "`c0`" + "Finger " + Name + "\n";
-				if (channels.fics) {
+				if (Channels.fics) {
 					action = "$Finger " + Name + "\n";
 				}
 				myoutput output = new myoutput();
@@ -459,7 +459,7 @@ class seekPanel extends JPanel implements MouseMotionListener, MouseListener {
 			public void actionPerformed(ActionEvent e) {
 
 				String action = "`c0`" + "History " + Name + "\n";
-				if (channels.fics) {
+				if (Channels.fics) {
 					action = "$History " + Name + "\n";
 				}
 				myoutput output = new myoutput();
@@ -474,7 +474,7 @@ class seekPanel extends JPanel implements MouseMotionListener, MouseListener {
 			public void actionPerformed(ActionEvent e) {
 
 				String action = "`c0`" + "Vars " + Name + "\n";
-				if (channels.fics) {
+				if (Channels.fics) {
 					action = "$Var " + Name + "\n";
 				}
 				myoutput output = new myoutput();
@@ -490,7 +490,7 @@ class seekPanel extends JPanel implements MouseMotionListener, MouseListener {
 			public void actionPerformed(ActionEvent e) {
 
 				String action = "`c0`" + "Ping " + Name + "\n";
-				if (channels.fics) {
+				if (Channels.fics) {
 					action = "$Ping " + Name + "\n";
 				}
 				myoutput output = new myoutput();
@@ -505,7 +505,7 @@ class seekPanel extends JPanel implements MouseMotionListener, MouseListener {
 			public void actionPerformed(ActionEvent e) {
 
 				String action = "`c0`" + "Assess " + Name + "\n";
-				if (channels.fics) {
+				if (Channels.fics) {
 					action = "$Assess " + Name + "\n";
 				}
 				myoutput output = new myoutput();

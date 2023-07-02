@@ -40,7 +40,7 @@ class topGamesFrame extends JDialog// implements InternalFrameListener
 {
 
 	// subframe [] consoleSubframes;
-	channels sharedVariables;
+	Channels sharedVariables;
 	JCheckBoxMenuItem notontop;
 	listClass eventsList;
 	ConcurrentLinkedQueue queue;
@@ -53,7 +53,7 @@ class topGamesFrame extends JDialog// implements InternalFrameListener
 	int ENTRY_COL = 3;
 	int iconWidth = 42;
 
-	topGamesFrame(JFrame master, channels sharedVariables1, ConcurrentLinkedQueue queue1, listClass eventsList1) {
+	topGamesFrame(JFrame master, Channels sharedVariables1, ConcurrentLinkedQueue queue1, listClass eventsList1) {
 		super(master, false);
 		sharedVariables = sharedVariables1;
 		queue = queue1;

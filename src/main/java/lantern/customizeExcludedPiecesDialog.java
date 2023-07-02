@@ -32,11 +32,11 @@ class customizeExcludedPiecesDialog extends JDialog {
 	JCheckBox[] mypieces;
 	int Pieces = 0;
 	JPanel checkPanel = new JPanel();
-	channels sharedVariables;
+	Channels sharedVariables;
 	int notIndex;
 	boolean amWhite;
 
-	customizeExcludedPiecesDialog(JFrame frame, boolean mybool, channels sharedVariables1, resourceClass graphics1,
+	customizeExcludedPiecesDialog(JFrame frame, boolean mybool, Channels sharedVariables1, resourceClass graphics1,
 			boolean[] excludedPieces1, boolean amWhite1) {
 		super(frame, mybool);
 		sharedVariables = sharedVariables1;

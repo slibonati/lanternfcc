@@ -51,7 +51,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 	listClass seeksList;
 	listClass computerSeeksList;
 	listClass notifyList;
-	channels sharedVariables;
+	Channels sharedVariables;
 	ConcurrentLinkedQueue<myoutput> queue;
 
 	JLabel tournamentLabel;
@@ -92,7 +92,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 	// subframe [] consoleSubframes;
 
 //subframe(JFrame frame, boolean mybool)
-	ActivitiesWindowPanel(Multiframe master, channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1,
+	ActivitiesWindowPanel(Multiframe master, Channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1,
 			listClass eventsList1, listClass seeksList1, listClass computerSeeksList1, listClass notifyList1,
 			listClass tournamentList1, Multiframe homeFrame1) {
 
@@ -160,7 +160,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 		 */
 		videoButton = new JButton();
 		videoButton.setText("Open Videos Page");
-		if (channels.fics) {
+		if (Channels.fics) {
 			videoButton.setText("Open Ficsgames.org");
 		}
 		videoButton.addActionListener(new ActionListener() {
@@ -169,7 +169,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 			}
 		});
 		eventsLabel = new JLabel("Events List", SwingConstants.CENTER);
-		if (channels.fics) {
+		if (Channels.fics) {
 			eventsLabel = new JLabel("Training", SwingConstants.CENTER);
 		}
 		tournamentLabel = new JLabel("Tournaments", SwingConstants.CENTER);
@@ -456,7 +456,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 					myoutput data = new myoutput();
 					data.consoleNumber = 0;
 					data.data = "`c0`" + watch + "\n";
-					if (channels.fics) {
+					if (Channels.fics) {
 						data.data = "$" + watch + "\n";
 					}
 					queue.add(data);
@@ -467,7 +467,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 					myoutput data = new myoutput();
 					data.consoleNumber = 0;
 					data.data = "`c0`" + join + "\n";
-					if (channels.fics) {
+					if (Channels.fics) {
 						data.data = "$" + join + "\n";
 					}
 					queue.add(data);
@@ -615,7 +615,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 				setLabelSelected(sharedVariables.activitiesTabNumber);
 				theEventsList.setModel(eventsList.eventsTable);
 				setEventTournamentTableProperties();
-				if (!channels.fics) {
+				if (!Channels.fics) {
 					videoButton.setText("Open Videos Page");
 					removeActionListeners(videoButton);
 					videoButton.addActionListener(new ActionListener() {
@@ -947,7 +947,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 		h2.addComponent(computerSeeksLabel, GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE);
 		h2.addComponent(eventsLabel, GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE);
 		h2.addComponent(notifyLabel, GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			h2.addComponent(tournamentLabel, GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE);
 			h2.addComponent(corrLabel, GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE);
 		}
@@ -992,7 +992,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 		v9.addComponent(seeksLabel);
 		v9.addComponent(computerSeeksLabel);
 
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			v9.addComponent(tournamentLabel);
 			v9.addComponent(corrLabel);
 		}
@@ -1139,7 +1139,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 
 		myoutput output = new myoutput();
 		output.data = "`c0`" + join1 + "\n";
-		if (channels.fics) {
+		if (Channels.fics) {
 			output.data = "$" + join1 + "\n";
 		}
 
@@ -1149,7 +1149,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 		if (!join2.equals("")) {
 			output = new myoutput();
 			output.data = "`c0`" + join2 + "\n";
-			if (channels.fics) {
+			if (Channels.fics) {
 				output.data = "$" + join2 + "\n";
 			}
 
@@ -1167,7 +1167,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 		}
 		myoutput output = new myoutput();
 		output.data = "`c0`" + info + "\n";
-		if (channels.fics) {
+		if (Channels.fics) {
 			output.data = "$" + info + "\n";
 		}
 
@@ -1179,7 +1179,7 @@ class ActivitiesWindowPanel extends JPanel// implements InternalFrameListener
 	void watchMethod(String watch) {
 		myoutput output = new myoutput();
 		output.data = "`c0`" + watch + "\n";
-		if (channels.fics) {
+		if (Channels.fics) {
 			output.data = "$" + watch + "\n";
 		}
 

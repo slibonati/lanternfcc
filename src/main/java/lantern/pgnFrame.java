@@ -41,7 +41,7 @@ class pgnFrame extends JInternalFrame {
 	JTable gametable;
 	JLabel helpText;
 	tableClass mygametable;
-	channels sharedVariables;
+	Channels sharedVariables;
 	ConcurrentLinkedQueue<myoutput> queue;
 	JScrollPane listScroller;
 	Color listColor;
@@ -51,7 +51,7 @@ class pgnFrame extends JInternalFrame {
 	// subframe [] consoleSubframes;
 
 //subframe(JFrame frame, boolean mybool)
-	pgnFrame(channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, tableClass mygametable1,
+	pgnFrame(Channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, tableClass mygametable1,
 			pgnLoader myLoader1) {
 
 //super(frame, mybool);
@@ -90,7 +90,7 @@ class pgnFrame extends JInternalFrame {
 		MouseListener mouseListenerEvents = new MouseAdapter() {
 
 			void sendToFics(String s) {
-				if (channels.fics) {
+				if (Channels.fics) {
 					try {
 						Thread.sleep(75); // this should not call on main thread on fics
 					} catch (Exception dui) {
@@ -153,7 +153,7 @@ class pgnFrame extends JInternalFrame {
 			void enterExamineMode(int row) {
 
 				if (sharedVariables.myname != null && sharedVariables.myname.length() > 1 && !sharedVariables.isGuest()
-						&& !channels.fics) {
+						&& !Channels.fics) {
 
 					String event = myLoader.games.get(row).event;
 					String variant = myLoader.games.get(row).variant;
@@ -239,7 +239,7 @@ class pgnFrame extends JInternalFrame {
 					if (variant != null) {
 						wild = getWildNumber(variant);
 					}
-					if (channels.fics) {
+					if (Channels.fics) {
 						sendToFics("$unexamine\n");
 						if (wild == 27) {
 							sendToFics("$examine b atomic\n");
@@ -358,7 +358,7 @@ class pgnFrame extends JInternalFrame {
 					@Override
 					public void run() {
 						enterExamineMode(row);
-						if (!channels.fics) {
+						if (!Channels.fics) {
 							if (myLoader.games.get(row).iccFen != null)
 								send("multi loadfen " + myLoader.games.get(row).iccFen + "\n");
 							if (sharedVariables.myname != null && sharedVariables.myname.length() > 1
@@ -392,17 +392,17 @@ class pgnFrame extends JInternalFrame {
 																							// is result we got there
 						{
 							String prefix = "multi chessmove ";
-							if (channels.fics) {
+							if (Channels.fics) {
 								prefix = "";
 							}
 							String theMoveSent = prefix + myLoader.games.get(row).moves.get(a) + "\n";
-							if (!channels.fics) {
+							if (!Channels.fics) {
 								send(theMoveSent);
 							} else {
 								sendToFics(theMoveSent);
 							}
 						}
-						if (channels.fics) {
+						if (Channels.fics) {
 							sendToFics("$commit\n");
 						} else {
 							if (myLoader.games.get(row).iccResult != null)

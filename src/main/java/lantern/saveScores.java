@@ -43,7 +43,7 @@ class saveScores {
 
 	} // constructor
 
-	void saveNow(channels sharedVariables) {
+	void saveNow(Channels sharedVariables) {
 
 		String set_string = "";
 		FileWrite out = new FileWrite();
@@ -81,7 +81,7 @@ class saveScores {
 
 	}
 
-	void readNow(channels sharedVariables) {
+	void readNow(Channels sharedVariables) {
 		String dummy = "";
 		try {
 			FileRead in = new FileRead();

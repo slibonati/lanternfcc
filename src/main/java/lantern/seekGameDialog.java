@@ -53,7 +53,7 @@ class seekGameDialog extends JDialog {
 	JLabel ratedLabel;
 	JLabel formulaLabel;
 	JLabel manualLabel;
-	channels sharedVariables;
+	Channels sharedVariables;
 
 	int wildarray[] = { 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27,
 			28, 29, 30 };
@@ -61,7 +61,7 @@ class seekGameDialog extends JDialog {
 	String colorarray[] = { "auto", "white", "black" };
 	ConcurrentLinkedQueue<myoutput> queue;
 
-	seekGameDialog(final JFrame frame, boolean mybool, channels sharedVariables1,
+	seekGameDialog(final JFrame frame, boolean mybool, Channels sharedVariables1,
 			ConcurrentLinkedQueue<myoutput> queue1) {
 		super(frame, mybool);
 		queue = queue1;
@@ -207,7 +207,7 @@ class seekGameDialog extends JDialog {
 				if (formulaBox.isSelected() == true)
 					formula = "f";
 				else {
-					if (channels.fics) {
+					if (Channels.fics) {
 						formula = "";
 					} else {
 						formula = "n";
@@ -217,7 +217,7 @@ class seekGameDialog extends JDialog {
 				if (manualBox.isSelected() == true)
 					manual = "m";
 				else {
-					if (channels.fics) {
+					if (Channels.fics) {
 						manual = "";
 					} else {
 						manual = "a";
@@ -226,7 +226,7 @@ class seekGameDialog extends JDialog {
 
 				String seekString = "seek " + time + " " + inc + " w" + wild + " " + rated + " " + minseek + "-"
 						+ maxseek + " " + formula + " " + manual + " " + color;
-				if (channels.fics) {
+				if (Channels.fics) {
 					seekString = "seek " + time + " " + inc + " " + rated + " " + minseek + "-" + maxseek;
 					if (!formula.equals("")) {
 						seekString += " " + formula;
@@ -238,7 +238,7 @@ class seekGameDialog extends JDialog {
 
 				// dialouge success
 				// showErrorMessage("success! " + seekString);
-				if (channels.fics) {
+				if (Channels.fics) {
 					sendToIcs(seekString + "\n");
 				} else {
 					sendToIcs("multi " + seekString + "\n");
@@ -368,7 +368,7 @@ class seekGameDialog extends JDialog {
 
 	void sendToIcs(String mess) {
 		myoutput data = new myoutput();
-		if (channels.fics) {
+		if (Channels.fics) {
 			data.data = mess;
 		} else {
 			data.data = "`c0`" + mess;
@@ -439,7 +439,7 @@ class seekGameDialog extends JDialog {
 	}
 
 	void saveToICC() {
-		if (channels.fics) {
+		if (Channels.fics) {
 			sendToIcs("$set time " + sharedVariables.myseek.time + "\n");
 			sendToIcs("$set inc " + sharedVariables.myseek.inc + "\n");
 			if (!sharedVariables.guest) {

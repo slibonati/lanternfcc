@@ -74,9 +74,9 @@ class listClass {
 // we are storing events in both a table and list
 
 		if (type.equals("Events") || type.equals("Tournaments")) {
-			joinIcon = new ImageIcon(channels.eventsImages.get(0));
-			watchIcon = new ImageIcon(channels.eventsImages.get(1));
-			infoIcon = new ImageIcon(channels.eventsImages.get(2));
+			joinIcon = new ImageIcon(Channels.eventsImages.get(0));
+			watchIcon = new ImageIcon(Channels.eventsImages.get(1));
+			infoIcon = new ImageIcon(Channels.eventsImages.get(2));
 
 			Object[][] tableData = {
 					{ joinIcon, watchIcon, infoIcon, "Click the icon on events below for Join, Watch and Info" } };

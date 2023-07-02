@@ -25,7 +25,7 @@ import javax.swing.event.ChangeListener;
 class customizeChannelQtellsDialog extends JDialog {
 	// JTextField field;
 	JSpinner field;
-	channels sharedVariables;
+	Channels sharedVariables;
 
 	JRadioButton allCheckBox;
 	JRadioButton qtellCheckBox;
@@ -33,7 +33,7 @@ class customizeChannelQtellsDialog extends JDialog {
 
 	JLabel update;
 
-	customizeChannelQtellsDialog(JFrame frame, boolean mybool, channels sharedVariables1, final int tabNum) {
+	customizeChannelQtellsDialog(JFrame frame, boolean mybool, Channels sharedVariables1, final int tabNum) {
 		super(frame, mybool);
 		setTitle("Customize Channel Qtells on Tab");
 		sharedVariables = sharedVariables1;

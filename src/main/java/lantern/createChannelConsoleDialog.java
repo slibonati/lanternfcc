@@ -23,11 +23,11 @@ import javax.swing.JDialog;
 class createChannelConsoleDialog extends JDialog {
 	JTextField field;
 	JFrame frame2;
-	channels sharedVariables;
+	Channels sharedVariables;
 	createWindows mycreator;
 	subframe[] consoleSubframes;
 
-	createChannelConsoleDialog(JFrame frame, boolean mybool, channels sharedVariables1, createWindows mycreator1,
+	createChannelConsoleDialog(JFrame frame, boolean mybool, Channels sharedVariables1, createWindows mycreator1,
 			subframe[] consoleSubframes1) {
 		super(frame, mybool);
 

@@ -47,7 +47,7 @@ class CorrespondenceViewPanel extends JPanel// implements InternalFrameListener
 {
 	JTable corrTable;
 	JScrollPane scrollPane;
-	channels sharedVariables;
+	Channels sharedVariables;
 	ConcurrentLinkedQueue<myoutput> queue;
 	Multiframe homeFrame;
 	JLabel dummyLabel;
@@ -62,7 +62,7 @@ class CorrespondenceViewPanel extends JPanel// implements InternalFrameListener
 	String openText = "Make Open";
 	String closedtext = "Make Closed";
 
-	CorrespondenceViewPanel(Multiframe master, channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1) {
+	CorrespondenceViewPanel(Multiframe master, Channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1) {
 		sharedVariables = sharedVariables1;
 		queue = queue1;
 		sharedVariables.corrPanel = this;

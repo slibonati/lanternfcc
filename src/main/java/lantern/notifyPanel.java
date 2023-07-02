@@ -39,14 +39,14 @@ class notifyPanel extends JPanel// implements InternalFrameListener
 {
 
 	// subframe [] consoleSubframes;
-	channels sharedVariables;
+	Channels sharedVariables;
 	listClass notifyList;
 	ConcurrentLinkedQueue queue;
 	JList theNotifyList;
 	JScrollPane notifylistScroller;
 	int lastSelectedIndex = -1;
 
-	notifyPanel(channels sharedVariables1, ConcurrentLinkedQueue queue1, listClass notifyList1) {
+	notifyPanel(Channels sharedVariables1, ConcurrentLinkedQueue queue1, listClass notifyList1) {
 		sharedVariables = sharedVariables1;
 		queue = queue1;
 		notifyList = notifyList1;
@@ -97,7 +97,7 @@ class notifyPanel extends JPanel// implements InternalFrameListener
 						public void actionPerformed(ActionEvent e) {
 
 							String action = "`c0`" + "Observe " + watchName + "\n";
-							if (channels.fics) {
+							if (Channels.fics) {
 								action = "$Observe " + watchName + "\n";
 							}
 
@@ -191,7 +191,7 @@ class notifyPanel extends JPanel// implements InternalFrameListener
 						public void actionPerformed(ActionEvent e) {
 
 							String action = "`c0`" + "History " + watchName + "\n";
-							if (channels.fics) {
+							if (Channels.fics) {
 								action = "$History " + watchName + "\n";
 							}
 							myoutput output = new myoutput();
@@ -206,7 +206,7 @@ class notifyPanel extends JPanel// implements InternalFrameListener
 						public void actionPerformed(ActionEvent e) {
 
 							String action = "`c0`" + "Finger " + watchName + "\n";
-							if (channels.fics) {
+							if (Channels.fics) {
 								action = "$Finger " + watchName + "\n";
 							}
 							myoutput output = new myoutput();
@@ -222,7 +222,7 @@ class notifyPanel extends JPanel// implements InternalFrameListener
 						public void actionPerformed(ActionEvent e) {
 
 							String action = "`c0`" + "Games " + watchName + "\n";
-							if (channels.fics) {
+							if (Channels.fics) {
 								action = "$Games " + watchName + "\n";
 							}
 							myoutput output = new myoutput();
@@ -238,7 +238,7 @@ class notifyPanel extends JPanel// implements InternalFrameListener
 						public void actionPerformed(ActionEvent e) {
 
 							String action = "`c0`" + "Ping " + watchName + "\n";
-							if (channels.fics) {
+							if (Channels.fics) {
 								action = "$Ping " + watchName + "\n";
 							}
 							myoutput output = new myoutput();

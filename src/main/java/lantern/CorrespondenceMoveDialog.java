@@ -41,7 +41,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 class CorrespondenceMoveDialog extends JDialog {
-	channels sharedVariables;
+	Channels sharedVariables;
 	ConcurrentLinkedQueue<myoutput> queue;
 	JFrame homeFrame;
 	JTextArea textView;
@@ -54,7 +54,7 @@ class CorrespondenceMoveDialog extends JDialog {
 	JTextField input;
 	String gameNumber;
 
-	CorrespondenceMoveDialog(JFrame master, channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1,
+	CorrespondenceMoveDialog(JFrame master, Channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1,
 			String gNumber, String whoIsPlaying) {
 		super(master, false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

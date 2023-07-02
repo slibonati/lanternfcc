@@ -28,10 +28,10 @@ import layout.TableLayout;
 /**/
 class userButtonsDialog extends JDialog implements ActionListener {
 
-	channels sVars;
+	Channels sVars;
 	JTextField[] mypanes;
 
-	userButtonsDialog(JFrame myframe, channels sVars) {
+	userButtonsDialog(JFrame myframe, Channels sVars) {
 		super(myframe, "Customize User Buttons", false);
 		this.sVars = sVars;
 

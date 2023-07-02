@@ -52,7 +52,7 @@ class toolbarCommands {
 
 	}
 
-	void dispatchCommand(int button, int con, boolean game, channels sharedVariables,
+	void dispatchCommand(int button, int con, boolean game, Channels sharedVariables,
 			ConcurrentLinkedQueue<myoutput> queue) {
 
 		if (sharedVariables.userButtonCommands[button].equals(""))
@@ -91,13 +91,13 @@ class toolbarCommands {
 
 		}
 
-		if (!channels.fics && sharedVariables.myname.length() > 0) {
+		if (!Channels.fics && sharedVariables.myname.length() > 0) {
 			if (game == false)
 				output.data = "`c" + con + "`" + mes;
 			else
 				output.data = "`g" + con + "`" + mes;
 
-		} else if (channels.fics && con > 0) {
+		} else if (Channels.fics && con > 0) {
 			output.data = sharedVariables.addHashTellWrapper(mes, con, true);
 		} else {
 			output.data = mes;

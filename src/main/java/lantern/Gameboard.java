@@ -54,7 +54,7 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 	 */
 	Image[] img;
 	int controlLength = 235;
-	channels sharedVariables;
+	Channels sharedVariables;
 	overallpanel overall;
 
 	// FileWriter fstream;
@@ -157,7 +157,7 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 
 	Gameboard(JTextPane consoles1[], subframe consoleSubframes1[], JTextPane gameconsoles1[],
 			ConcurrentLinkedQueue<newBoardData> gamequeue1, int boardNumber, Image img1[],
-			ConcurrentLinkedQueue<myoutput> queue1, channels sharedVariables1, resourceClass graphics1,
+			ConcurrentLinkedQueue<myoutput> queue1, Channels sharedVariables1, resourceClass graphics1,
 			docWriter myDocWriter1) {
 		super("Game Board" + (boardNumber), true, // resizable
 				true, // closable
@@ -587,7 +587,7 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 		myoutput data = new myoutput();
 		data.startengine = 1;
 		queue.add(data);
-		if (channels.fics) {
+		if (Channels.fics) {
 			sendUciMoves();
 		}
 	}
@@ -924,7 +924,7 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 
 			else {
 				sharedVariables.mygame[gameData.BoardIndex].state = sharedVariables.STATE_EXAMINING;
-				if (channels.fics) {
+				if (Channels.fics) {
 					sharedVariables.graphData = new seekGraphData();// dump seeks in examine mode on fics
 				}
 			}
@@ -961,7 +961,7 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 
 		setTitle(sharedVariables.mygame[gameData.BoardIndex].title);
 
-		if (sharedVariables.mygame[gameData.BoardIndex].state == sharedVariables.STATE_PLAYING && !channels.fics) {
+		if (sharedVariables.mygame[gameData.BoardIndex].state == sharedVariables.STATE_PLAYING && !Channels.fics) {
 			if (sharedVariables.myname.equals(WN)) {
 				sharedVariables.mygame[gameData.BoardIndex].myColor = "W";
 				// sharedVariables.mygame[gameData.BoardIndex].iflipped=0;
@@ -1005,7 +1005,7 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 	}
 
 	void logpgn() {
-		if (channels.fics) {
+		if (Channels.fics) {
 			logFicsGameToPGN();
 			return;
 		}
@@ -1022,16 +1022,16 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 	void setObservedPgnFile(double time, int wild) {
 
 		if (wild > 0)
-			sharedVariables.mygame[gameData.BoardIndex].observedPgnFile = channels.publicDirectory
+			sharedVariables.mygame[gameData.BoardIndex].observedPgnFile = Channels.publicDirectory
 					+ "lantern_owild.pgn";
 		else if (time < 3)
-			sharedVariables.mygame[gameData.BoardIndex].observedPgnFile = channels.publicDirectory
+			sharedVariables.mygame[gameData.BoardIndex].observedPgnFile = Channels.publicDirectory
 					+ "lantern_obullet.pgn";
 		else if (time < 15)
-			sharedVariables.mygame[gameData.BoardIndex].observedPgnFile = channels.publicDirectory
+			sharedVariables.mygame[gameData.BoardIndex].observedPgnFile = Channels.publicDirectory
 					+ "lantern_oblitz.pgn";
 		else
-			sharedVariables.mygame[gameData.BoardIndex].observedPgnFile = channels.publicDirectory
+			sharedVariables.mygame[gameData.BoardIndex].observedPgnFile = Channels.publicDirectory
 					+ "lantern_ostandard.pgn";
 	} // end method set observed pgn file
 
@@ -1166,7 +1166,7 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 			game += sharedVariables.mygame[gameData.BoardIndex].ficsResult + "\r\n";
 			game += "\r\n";
 			FileWrite writer = new FileWrite();
-			writer.writeAppend(game, channels.publicDirectory + "pearl-" + sharedVariables.whoAmI + ".pgn");
+			writer.writeAppend(game, Channels.publicDirectory + "pearl-" + sharedVariables.whoAmI + ".pgn");
 
 		} // end try
 		catch (Exception logging) {
@@ -1353,7 +1353,7 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 			if (sharedVariables.mygame[gameData.BoardIndex].myGameNumber == sharedVariables.ISOLATED_NUMBER)
 				sharedVariables.tabTitle[gameData.BoardIndex] = "SP";
 			else
-				sharedVariables.tabTitle[gameData.BoardIndex] = channels.gameOverTitle;
+				sharedVariables.tabTitle[gameData.BoardIndex] = Channels.gameOverTitle;
 
 			sharedVariables.tabChanged = gameData.BoardIndex;
 
@@ -1689,7 +1689,7 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 						whiteOnMove = true;
 
 					}
-					if (channels.fics) {
+					if (Channels.fics) {
 						if (sharedVariables.mygame[gameData.BoardIndex].currentPlayer.equals("W"))
 							whiteOnMove = true;
 						else
@@ -2080,7 +2080,7 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 				if ((sharedVariables.mygame[gameData.BoardIndex].state == sharedVariables.STATE_EXAMINING
 						|| sharedVariables.mygame[gameData.BoardIndex].state == sharedVariables.STATE_OBSERVING)
 						&& sharedVariables.engineOn == true && sharedVariables.engineBoard == gameData.BoardIndex
-						&& !channels.fics) {
+						&& !Channels.fics) {
 					// we allways make the engine moves for later but dont send
 					// unless of course the engine is on
 					if (sharedVariables.uci == false)
@@ -2346,7 +2346,7 @@ class Gameboard extends JInternalFrame implements InternalFrameListener, Compone
 		// sharedVariables.engineQueue.add(outgoing);
 
 		// myoutput outgoing2 = new myoutput();
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			String moves;
 			if (sharedVariables.mygame[gameData.BoardIndex].engineFen.length() > 2) {
 
@@ -2819,7 +2819,7 @@ class randomPieces {
 	int blackPieceNum;
 	int whitePieceNum;
 	int boardNum;
-	channels SharedVariables;
+	Channels SharedVariables;
 	boolean[] excludedPiecesWhite;
 	boolean[] excludedPiecesBlack;
 	boolean[] excludedBoards;
@@ -2940,9 +2940,9 @@ class randomPieces {
 } // end grpahics sub class
 
 class TimeDisplayClass {
-	channels sharedVariables;
+	Channels sharedVariables;
 
-	TimeDisplayClass(channels sharedVariables1) {
+	TimeDisplayClass(Channels sharedVariables1) {
 		sharedVariables = sharedVariables1;
 	}
 

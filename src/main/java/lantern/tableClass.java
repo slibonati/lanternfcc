@@ -69,12 +69,12 @@ class tableClass {
 		collumns.add("black name");
 		collumns.add("black rating");
 		collumns.add("Result");
-		if (channels.fics) {
+		if (Channels.fics) {
 			collumns.add("End");
 		}
 		collumns.add("Time Controls");
 		collumns.add("ECO");
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			collumns.add("Date Game Started");
 			collumns.add("Note");
 		}

@@ -41,7 +41,7 @@ public class customizeChannelsDialog extends JDialog implements ActionListener {
 	private List<Integer> qtellchannels;
 
 	private int tab;
-	private channels sVars;
+	private Channels sVars;
 	private subframe[] subs;
 
 	private int width = 450;
@@ -77,7 +77,7 @@ public class customizeChannelsDialog extends JDialog implements ActionListener {
 
 	private TableLayout layout;
 
-	public customizeChannelsDialog(JFrame frame, boolean mybool, int tab, channels sVars, subframe[] subs) {
+	public customizeChannelsDialog(JFrame frame, boolean mybool, int tab, Channels sVars, subframe[] subs) {
 		super(frame, "Customize Tab " + tab, mybool);
 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

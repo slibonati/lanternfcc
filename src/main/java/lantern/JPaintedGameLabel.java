@@ -76,7 +76,7 @@ public class JPaintedGameLabel extends JLabel {
 
 	}
 
-	JPaintedGameLabel(String title, channels sharedVariables1) {
+	JPaintedGameLabel(String title, Channels sharedVariables1) {
 		super(title, (int) CENTER_ALIGNMENT);
 		mybackground = new Color(0, 0, 0);
 		sharedVariables = sharedVariables1;
@@ -162,7 +162,7 @@ public class JPaintedGameLabel extends JLabel {
 
 	Color mybackground;
 
-	channels sharedVariables;
+	Channels sharedVariables;
 
 	int fontInUse;
 	int fontType;

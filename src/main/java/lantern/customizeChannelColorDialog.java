@@ -23,14 +23,14 @@ import javax.swing.JDialog;
 class customizeChannelColorDialog extends JDialog {
 	// JTextField field;
 	JSpinner field;
-	channels sharedVariables;
+	Channels sharedVariables;
 	JTextPane[] consoles;
 	JLabel boldLabel;
 	JLabel italicLabel;
 	JCheckBox boldCheckBox;
 	JCheckBox italicCheckBox;
 
-	customizeChannelColorDialog(JFrame frame, boolean mybool, channels sharedVariables1, JTextPane[] consoles1) {
+	customizeChannelColorDialog(JFrame frame, boolean mybool, Channels sharedVariables1, JTextPane[] consoles1) {
 		super(frame, mybool);
 		setTitle("Colorize/Apply Style");
 		sharedVariables = sharedVariables1;

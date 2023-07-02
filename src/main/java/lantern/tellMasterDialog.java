@@ -43,7 +43,7 @@ import javax.swing.event.ChangeEvent.*;
 import java.util.ArrayList;
 
 class tellMasterDialog extends JDialog {
-	channels sharedVariables;
+	Channels sharedVariables;
 	JButton OkButton;
 	JButton cancelButton;
 	JComboBox tabChoices;
@@ -55,7 +55,7 @@ class tellMasterDialog extends JDialog {
 	JLabel preamble2;
 	JLabel preamble3;
 
-	tellMasterDialog(JFrame frame, boolean mybool, channels sharedVariables1, final String handle, boolean soundOn,
+	tellMasterDialog(JFrame frame, boolean mybool, Channels sharedVariables1, final String handle, boolean soundOn,
 			boolean channelsOn) {
 		super(frame, mybool);
 		sharedVariables = sharedVariables1;

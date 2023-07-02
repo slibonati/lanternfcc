@@ -69,7 +69,7 @@ class Sound extends JApplet implements LineListener, Runnable {
 	Sound(URL songPath1) {
 
 		String os = System.getProperty("os.name").toLowerCase();
-		logger.info("os: {}", os);
+		
 		if (os.indexOf("win") >= 0)
 			operatingSystem = "win";
 		else if (os.indexOf("mac") >= 0)
@@ -77,7 +77,7 @@ class Sound extends JApplet implements LineListener, Runnable {
 		else
 			operatingSystem = "unix";
 
-		if (operatingSystem.equals("mac") || (operatingSystem.equals("win") && channels.firstSound == false)) {
+		if (operatingSystem.equals("mac") || (operatingSystem.equals("win") && Channels.firstSound == false)) {
 			try {
 
 				free.util.audio.AudioClip unixClip = new free.util.audio.AudioClip(songPath1);
@@ -99,7 +99,7 @@ class Sound extends JApplet implements LineListener, Runnable {
 		} else {
 
 			try {
-				channels.firstSound = false;
+				Channels.firstSound = false;
 				songPath = songPath1;
 				playNative player = new playNative();
 				Thread t = new Thread(player);
@@ -200,11 +200,11 @@ class Sound extends JApplet implements LineListener, Runnable {
 		LineEvent.Type type = event.getType();
 
 		if (type == LineEvent.Type.START) {
-			// System.out.println("Playback started.");
+			System.out.println("Playback started.");
 
 		} else if (type == LineEvent.Type.STOP) {
 			playCompleted = true;
-			// System.out.println("Playback completed.");
+			System.out.println("Playback completed.");
 		}
 
 	}

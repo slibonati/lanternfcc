@@ -31,7 +31,7 @@ import free.util.BrowserControl;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
-public class channels {
+public class Channels {
 	static boolean fics = true;
 	/*
 	 * Build Steps for a fics/Pearl versus icc/lantern build
@@ -440,7 +440,7 @@ public class channels {
 		return false;
 	}
 
-	channels() {
+	Channels() {
 		if (fics) {
 			myServer = "FICS";
 			version = "v1.0l";
@@ -633,7 +633,7 @@ public class channels {
 		showMaterialCount = true;
 		showRatings = true;
 		showFlags = true;
-		if (channels.fics) {
+		if (Channels.fics) {
 			showPallette = false;
 		} else {
 			showPallette = true;
@@ -1150,7 +1150,7 @@ public class channels {
 		rightClickMenu.add("Vars");
 		rightClickMenu.add("Google");
 		rightClickMenu.add("History");
-		if (channels.fics) {
+		if (Channels.fics) {
 			rightClickMenu.add("Journal");
 		} else {
 			rightClickMenu.add("Liblist");
@@ -1160,7 +1160,7 @@ public class channels {
 		rightClickMenu.add("Observe");
 		rightClickMenu.add("Follow");
 		rightClickMenu.add("Challenge");
-		if (channels.fics) {
+		if (Channels.fics) {
 			rightClickMenu.add("In");
 		} else {
 			rightClickMenu.add("Ping");
@@ -1169,7 +1169,7 @@ public class channels {
 		rightClickMenu.add("Pstat");
 		rightClickMenu.add("Assess");
 		rightClickMenu.add("Games");
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			rightClickMenu.add("Quarantine");
 		}
 

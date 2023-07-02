@@ -94,7 +94,7 @@ class chessbot4 implements Runnable {
 	ConcurrentLinkedQueue<newBoardData> listqueue = new ConcurrentLinkedQueue();
 	JTextPane consoles[];
 	Gameboard myboards[];
-	channels sharedVariables;
+	Channels sharedVariables;
 	subframe[] consoleSubframes;
 	chatframe[] consoleChatframes;
 	JTextPane gameconsoles[];
@@ -116,7 +116,7 @@ class chessbot4 implements Runnable {
 	DataParsing ficsParser;
 
 	chessbot4(JTextPane gameconsoles1[], ConcurrentLinkedQueue<newBoardData> gamequeue1,
-			ConcurrentLinkedQueue<myoutput> queue1, JTextPane consoles1[], channels sharedVariables1,
+			ConcurrentLinkedQueue<myoutput> queue1, JTextPane consoles1[], Channels sharedVariables1,
 			Gameboard myboards1[], subframe consoleSubframes1[], createWindows mycreator1, resourceClass graphics1,
 			listClass eventsList1, listClass tournamentList1, listClass seeksList1, listClass computerSeeksList1,
 			listClass notifyList1, tableClass gameList1, gameFrame myGameList1, Multiframe masterFrame1,
@@ -433,7 +433,7 @@ class chessbot4 implements Runnable {
 					try {
 						if (masterFrame.topGamesFlipLabel != null) {
 							masterFrame.topGamesFlipLabel.setText("  Flip  ");
-							if (channels.fics) {
+							if (Channels.fics) {
 								masterFrame.topGamesFlipLabel.setVisible(true);
 							}
 						}
@@ -452,7 +452,7 @@ class chessbot4 implements Runnable {
 					try {
 						if (masterFrame.topGamesFlipLabel != null) {
 							masterFrame.topGamesFlipLabel.setText("   Top Games   ");
-							if (channels.fics) {
+							if (Channels.fics) {
 								masterFrame.topGamesFlipLabel.setVisible(false);
 							}
 						}
@@ -569,7 +569,7 @@ class chessbot4 implements Runnable {
 			if (sharedVariables.myServer.equals("ICC") || sharedVariables.myServer.equals("FICS")) {
 
 				try {
-					channels.firstSound = true;
+					Channels.firstSound = true;
 					sharedVariables.ccListData.clear();
 					DataParsing.backedUp = false;
 					try {
@@ -1826,7 +1826,7 @@ class chessbot4 implements Runnable {
 				}
 				return 1; // we must have read something
 			}
-			if (channels.fics) {
+			if (Channels.fics) {
 				try {
 					if (!gamequeue.isEmpty()) {
 						SwingUtilities.invokeLater(new Runnable() {
@@ -2765,7 +2765,7 @@ class chessbot4 implements Runnable {
 					else if (sharedVariables.operatingSystem.equals("win"))
 						OS = "Windows";
 					String javaMessage = "";
-					if (channels.macClient) {
+					if (Channels.macClient) {
 						javaMessage = " Java " + javaVersion;
 					}
 					sendMessage("multi set-quietly interface Lantern Chess " + sharedVariables.version + " on " + OS
@@ -2907,7 +2907,7 @@ class chessbot4 implements Runnable {
 				String chatTime2 = "";
 
 				if (sharedVariables.channelTimestamp == true) {
-					if (channels.leftTimestamp == false)
+					if (Channels.leftTimestamp == false)
 						chatTime = getATimestamp();
 					else
 						chatTime2 = getATimestamp();
@@ -3099,7 +3099,7 @@ class chessbot4 implements Runnable {
 				String chatTime2 = "";
 
 				if (sharedVariables.tellTimestamp == true) {
-					if (channels.leftTimestamp == false)
+					if (Channels.leftTimestamp == false)
 						chatTime = getATimestamp();
 					else
 						chatTime2 = getATimestamp();
@@ -3315,7 +3315,7 @@ class chessbot4 implements Runnable {
 				String chatTime2 = "";
 
 				if (sharedVariables.shoutTimestamp == true) {
-					if (channels.leftTimestamp == false)
+					if (Channels.leftTimestamp == false)
 						chatTime = getATimestamp();
 					else
 						chatTime2 = getATimestamp();
@@ -3627,7 +3627,7 @@ class chessbot4 implements Runnable {
 				String chatTime2 = "";
 
 				if (sharedVariables.qtellTimestamp == true) {
-					if (channels.leftTimestamp == false) {
+					if (Channels.leftTimestamp == false) {
 						chatTime = getATimestamp();
 						chatTime = chatTime.replace("(", " ");
 						chatTime = chatTime.replace(")", "");
@@ -4315,7 +4315,7 @@ class chessbot4 implements Runnable {
 
 					} else if (console.type == 2) {
 						FileWriter fstream = new FileWriter(
-								channels.publicDirectory + "lantern_" + sharedVariables.myname + ".pgn", true);
+								Channels.publicDirectory + "lantern_" + sharedVariables.myname + ".pgn", true);
 
 						try {
 							BufferedWriter out = new BufferedWriter(fstream);
@@ -4744,7 +4744,7 @@ class chessbot4 implements Runnable {
 
 		try {
 
-			if (!channels.fics) {
+			if (!Channels.fics) {
 
 				if (!gamequeue.isEmpty()) {
 					SwingUtilities.invokeLater(new Runnable() {
@@ -5666,7 +5666,7 @@ class chessbot4 implements Runnable {
 						String chatTime2 = "";
 
 						if (sharedVariables.tellTimestamp == true) {
-							if (channels.leftTimestamp == false)
+							if (Channels.leftTimestamp == false)
 								chatTime = getATimestamp();
 							else
 								chatTime2 = getATimestamp();
@@ -5726,7 +5726,7 @@ class chessbot4 implements Runnable {
 						String chatTime2 = "";
 
 						if (sharedVariables.tellTimestamp == true) {
-							if (channels.leftTimestamp == false)
+							if (Channels.leftTimestamp == false)
 								chatTime = getATimestamp();
 							else
 								chatTime2 = getATimestamp();
@@ -6461,7 +6461,7 @@ class chessbot4 implements Runnable {
 	{
 
 		void cleanOutputDataForFics(myoutput tosend) {
-			if (!channels.fics) {
+			if (!Channels.fics) {
 				return;
 			}
 			if (tosend != null && tosend.data != null) {
@@ -7148,7 +7148,7 @@ class chessbot4 implements Runnable {
 			Calendar Now = Calendar.getInstance();
 			String hour;
 
-			if (channels.timeStamp24hr) {
+			if (Channels.timeStamp24hr) {
 				hour = "" + Now.get(Now.HOUR_OF_DAY);
 				if (hour.length() == 1)
 					hour = "0" + hour;
@@ -7166,7 +7166,7 @@ class chessbot4 implements Runnable {
 			if (second.length() == 1)
 				second = "0" + second;
 
-			if (channels.leftTimestamp == true)
+			if (Channels.leftTimestamp == true)
 				theTime = hour + ":" + minute + ":" + second + " ";
 			else
 				theTime = "(" + hour + ":" + minute + ":" + second + ")";
@@ -7184,7 +7184,7 @@ class chessbot4 implements Runnable {
 			Calendar Now = Calendar.getInstance();
 			String hour;
 
-			if (channels.timeStamp24hr) {
+			if (Channels.timeStamp24hr) {
 				hour = "" + Now.get(Now.HOUR_OF_DAY);
 				if (hour.length() == 1)
 					hour = "0" + hour;
@@ -7222,7 +7222,7 @@ class chessbot4 implements Runnable {
 			String ampm = "";
 
 			// 24 hours format doesn't have AM/PM
-			if (!channels.timeStamp24hr) {
+			if (!Channels.timeStamp24hr) {
 				int ampmNum = Now.get(Now.AM_PM);
 				if (ampmNum == 0)
 					ampm = "AM";

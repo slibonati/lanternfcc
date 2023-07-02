@@ -92,7 +92,7 @@ public class DataParsing {
 	String lastCreatingBlackELO = "";
 	String lastCreatingWhiteELO = "";
 	Map gameStartMap = new HashMap();
-	channels mySettings;
+	Channels mySettings;
 	docWriter myDocWriter;
 	int maxLinks = 75;
 	int SUBFRAME_CONSOLES = 0;
@@ -105,7 +105,7 @@ public class DataParsing {
 	char icc_data[] = new char[5000];
 	int dataTop = -1;
 
-	public DataParsing(channels sharedSettings, ConcurrentLinkedQueue<myoutput> sendQueueConsole1,
+	public DataParsing(Channels sharedSettings, ConcurrentLinkedQueue<myoutput> sendQueueConsole1,
 			ConcurrentLinkedQueue<newBoardData> gamequeue1, docWriter myDocWriter1, chessbot4 mainTelnet1) {
 		spaceSeperatedLine = new ArrayList<String>();
 		mySettings = sharedSettings;
@@ -545,7 +545,7 @@ public class DataParsing {
 	}
 
 	void writeOutToShouts(String thetell) {
-		channels sharedVariables = mySettings;
+		Channels sharedVariables = mySettings;
 		SimpleAttributeSet attrs = new SimpleAttributeSet();
 		if (sharedVariables.shoutStyle == 1 || sharedVariables.shoutStyle == 3)
 			StyleConstants.setItalic(attrs, true);
@@ -589,7 +589,7 @@ public class DataParsing {
 
 	void writeOutToChannel(String theTell, int channelNumber) {
 		theTell += "\n";
-		channels sharedVariables = mySettings;
+		Channels sharedVariables = mySettings;
 		int[] cindex2 = new int[sharedVariables.maxConsoleTabs];
 		cindex2[0] = 0; // default till we know more is its not going to main
 		Color channelColor;
@@ -669,7 +669,7 @@ public class DataParsing {
 	void writeOutToNotify(String tell, String name) {
 		try {
 
-			channels sharedVariables = mySettings;
+			Channels sharedVariables = mySettings;
 			if (tell.contains("has arrived.")) {
 				mainTelnet.notifyList.notifyStateChanged(name.trim(), ""); // arg2 state "P" playing etc
 			} else {
@@ -732,7 +732,7 @@ public class DataParsing {
 	}
 
 	void writeOutToTell(String thetell, String name) {
-		channels sharedVariables = mySettings;
+		Channels sharedVariables = mySettings;
 		thetell += "\n";
 		String screenName = name.contains("(") ? name.substring(0, name.indexOf("(")) : name;
 		sharedVariables.lasttell = screenName; // obsolete but why not leave the data
@@ -1132,7 +1132,7 @@ public class DataParsing {
 			}
 
 			StyledDocument doc = mySettings.mydocs[consoleNumber];// 0 for main console
-			channels sharedVariables = mySettings;
+			Channels sharedVariables = mySettings;
 			SimpleAttributeSet attrs = new SimpleAttributeSet();
 			if (sharedVariables.tabStuff[consoleNumber].ForColor == null)
 				StyleConstants.setForeground(attrs, mySettings.ForColor);
@@ -1841,7 +1841,7 @@ public class DataParsing {
 
 	void writeOutSays(String theTell, String theTell2) {
 		try {
-			channels sharedVariables = mySettings;
+			Channels sharedVariables = mySettings;
 			String name = theTell.contains("[") ? theTell.substring(0, theTell.indexOf("["))
 					: theTell.trim().substring(0, theTell.length());
 			if (theTell.contains("(")) {
@@ -1954,7 +1954,7 @@ public class DataParsing {
 		try {
 
 			int gameNumber = getGameNumberFromKibWhisper(theTell);
-			channels sharedVariables = mySettings;
+			Channels sharedVariables = mySettings;
 			try {
 				messageStyles myStyles = null;
 				SimpleAttributeSet attrs = new SimpleAttributeSet();
@@ -2600,7 +2600,7 @@ public class DataParsing {
 		return false;
 	}
 
-	boolean isExamineInfo(String data, channels mySettings) {
+	boolean isExamineInfo(String data, Channels mySettings) {
 		if (data == null) {
 			return false;
 		}
@@ -2986,7 +2986,7 @@ public class DataParsing {
 		 */
 	}
 
-	boolean illegalMessage(String message, channels sharedVariables) {
+	boolean illegalMessage(String message, Channels sharedVariables) {
 		try {
 			for (int a = 0; a < mySettings.mygame.length; a++) {
 				if (mySettings.mygame[a] != null) {
@@ -3345,7 +3345,7 @@ public class DataParsing {
 
 	void setUpNewUserTabs() {
 		try {
-			channels sharedVariables = mySettings;
+			Channels sharedVariables = mySettings;
 
 			if (sharedVariables.channelNamesList.size() < sharedVariables.maxConsoleTabs - 1) {
 				// condition that there are enough channels to be one per tab
@@ -3541,7 +3541,7 @@ public class DataParsing {
 
 	class FicsSoundPlayer implements Runnable {
 
-		channels sharedVariables = null;
+		Channels sharedVariables = null;
 
 		private AudioInputStream audio;
 

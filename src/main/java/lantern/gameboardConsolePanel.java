@@ -67,7 +67,7 @@ class gameboardConsolePanel extends JPanel {
 	String myglobalinput;
 	arrowManagement arrowManager;
 	JComboBox prefixHandler;
-	channels sharedVariables;
+	Channels sharedVariables;
 	gamestuff gameData;
 	JTextPane[] consoles;
 	subframe[] consoleSubframes;
@@ -82,7 +82,7 @@ class gameboardConsolePanel extends JPanel {
 	boolean sideWayValue = false;
 
 	gameboardConsolePanel(gameboardTop topGame1, JTextPane consoles1[], subframe consoleSubframes1[],
-			channels sharedVariables1, gamestuff gameData1, JTextPane gameconsoles1[],
+			Channels sharedVariables1, gamestuff gameData1, JTextPane gameconsoles1[],
 			ConcurrentLinkedQueue<newBoardData> gamequeue1, ConcurrentLinkedQueue<myoutput> queue1,
 			docWriter myDocWriter1, gameboardControlsPanel mycontrolspanel1, gameboardPanel mypanel1) {
 		topGame = topGame1;
@@ -203,7 +203,7 @@ class gameboardConsolePanel extends JPanel {
 		sharedVariables.pointedToMain[gameData.BoardIndex] = false;// this tells us if the tab is on a game but console
 																	// is on main
 		try {
-			if (channels.fics) {
+			if (Channels.fics) {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -355,7 +355,7 @@ class gameboardConsolePanel extends JPanel {
 		if (sharedVariables.mygame[gameData.LookingAt].state != -1
 				|| !sharedVariables.mygame[gameData.LookingAt].name1.equals("")
 				|| !sharedVariables.mygame[gameData.LookingAt].name2.equals("")) {
-			if (!channels.fics) {
+			if (!Channels.fics) {
 				menu2.add(saveitem);
 			}
 		}
@@ -591,7 +591,7 @@ class gameboardConsolePanel extends JPanel {
 		mycommand = mycommand + "\n";
 
 		myoutput output = new myoutput();
-		if (!channels.fics && sharedVariables.myname.length() > 0) {
+		if (!Channels.fics && sharedVariables.myname.length() > 0) {
 			if (sharedVariables.pointedToMain[gameData.LookingAt] == false)
 				output.data = "`g" + gameData.LookingAt + "`" + mycommand;
 			else
@@ -1271,12 +1271,12 @@ class gameboardConsolePanel extends JPanel {
 						// code here to prefix our command with `g#`command if on icc and we have a name
 						// defined i.e. recieved whoami
 						// this will get any text back from server to go to right console
-						if (!channels.fics && sharedVariables.myname.length() > 0) {
+						if (!Channels.fics && sharedVariables.myname.length() > 0) {
 							if (sharedVariables.pointedToMain[gameData.LookingAt] == false)
 								output.data = "`g" + gameData.LookingAt + "`" + mes;
 							else
 								output.data = "`c" + mainConsoleIndex + "`" + mes;
-						} else if (channels.fics) {
+						} else if (Channels.fics) {
 							output.data = mes;
 						}
 						output.consoleNumber = 0;
@@ -1299,7 +1299,7 @@ class gameboardConsolePanel extends JPanel {
 						person = sharedVariables.F9Manager.getName(false);
 
 					if (person.length() > 0) {
-						if (channels.fics) {
+						if (Channels.fics) {
 							Input.setText("Tell " + person + " ");
 						} else {
 							Input.setText("/Tell " + person + " ");
@@ -1973,7 +1973,7 @@ class gameboardConsolePanel extends JPanel {
 							sharedVariables.openUrl(name);
 						} else if (sharedVariables.rightClickMenu.get(mfinal).equals("Lookup")) {
 
-							if (channels.fics) {
+							if (Channels.fics) {
 								doCommand("Finger" + " " + name + "\n");
 							} else {
 								doCommand("`f1`Finger" + " " + name + "\n");
@@ -2017,7 +2017,7 @@ class gameboardConsolePanel extends JPanel {
 					if (menuEntry.equals("Stored"))// now add edit list sub menu
 					{
 						JMenu LMenu = new JMenu("Edit List");
-						if (!channels.fics) {
+						if (!Channels.fics) {
 							sharedVariables.setUpListMenu(LMenu, handle, queue, "`g" + gameData.LookingAt + "`");
 						} else {
 							sharedVariables.setUpListMenu(LMenu, handle, queue, "");
@@ -2207,7 +2207,7 @@ class gameboardConsolePanel extends JPanel {
 
 	void doCommand(String mycommand) {
 		myoutput output = new myoutput();
-		if (mycommand.startsWith("`") || channels.fics)
+		if (mycommand.startsWith("`") || Channels.fics)
 			output.data = mycommand;
 		else
 			output.data = "`g" + gameData.LookingAt + "`" + mycommand;

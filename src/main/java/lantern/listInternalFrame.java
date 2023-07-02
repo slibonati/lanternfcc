@@ -38,12 +38,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 class listInternalFrame extends JInternalFrame implements InternalFrameListener {
 
 	// subframe [] consoleSubframes;
-	channels sharedVariables;
+	Channels sharedVariables;
 	JCheckBoxMenuItem notontop;
 	ConcurrentLinkedQueue queue;
 
 //subframe(JFrame frame, boolean mybool)
-	listInternalFrame(Multiframe master, channels sharedVariables1, ConcurrentLinkedQueue queue1) {
+	listInternalFrame(Multiframe master, Channels sharedVariables1, ConcurrentLinkedQueue queue1) {
 //super(frame, mybool);
 		super("Activities Window- double click to select", true, // resizable
 				true, // closable
@@ -78,7 +78,7 @@ class listInternalFrame extends JInternalFrame implements InternalFrameListener 
 		JMenu mymenu2 = new JMenu("Font");
 
 		JMenuItem fontchange = new JMenuItem("Set Event List/Tournaments Font");
-		if (channels.fics) {
+		if (Channels.fics) {
 			fontchange = new JMenuItem("Set Activities Font");
 		}
 		fontchange.addActionListener(new ActionListener() {

@@ -45,7 +45,7 @@ import layout.TableLayout;
 
 public class customizeChannelNotifyDialog extends JDialog implements ActionListener, ListSelectionListener {
 
-	private channels sVars;
+	private Channels sVars;
 	private final String name;
 	private final String lname;
 
@@ -67,7 +67,7 @@ public class customizeChannelNotifyDialog extends JDialog implements ActionListe
 	private double[] showrows;
 	private double[] hiderows;
 
-	public customizeChannelNotifyDialog(JFrame frame, boolean mybool, channels sVars, final String name) {
+	public customizeChannelNotifyDialog(JFrame frame, boolean mybool, Channels sVars, final String name) {
 		super(frame, name + " Channel Notify", mybool);
 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -26,10 +26,10 @@ class addFriendDialog extends JDialog {
 
 	JButton okButton;
 	JButton cancelButton;
-	channels sharedVariables;
+	Channels sharedVariables;
 	ConcurrentLinkedQueue<myoutput> queue;
 
-	addFriendDialog(JFrame frame, boolean mybool, channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1) {
+	addFriendDialog(JFrame frame, boolean mybool, Channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1) {
 		super(frame, mybool);
 		sharedVariables = sharedVariables1;
 		queue = queue1;

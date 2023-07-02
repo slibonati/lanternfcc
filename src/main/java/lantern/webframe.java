@@ -59,7 +59,7 @@ class webframe extends JInternalFrame {
 	String lastcommand;
 	int madeTextPane;
 
-	channels sharedVariables;
+	Channels sharedVariables;
 	JEditorPane[] consoles;
 	ConcurrentLinkedQueue<myoutput> queue;
 	String incomingUrl;
@@ -67,7 +67,7 @@ class webframe extends JInternalFrame {
 	// subframe [] consoleSubframes;
 
 //subframe(JFrame frame, boolean mybool)
-	webframe(channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, String incomingUrl1) {
+	webframe(Channels sharedVariables1, ConcurrentLinkedQueue<myoutput> queue1, String incomingUrl1) {
 
 //super(frame, mybool);
 		super("Web View", true, // resizable

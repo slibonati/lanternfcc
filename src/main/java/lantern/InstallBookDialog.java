@@ -59,10 +59,10 @@ class InstallBookDialog extends JDialog {
 		super(frame, "Extract Opening Book", true);
 		myfont = thefont;
 		setSize(350, 300);
-		if (channels.stockfishName.contains("10")) {
+		if (Channels.stockfishName.contains("10")) {
 			stockfish = "Stockfish 15";
 		}
-		if (channels.stockfishName.contains("15")) {
+		if (Channels.stockfishName.contains("15")) {
 			stockfish = "Stockfish 15";
 		}
 		if (type == mediocreChess5) {
@@ -90,13 +90,13 @@ class InstallBookDialog extends JDialog {
 					installContinue.setEnabled(false);
 					File file;
 					if (installType == mediocreChess5) {
-						file = new File(channels.privateDirectory + channels.mediocreEngineName);
+						file = new File(Channels.privateDirectory + Channels.mediocreEngineName);
 					} else if (installType == cuckooChess112) {
-						file = new File(channels.privateDirectory + channels.cuckooEngineName);
+						file = new File(Channels.privateDirectory + Channels.cuckooEngineName);
 					} else if (installType == stockfish8) {
-						file = new File(channels.privateDirectory + channels.stockfishName);
+						file = new File(Channels.privateDirectory + Channels.stockfishName);
 					} else {
-						file = new File(channels.privateDirectory + channels.openingBookName);
+						file = new File(Channels.privateDirectory + Channels.openingBookName);
 					}
 					if (installType == mediocreChess5) {
 						setPaneText("Installing Mediocre Chess");
@@ -114,13 +114,13 @@ class InstallBookDialog extends JDialog {
 						InputStream link;
 
 						if (installType == mediocreChess5) {
-							link = (getClass().getResourceAsStream("/engines/" + channels.mediocreEngineName));
+							link = (getClass().getResourceAsStream("/engines/" + Channels.mediocreEngineName));
 						} else if (installType == cuckooChess112) {
-							link = (getClass().getResourceAsStream("/engines/" + channels.cuckooEngineName));
+							link = (getClass().getResourceAsStream("/engines/" + Channels.cuckooEngineName));
 						} else if (installType == stockfish8) {
-							link = (getClass().getResourceAsStream("/engines/" + channels.stockfishName));
+							link = (getClass().getResourceAsStream("/engines/" + Channels.stockfishName));
 						} else {
-							link = (getClass().getResourceAsStream("/" + channels.openingBookName));
+							link = (getClass().getResourceAsStream("/" + Channels.openingBookName));
 						}
 						// Files.copy(link, file.getAbsoluteFile().toPath());
 						copyInputStreamToFile(link, file);
@@ -225,19 +225,19 @@ class InstallBookDialog extends JDialog {
 		textPane.setEditable(false);
 		textPane.setFont(myfont);
 		String text = "To use the Opening Book the book file must be extracted from the Lantern Jar. It will create a file called "
-				+ channels.openingBookName + "  in the lantern folder with a size of 3 megs.";
+				+ Channels.openingBookName + "  in the lantern folder with a size of 3 megs.";
 		if (installType == mediocreChess5) {
 			text = "To use the Medicore Chess Engine it must be extracted from the Lantern Jar. It will create a file called "
-					+ channels.mediocreEngineName + "  in the lantern folder with a size of less than a meg.";
+					+ Channels.mediocreEngineName + "  in the lantern folder with a size of less than a meg.";
 		}
 		if (installType == cuckooChess112) {
 			text = "To use the Cuckoo Chess Engine it must be extracted from the Lantern Jar. It will create a file called "
-					+ channels.cuckooEngineName + "  in the lantern folder with a size of less than a meg.";
+					+ Channels.cuckooEngineName + "  in the lantern folder with a size of less than a meg.";
 		}
 		if (installType == stockfish8) {
 			text = "To use the " + stockfish
 					+ " Chess Engine it must be extracted from the Lantern Jar. It will create a file called "
-					+ channels.stockfishName + "  in the lantern folder with a size of about 48 megs.";
+					+ Channels.stockfishName + "  in the lantern folder with a size of about 48 megs.";
 		}
 
 		setPaneText(text);

@@ -64,7 +64,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 	JComboBox tabChooser;
 	Highlighter myHighlighter;
 
-	channels sharedVariables;
+	Channels sharedVariables;
 	JTextPane[] consoles;
 
 	// Andrey says: want to change this to
@@ -84,7 +84,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 	docWriter myDocWriter;
 	// subframe(JFrame frame, boolean mybool)
 
-	subframe(channels sharedVariables1, JTextPane[] consoles1, ConcurrentLinkedQueue<myoutput> queue1,
+	subframe(Channels sharedVariables1, JTextPane[] consoles1, ConcurrentLinkedQueue<myoutput> queue1,
 			docWriter myDocWriter1, Gameboard[] myboards1, createWindows mycreator1) {
 
 		// super(frame, mybool);
@@ -1571,9 +1571,9 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 		mycommand = mycommand + "\n";
 
 		myoutput output = new myoutput();
-		if (!channels.fics && sharedVariables.myname.length() > 0)
+		if (!Channels.fics && sharedVariables.myname.length() > 0)
 			output.data = "`c" + sharedVariables.looking[consoleNumber] + "`" + mycommand;
-		else if (channels.fics && sharedVariables.looking[consoleNumber] > 0) {
+		else if (Channels.fics && sharedVariables.looking[consoleNumber] > 0) {
 			output.data = sharedVariables.addHashTellWrapper(mycommand, sharedVariables.looking[consoleNumber]);
 		} else {
 			output.data = mycommand;
@@ -1665,7 +1665,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 
 						} else if (sharedVariables.rightClickMenu.get(mfinal).equals("Lookup")) {
 
-							if (channels.fics) {
+							if (Channels.fics) {
 								myoutput output = new myoutput();
 								output.data = sharedVariables.addHashWrapperToLookupUser("$Finger" + " " + name + "\n");
 								queue.add(output);
@@ -1674,7 +1674,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 							}
 						} else if (sharedVariables.rightClickMenu.get(mfinal).equals("Vars")) {
 
-							if (channels.fics) {
+							if (Channels.fics) {
 								myoutput output = new myoutput();
 								output.data = sharedVariables.addHashWrapperToLookupUser("$var" + " " + name + "\n");
 								queue.add(output);
@@ -1727,7 +1727,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 							 */
 						} else {
 							String command = sharedVariables.rightClickMenu.get(mfinal) + " " + name;
-							if (channels.fics && command.startsWith("Finger r")) {
+							if (Channels.fics && command.startsWith("Finger r")) {
 								command = "Finger " + name + " r";
 								;
 							}
@@ -1744,7 +1744,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 					String menuEntry = sharedVariables.rightClickMenu.get(m);
 					if (menuEntry.equals("Stored")) {// now add edit list sub menu
 						JMenu LMenu = new JMenu("Edit List");
-						String prefix = channels.fics ? "" : "`c" + sharedVariables.looking[consoleNumber] + "`";
+						String prefix = Channels.fics ? "" : "`c" + sharedVariables.looking[consoleNumber] + "`";
 						sharedVariables.setUpListMenu(LMenu, handle, queue, prefix);
 						menu3.addSeparator();
 						menu3.add(LMenu);
@@ -1801,7 +1801,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 
 		JMenu submenu = new JMenu("Advanced");
 
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			submenu.add(item11);
 		}
 		JMenuItem item2 = new JMenuItem("set tab channels and name");
@@ -1874,7 +1874,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 				mycreator.createWebFrame("http://www.lanternchess.com/lanternhelp/mychat.html");
 			}
 		});
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			if (menu3 == null)
 				menu2.add(itemX1);
 			else
@@ -1887,7 +1887,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 				mycreator.createWebFrame("http://www.lanternchess.com/lanternhelp/colorsbytab.html");
 			}
 		});
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			if (menu3 == null)
 				menu2.add(itemX2);
 			else
@@ -2005,7 +2005,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 				mycreator.createWebFrame("http://www.lanternchess.com/lanternhelp/personal-tells.html");
 			}
 		});
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			if (menu3 == null)
 				menu2.add(itemX3);
 			else
@@ -2026,14 +2026,14 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 					customizeTabQtells(sharedVariables.looking[consoleNumber]);
 			}
 		});
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			if (menu3 == null)
 				menu2.add(itemQ);
 			else
 				menu3.add(itemQ);
 		}
 
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			if (menu3 == null)
 				menu2.add(submenu);
 			else
@@ -2062,9 +2062,9 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 		else
 			output.data = "`c" + sharedVariables.looking[consoleNumber] + "`" + mycommand;
 
-		if (channels.fics && sharedVariables.looking[consoleNumber] > 0) {
+		if (Channels.fics && sharedVariables.looking[consoleNumber] > 0) {
 			output.data = sharedVariables.addHashTellWrapper(mycommand, sharedVariables.looking[consoleNumber]);
-		} else if (channels.fics) {
+		} else if (Channels.fics) {
 			output.data = mycommand;
 		}
 
@@ -2665,7 +2665,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 						if (index > 0 && !Input.getText().startsWith("/"))
 							// we don't use tell channel prefix if starts with /
 							mes = pre + mes;
-						else if (channels.fics && index > 0 && Input.getText().startsWith("/")) {
+						else if (Channels.fics && index > 0 && Input.getText().startsWith("/")) {
 							mes = mes.substring(1, mes.length());
 						}
 
@@ -2702,12 +2702,12 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 						}
 
 						myoutput output = new myoutput();
-						if (!channels.fics && sharedVariables.myname.length() > 0)
+						if (!Channels.fics && sharedVariables.myname.length() > 0)
 							output.data = "`c" + sharedVariables.looking[consoleNumber] + "`" + mes;
 						// having a name means level 1 is on if on icc and this
 						// `phrase`mess will be used to direct output back to this
 						// console
-						else if (channels.fics && sharedVariables.looking[consoleNumber] > 0) {
+						else if (Channels.fics && sharedVariables.looking[consoleNumber] > 0) {
 							output.data = sharedVariables.addHashTellWrapper(mes,
 									sharedVariables.looking[consoleNumber]);
 						} else {
@@ -2747,7 +2747,7 @@ class subframe extends JInternalFrame implements ComponentListener, InternalFram
 								: sharedVariables.F9Manager.getNameReverse(resetcycle));
 
 						if (person.length() > 0) {
-							if (channels.fics) {
+							if (Channels.fics) {
 								Input.setText("Tell " + person + "! ");
 							} else {
 								Input.setText("/Tell " + person + "! ");

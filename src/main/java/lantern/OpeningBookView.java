@@ -106,7 +106,7 @@ class OpeningBookView extends JDialog {
 					String move = getSubMove(moveListData.get(row).movefrom) + getSubMove(moveListData.get(row).moveto);
 					myoutput output = new myoutput();
 					output.data = "`c0`" + "multi chessmove " + move + "\n";
-					if (channels.fics) {
+					if (Channels.fics) {
 						output.data = move + "\n";
 					}
 					output.consoleNumber = 0;
@@ -118,7 +118,7 @@ class OpeningBookView extends JDialog {
 			public void mousePressed(MouseEvent e) {
 				myoutput output = new myoutput();
 				output.data = "`c0`" + "multi backward" + "\n";
-				if (channels.fics) {
+				if (Channels.fics) {
 					output.data = "backward 1" + "\n";
 				}
 				output.consoleNumber = 0;
@@ -143,7 +143,7 @@ class OpeningBookView extends JDialog {
 			public void mousePressed(MouseEvent e) {
 				myoutput output = new myoutput();
 				output.data = "`c0`" + "multi forward" + "\n";
-				if (channels.fics) {
+				if (Channels.fics) {
 					output.data = "forwarward 1" + "\n";
 				}
 				output.consoleNumber = 0;
@@ -187,11 +187,11 @@ class OpeningBookView extends JDialog {
 				// create a database connection
 				if (oldBook) {
 					connection = DriverManager
-							.getConnection("jdbc:sqlite:" + channels.privateDirectory + channels.oldOpeningBookName);
+							.getConnection("jdbc:sqlite:" + Channels.privateDirectory + Channels.oldOpeningBookName);
 				} else {
 					// Connection conn = DriverManager.getConnection(myUrl, "root", "");
 					connection = DriverManager
-							.getConnection("jdbc:sqlite:" + channels.privateDirectory + channels.openingBookName);
+							.getConnection("jdbc:sqlite:" + Channels.privateDirectory + Channels.openingBookName);
 				}
 
 			} catch (SQLException e) {
@@ -342,7 +342,7 @@ class OpeningBookView extends JDialog {
 		output.data = "`e0`" + "multi eco" + "\n";
 
 		output.consoleNumber = 0;
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			queue.add(output);
 		}
 

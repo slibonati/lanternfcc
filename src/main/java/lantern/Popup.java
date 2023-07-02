@@ -41,14 +41,14 @@ import java.util.TimerTask;
 class Popup extends JDialog {
 	JTextArea field;
 	String warning1;
-	channels sharedVariables;
+	Channels sharedVariables;
 	JFrame master;
 
 	void setWarning(String s) {
 		warning1 = s;
 	}
 
-	Popup(JFrame frame, boolean mybool, String warning, channels sharedVariables1) {
+	Popup(JFrame frame, boolean mybool, String warning, Channels sharedVariables1) {
 		super(frame, false);// doesnt take all focus
 		setLocation(frame.getLocation().x + sharedVariables1.cornerDistance,
 				frame.getLocation().y + sharedVariables1.cornerDistance);// if they set it after it will use the later

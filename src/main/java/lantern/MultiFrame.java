@@ -75,7 +75,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 	listClass notifyList;
 	tableClass gameList;
 	webframe mywebframe;
-	channels sharedVariables;
+	Channels sharedVariables;
 	private JTextPane[] consoles;
 	private JTextPane[] gameconsoles;
 	protected JColorChooser tcc;
@@ -254,7 +254,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		graphics = new resourceClass();
 		gamequeue = new ConcurrentLinkedQueue<newBoardData>();
 
-		sharedVariables = new channels();
+		sharedVariables = new Channels();
 		// chess font setting
 		sharedVariables.chessFontForMoveList = false;
 		loadGraphicsStandAlone();
@@ -467,7 +467,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		channelTimestamp.setSelected(sharedVariables.channelTimestamp);
 		shoutTimestamp.setSelected(sharedVariables.shoutTimestamp);
 		qtellTimestamp.setSelected(sharedVariables.qtellTimestamp);
-		timeStamp24hr.setSelected(channels.timeStamp24hr);
+		timeStamp24hr.setSelected(Channels.timeStamp24hr);
 		reconnectTimestamp.setSelected(sharedVariables.reconnectTimestamp);
 
 		if (sharedVariables.andreysLayout >= 0 && sharedVariables.andreysLayout < boarddesignarray.length)
@@ -476,7 +476,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		playersInMyGame.setSelected((sharedVariables.playersInMyGame == 2));
 		unobserveGoExamine.setSelected(sharedVariables.unobserveGoExamine);
 		tellTimestamp.setSelected(sharedVariables.tellTimestamp);
-		leftNameTimestamp.setSelected(channels.leftTimestamp);
+		leftNameTimestamp.setSelected(Channels.leftTimestamp);
 		checkLegality.setSelected(sharedVariables.checkLegality);
 		noFocusOnObserve.setSelected(sharedVariables.noFocusOnObserve);
 		lineindent.setSelected(sharedVariables.indent);
@@ -505,8 +505,8 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		if (sharedVariables.rotateAways) {
 			try {
 				scriptLoader loadScripts = new scriptLoader();
-				if (channels.macClient) {
-					loadScripts.loadScript(sharedVariables.lanternAways, channels.publicDirectory + "lantern_away.txt");
+				if (Channels.macClient) {
+					loadScripts.loadScript(sharedVariables.lanternAways, Channels.publicDirectory + "lantern_away.txt");
 				} else {
 					loadScripts.loadScript(sharedVariables.lanternAways, "lantern_away.txt");
 				}
@@ -694,7 +694,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			myPearlImage512 = Toolkit.getDefaultToolkit().getImage(myurlPearl512);
 
 			final java.util.List<Image> icons = new ArrayList<Image>();
-			if (channels.fics) {
+			if (Channels.fics) {
 				icons.add(myPearlImage512);
 			} else {
 				icons.add(myIconImage16);
@@ -905,7 +905,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		// Andrey says:
 		// want to be able to change this to:
 		// List<String> ontop = new ArrayList<String>();
-		loadScripts.loadScript(ontop, channels.privateDirectory + "lantern_board_on_top.txt");
+		loadScripts.loadScript(ontop, Channels.privateDirectory + "lantern_board_on_top.txt");
 		if (ontop.size() > 0) {
 			String top = ontop.get(0);
 			if (top.equals("true"))
@@ -1033,7 +1033,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		} else {
 			myfiles.add(reconnectFics);
 		}
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			myfiles.addSeparator();
 			myfiles.add(help_connecting);
 			// myfiles.add(reconnect2);
@@ -1077,7 +1077,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		JMenuItem namelistFont = new JMenuItem("Names List Font");
 		// .. /
 		JMenuItem eventsFont = new JMenuItem("Event List/Tournaments Font");
-		if (channels.fics) {
+		if (Channels.fics) {
 			eventsFont = new JMenuItem("Activities Font");
 		}
 		JMenuItem colortimestamp = new JMenuItem("Chat Timestamp Color");
@@ -1336,12 +1336,12 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		soundmenu.add(makeatnamesounds);
 		soundmenu.add(makedrawsounds);
 		soundmenu.add(notifysound);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			soundmenu.add(correspondenceNotificationSounds);
 		}
 
 		soundmenu.add(maketellsounds);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			optionsmenu.add(showMugshots);
 		}
 
@@ -1366,12 +1366,12 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			optionsmenu.add(cuckooanalysis);
 		}
 		javaEngines.add(mediocreanalysis);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			optionsmenu.add(javaEngines);
 		}
 
 		optionsmenu.addSeparator();
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			optionsmenu.add(helpanalysis);
 
 			optionsmenu.addSeparator();
@@ -1380,7 +1380,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		optionsmenu.add(ucianalysis);
 		optionsmenu.add(enginerestart);
 		optionsmenu.add(enginestop);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			optionsmenu.add(winanalysis);
 		}
 
@@ -1402,19 +1402,19 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		optionsmenu.add(customizetools);
 		optionsmenu.add(toolbox);
 		optionsmenu.addSeparator();
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			optionsmenu.add(toolboxhelp);
 			optionsmenu.addSeparator();
 		}
 
 		// .. / Advanced /
 		optionsmenu.add(advancedOptions);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			advancedOptions.add(advancedmenuhelp);
 			advancedOptions.addSeparator();
 		}
 
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			advancedOptions.add(qsuggestPopup);
 		}
 
@@ -1428,7 +1428,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		advancedOptions.add(dontReuseGameTabs);
 		advancedOptions.add(autopopup);
 		advancedOptions.add(autoHistoryPopup);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			advancedOptions.add(basketballFlag);
 		}
 
@@ -1441,7 +1441,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		// .. /
 		optionsmenu.add(featuresMenu);
 		// .. / Features /
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			featuresMenu.add(featuresmenuhelp);
 			featuresMenu.addSeparator();
 		}
@@ -1454,7 +1454,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		// .. /
 		optionsmenu.add(observeOptions);
 		// .. / Observing Options /
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			observeOptions.add(observingmenuhelp);
 			observeOptions.addSeparator();
 			observeOptions.add(tournieFollow);
@@ -1583,7 +1583,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		// Windows /
 		// JMenuItem nconsole = new JMenuItem("New Console");
 		JMenuItem eventlist = new JMenuItem("Activities Window/Events");
-		if (channels.fics) {
+		if (Channels.fics) {
 			eventlist = new JMenuItem("Activities Window");
 		}
 		JMenuItem seekingGraph = new JMenuItem("Seek Graph");
@@ -1662,7 +1662,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 
 		sharedVariables.myWindows.add(seekingGraph);
 		sharedVariables.myWindows.add(mynotify);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			sharedVariables.myWindows.add(mytopgames);
 			sharedVariables.myWindows.addSeparator();
 			sharedVariables.myWindows.add(windowhelp);
@@ -1931,12 +1931,12 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		// add to menu bar
 		menu.add(optionsmenu);
 		// Options /
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			myboardmenu.add(jtournament);
 		}
 
 		myboardmenu.add(nseek);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			myboardmenu.add(jcorrespondence);
 		}
 
@@ -1944,11 +1944,11 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		myboardmenu.add(dorematch);
 		myboardmenu.add(withdrawSent);
 		myboardmenu.add(unfollowBroadcast);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			myboardmenu.add(autoExamine);
 		}
 
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			myboardmenu.addSeparator();
 			myboardmenu.add(help_getting_game);
 			// myboardmenu.add(help_correspondence);
@@ -1995,7 +1995,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			preset.add(presetarray[i]);
 		// .. /
 		myboardappearancemenu.add(selectpieces);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			myboardappearancemenu.add(checkersselectpieces);
 		}
 
@@ -2045,12 +2045,12 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		theHideMenu.add(materialCount);
 		theHideMenu.add(drawCoordinates);
 		theHideMenu.add(showPallette);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			theHideMenu.add(showFlags);
 		}
 
 		theHideMenu.add(showRatings);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			theHideMenu.add(playersInMyGame);
 		}
 
@@ -2084,7 +2084,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		// .. / Board Fonts /
 		boardFonts9.add(gamefont);
 		boardFonts9.add(gameclockfont);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			myboardappearancemenu.addSeparator();
 			myboardappearancemenu.add(help_customizing_board);
 		}
@@ -2099,13 +2099,13 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		myboardmenu.add(opengamefiles);
 		myboardmenu.add(PgnMenu);
 		// .. / PGN /
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			PgnMenu.add(help_pgn);
 			PgnMenu.addSeparator();
 		}
 
 		PgnMenu.add(pgnlogging);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			PgnMenu.add(pgnObservedLogging);
 		}
 		PgnMenu.add(openpgn);
@@ -2118,29 +2118,29 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 
 		myboardmenu.add(Communications);
 		// .. / Communications /
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			Communications.add(help_game_communication);
 			Communications.addSeparator();
 		}
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			Communications.add(blockSays);
 		}
 
 		Communications.add(gameend);
 		Communications.add(autoChat);
 		// .. /
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			AdvancedGameMenu.add(help_board_advanced);
 			AdvancedGameMenu.addSeparator();
 		}
 
 		// .. / Advanced /
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			AdvancedGameMenu.add(lowTimeColors);
 		}
 
 		AdvancedGameMenu.add(checkLegality);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			AdvancedGameMenu.add(unobserveGoExamine);
 		}
 
@@ -2272,7 +2272,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		// Actions /
 		JMenuItem showhistory = new JMenuItem("Show My Recent Games");
 		JMenuItem showlib = new JMenuItem("Show My Game Library");
-		if (channels.fics) {
+		if (Channels.fics) {
 			showlib = new JMenuItem("Show My Journal");
 		}
 		JMenuItem showstored = new JMenuItem("Show My Adjourned Games");
@@ -2289,11 +2289,11 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		// .. / (separator)
 		JMenuItem showobs = new JMenuItem("Observe High Rated Game");
 		JMenuItem showobs5 = new JMenuItem("Observe High Rated 5-Minute Game");
-		if (channels.fics) {
+		if (Channels.fics) {
 			showobs5 = new JMenuItem("Observe High Rated Blitz Game");
 		}
 		JMenuItem showobs15 = new JMenuItem("Observe High Rated 15-Minute Game");
-		if (channels.fics) {
+		if (Channels.fics) {
 			showobs15 = new JMenuItem("Observe High Rated Standard Game");
 		}
 		// .. / (separator)
@@ -2314,11 +2314,11 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		actionsmenu.add(showhistory);
 		actionsmenu.add(showlib);
 		actionsmenu.add(showstored);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			actionsmenu.add(showcorrespondence);
 		}
 		actionsmenu.add(showlogfile);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			actionsmenu.addSeparator();
 			actionsmenu.add(showStore);
 			actionsmenu.add(showMyICC);
@@ -2332,7 +2332,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		actionsmenu.add(showobs);
 		actionsmenu.add(showobs5);
 		actionsmenu.add(showobs15);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			actionsmenu.addSeparator();
 			actionsmenu.add(showtitled);
 			actionsmenu.add(showrelay);
@@ -2396,22 +2396,22 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		menu.add(helpmenu);
 		// Help /
 		helpmenu.add(joinrenewhelp);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			helpmenu.add(helpdiscount);
 		}
 		helpmenu.add(passwordhelp);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			helpmenu.add(iccstore2);
 			helpmenu.add(chesscoaches);
 			helpmenu.addSeparator();
 		}
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			helpmenu.add(lanternmanual);
 			helpmenu.add(changelog);
 		}
 
 		helpmenu.add(privacypolicy);
-		if (!channels.fics) {
+		if (!Channels.fics) {
 
 			helpmenu.add(calendaritem);
 			helpmenu.add(askaquestion);
@@ -2629,7 +2629,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			mycreator.createWebFrame("http://www.lanternchess.com/changelog.htm");
 
 		} else if (action.equals("Privacy Policy")) {
-			if (channels.fics) {
+			if (Channels.fics) {
 				sharedVariables.openUrl("http://www.pearlchess.com/pearlchess-privacypolicy.html");
 			} else {
 				sharedVariables.openUrl("http://www.lanternchess.com/lanternchessios-privacypolicy.html");
@@ -2642,7 +2642,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			sharedVariables.openUrl("http://www.chessclub.com/help/commands");
 
 		} else if (action.equals("Join")) {
-			if (channels.fics) {
+			if (Channels.fics) {
 				sharedVariables.openUrl("https://www.freechess.org/Register/index.html");
 			} else {
 				sharedVariables.openUrl("https://store.chessclub.com/rewardsref/index/refer/id/LanternApp/");
@@ -2652,7 +2652,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			sharedVariables.openUrl("https://store.chessclub.com/teachers");
 
 		} else if (action.equals("Lost Password")) {
-			if (channels.fics) {
+			if (Channels.fics) {
 				sharedVariables.openUrl("https://www.freechess.org/cgi-bin/Utilities/requestPassword.cgi");
 			} else {
 				sharedVariables.openUrl("https://login.chessclub.com/Account/ForgotPassword");
@@ -2671,7 +2671,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 				return;
 			}
 			boolean installed = false;
-			File f = new File(channels.privateDirectory + sharedVariables.cuckooEngineName);
+			File f = new File(Channels.privateDirectory + sharedVariables.cuckooEngineName);
 			if (f.exists() && !f.isDirectory()) {
 				installed = true;
 			}
@@ -2692,7 +2692,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 				return;
 			}
 			boolean installed = false;
-			File f = new File(channels.privateDirectory + sharedVariables.mediocreEngineName);
+			File f = new File(Channels.privateDirectory + sharedVariables.mediocreEngineName);
 			if (f.exists() && !f.isDirectory()) {
 				installed = true;
 			}
@@ -2721,11 +2721,11 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 					if (sharedVariables.engineDirectory != null)
 						fc.setCurrentDirectory(sharedVariables.engineDirectory);
 					else {
-						if (channels.macClient) {
-							fc.setCurrentDirectory(new File(channels.publicDirectory));
+						if (Channels.macClient) {
+							fc.setCurrentDirectory(new File(Channels.publicDirectory));
 						} else {
-							if (channels.macClient) {
-								fc.setCurrentDirectory(new File(channels.publicDirectory));
+							if (Channels.macClient) {
+								fc.setCurrentDirectory(new File(Channels.publicDirectory));
 							} else {
 								fc.setCurrentDirectory(new File("."));
 							}
@@ -2790,8 +2790,8 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		} else if (action.equals("Open Pgn") || action.equals("Open Game Files on Computer")) {
 			try {
 				JFileChooser fc = new JFileChooser();
-				if (channels.macClient) {
-					fc.setCurrentDirectory(new File(channels.publicDirectory));
+				if (Channels.macClient) {
+					fc.setCurrentDirectory(new File(Channels.publicDirectory));
 					;
 				} else {
 					fc.setCurrentDirectory(new File("."));
@@ -2897,9 +2897,9 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 
 		} else if (action.equals("Show My Game Log File")) {
 			try {
-				String myfile = channels.publicDirectory + "lantern_" + sharedVariables.whoAmI + ".pgn";
-				if (channels.fics) {
-					myfile = channels.publicDirectory + "pearl-" + sharedVariables.whoAmI + ".pgn";
+				String myfile = Channels.publicDirectory + "lantern_" + sharedVariables.whoAmI + ".pgn";
+				if (Channels.fics) {
+					myfile = Channels.publicDirectory + "pearl-" + sharedVariables.whoAmI + ".pgn";
 				}
 				File f = new File(myfile);
 				if (f.exists() && !f.isDirectory()) {
@@ -2912,8 +2912,8 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 					myPgnFrame.setSize(750, 400);
 					myPgnFrame.setVisible(true);
 				} else {
-					String mess = channels.fics ? "pearl-" : "lantern_";
-					if (channels.fics) {
+					String mess = Channels.fics ? "pearl-" : "lantern_";
+					if (Channels.fics) {
 						mess += sharedVariables.whoAmI
 								+ ".pgn not found. Is Game menu / PGN / Log My Games selected?. Have you played a game with Pearl on this username? On Mac give Pearl permission to access the Documents Directory so save games there in a PearlChess subfolder.";
 					} else {
@@ -3079,8 +3079,8 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			if (!sharedVariables.rotateAways) {
 				scriptLoader loadScripts = new scriptLoader();
 				sharedVariables.lanternAways.clear();
-				if (channels.macClient) {
-					loadScripts.loadScript(sharedVariables.lanternAways, channels.publicDirectory + "lantern_away.txt");
+				if (Channels.macClient) {
+					loadScripts.loadScript(sharedVariables.lanternAways, Channels.publicDirectory + "lantern_away.txt");
 				} else {
 					loadScripts.loadScript(sharedVariables.lanternAways, "lantern_away.txt");
 				}
@@ -3092,7 +3092,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 				} else {
 					String mes = "lantern_away.txt not found or has nothing in it.  "
 							+ "Create a file called lantern_away.txt";
-					if (channels.macClient) {
+					if (Channels.macClient) {
 						mes += " in Documents/LanternChess";
 					} else {
 						mes += " in the lantern folder";
@@ -3115,7 +3115,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 					+ "forward 1, at a set interval with delay set by the user between "
 					+ "moves.\n\nFor example go to the Game menu and choose Examine My "
 					+ "Last game, then to to Start Examine Game Replay.";
-			if (channels.fics) {
+			if (Channels.fics) {
 				mes = "If Examining a game from a history (including your own)"
 						+ " or journal, you can have Pearl issue the command "
 						+ "forward 1, at a set interval with delay set by the user between "
@@ -3404,7 +3404,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 					+ " be on top windows.";
 			Popup mypopper = new Popup(this, true, mess, sharedVariables);
 			mypopper.setVisible(true);
-			mywriter.write((ontop ? "false" : "true") + "\r\n", channels.privateDirectory + "lantern_board_on_top.txt");
+			mywriter.write((ontop ? "false" : "true") + "\r\n", Channels.privateDirectory + "lantern_board_on_top.txt");
 
 		} else if (action.equals("Seek a Game")) {
 
@@ -3427,11 +3427,11 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 		}
 
 		else if (action.equals("Drag Move")) {
-			sharedVariables.moveInputType = channels.DRAG_DROP;
+			sharedVariables.moveInputType = Channels.DRAG_DROP;
 			dragMoveInput.setSelected(true);
 			clickMoveInput.setSelected(false);
 		} else if (action.equals("Click Click")) {
-			sharedVariables.moveInputType = channels.CLICK_CLICK;
+			sharedVariables.moveInputType = Channels.CLICK_CLICK;
 			dragMoveInput.setSelected(false);
 			clickMoveInput.setSelected(true);
 
@@ -3692,7 +3692,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 							: (action.equals("Show My Journal") ? "Journal"
 									: (action.equals("Show My Adjourned Games") ? "Stored"
 											: (action.equals("My Profile and Ratings")
-													? channels.fics ? "Finger" : "`f1`Finger"
+													? Channels.fics ? "Finger" : "`f1`Finger"
 													: (action.equals("Enter Examination Mode") ? "Examine"
 															: (action.equals("Show Titled Players Online in M0 Tab")
 																	? "Who T"
@@ -3703,11 +3703,11 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 																							? "Rematch"
 																							: (action.equals(
 																									"Examine My Last Game")
-																									&& !channels.fics
+																									&& !Channels.fics
 																											? "Examine -1"
 																											: (action
 																													.equals("Examine My Last Game")
-																													&& channels.fics
+																													&& Channels.fics
 																															? "exl"
 																															: (action
 																																	.equals("Unexamine")
@@ -3740,7 +3740,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 																																																																			: "Match")))))))))))))))))))))
 					+ "\n";
 
-			if (action.equals("Withdraw Challenges") && channels.fics) {
+			if (action.equals("Withdraw Challenges") && Channels.fics) {
 				actionmess = "$unseek\n";
 				myoutput data = new myoutput();
 				data.data = actionmess;
@@ -3748,7 +3748,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 				actionmess = "$withdraw t match\n";
 
 			}
-			if (!channels.fics && !actionmess.startsWith("`"))
+			if (!Channels.fics && !actionmess.startsWith("`"))
 				actionmess = "`c0`" + actionmess;
 
 			myoutput data = new myoutput();
@@ -4293,8 +4293,8 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			addnameontellswitch.setSelected(sharedVariables.addNameOnSwitch);
 
 		} else if (action.equals("Timestamp To Left Of Name")) {
-			channels.leftTimestamp = !channels.leftTimestamp;
-			leftNameTimestamp.setSelected(channels.leftTimestamp);
+			Channels.leftTimestamp = !Channels.leftTimestamp;
+			leftNameTimestamp.setSelected(Channels.leftTimestamp);
 
 		} else if (action.equals("Timestamp Connecting")) {
 			sharedVariables.reconnectTimestamp = !sharedVariables.reconnectTimestamp;
@@ -4309,8 +4309,8 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			qtellTimestamp.setSelected(sharedVariables.qtellTimestamp);
 
 		} else if (action.equals("Timestamp in 24hr Format")) {
-			channels.timeStamp24hr = !channels.timeStamp24hr;
-			timeStamp24hr.setSelected(channels.timeStamp24hr);
+			Channels.timeStamp24hr = !Channels.timeStamp24hr;
+			timeStamp24hr.setSelected(Channels.timeStamp24hr);
 
 		} else if (action.equals("Timestamp Tells and Notifications")) {
 			sharedVariables.tellTimestamp = !sharedVariables.tellTimestamp;
@@ -4654,7 +4654,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 
 	void setEventListFont() {
 		JFrame f = new JFrame("Event List/Tournaments Font");
-		if (channels.fics) {
+		if (Channels.fics) {
 			f = new JFrame("Activities Font");
 		}
 		FontChooser2 fc = new FontChooser2(f, sharedVariables.eventsFont);
@@ -4684,9 +4684,9 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 	void runFlipCommand() {
 		boolean sentFicsFlip = false;
 		for (int a = 0; a < sharedVariables.maxGameTabs && a < myboards.length; a++) {
-			if (myboards[a] != null && ((myboards[a].isVisible() && myboards[a].isSelected()) || channels.fics)) {
+			if (myboards[a] != null && ((myboards[a].isVisible() && myboards[a].isSelected()) || Channels.fics)) {
 				int targetBoard = myboards[a].gameData.LookingAt;
-				if (channels.fics) {
+				if (Channels.fics) {
 					targetBoard = myboards[a].gameData.BoardIndex;
 				}
 				int flipPlus = (sharedVariables.mygame[targetBoard].iflipped + 1) % 2;
@@ -4695,13 +4695,13 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 				myboards[targetBoard].flipSent(icsGameNumber, flip);
 				myboards[a].mypanel.repaint();
 				myboards[a].mycontrolspanel.repaint();
-				if (channels.fics && !sentFicsFlip) {
+				if (Channels.fics && !sentFicsFlip) {
 					myoutput output = new myoutput();
 					output.data = "$Flip\n";
 					queue.add(output);
 					sentFicsFlip = true;
 				}
-				if (!channels.fics) {
+				if (!Channels.fics) {
 					break;
 				}
 
@@ -4757,7 +4757,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 	}
 
 	void openSeekAGame() {
-		if (channels.fics && DataParsing.inFicsExamineMode) {
+		if (Channels.fics && DataParsing.inFicsExamineMode) {
 			String swarning = "To seek games exit examine mode first. Go to Game Menu / Unexamine at top.";
 			Popup pframe = new Popup((JFrame) this, true, swarning, sharedVariables);
 			pframe.setVisible(true);
@@ -4951,14 +4951,14 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 	void openBook() {
 		boolean installed = false;
 		boolean old = false;
-		File f = new File(channels.privateDirectory + channels.openingBookName);
+		File f = new File(Channels.privateDirectory + Channels.openingBookName);
 		if (f.exists() && !f.isDirectory()) {
 			installed = true;
 			old = false;
 		}
 		if (installed == false) {
 
-			f = new File(channels.privateDirectory + channels.oldOpeningBookName);
+			f = new File(Channels.privateDirectory + Channels.oldOpeningBookName);
 			if (f.exists() && !f.isDirectory()) {
 				installed = true;
 				old = true;
@@ -5009,7 +5009,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			return;
 		}
 		boolean installed = false;
-		File f = new File(channels.privateDirectory + sharedVariables.stockfishName);
+		File f = new File(Channels.privateDirectory + sharedVariables.stockfishName);
 		if (f.exists() && !f.isDirectory()) {
 			installed = true;
 		}
@@ -5043,8 +5043,8 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 						}
 					}
 					if (c > 0) {
-						if (channels.macClient) {
-							lookup = channels.privateDirectory + sharedVariables.stockfishName;
+						if (Channels.macClient) {
+							lookup = Channels.privateDirectory + sharedVariables.stockfishName;
 							System.out.println("mike says lookup is now " + lookup);
 						} else {
 							lookup = lookup.substring(0, c) + "/" + sharedVariables.stockfishName;
@@ -5348,7 +5348,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 
 			ArrayList<String> myArray2 = new ArrayList();
 
-			myloader.loadScript(myArray2, channels.privateDirectory + "lantern_default_size.ini");
+			myloader.loadScript(myArray2, Channels.privateDirectory + "lantern_default_size.ini");
 
 			if (!valid) {
 				try {
@@ -5498,9 +5498,9 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 
 	class JSettingsDialog extends JFrame {
 
-		channels sharedVariables;
+		Channels sharedVariables;
 
-		JSettingsDialog(JFrame frame, boolean mybool, channels sharedVariables1) {
+		JSettingsDialog(JFrame frame, boolean mybool, Channels sharedVariables1) {
 			// super(frame, false);
 
 			sharedVariables = sharedVariables1;
@@ -5612,7 +5612,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			}
 			FileWrite writer = new FileWrite();
 			String outputSizes = "" + screenW + "\n" + screenH + "\n" + locX + "\n" + locY + "\n";
-			writer.write(outputSizes, channels.privateDirectory + "lantern_default_size.ini");
+			writer.write(outputSizes, Channels.privateDirectory + "lantern_default_size.ini");
 		} catch (Exception dumb) {
 		}
 
@@ -5772,7 +5772,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 
 			hgroup.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
 			hgroup.addComponent(topGamesFlipLabel);
-			if (channels.fics) {
+			if (Channels.fics) {
 				topGamesFlipLabel.setVisible(false);
 			}
 			hgroup.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
@@ -5782,7 +5782,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			hgroup.addComponent(seeksLabel, 100, 100, 100);
 			hgroup.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
 			hgroup.addComponent(activitesLabel);
-			if (!channels.fics) {
+			if (!Channels.fics) {
 				hgroup.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
 				hgroup.addComponent(pure1);
 				hgroup.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED);
@@ -5811,13 +5811,13 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			vgroup.addComponent(toggleEngineLabel);
 			// vgroup.addComponent(scripterLabel);
 			vgroup.addComponent(notifyBookLabel);
-			if (!channels.fics) {
+			if (!Channels.fics) {
 				vgroup.addComponent(topGamesFlipLabel);
 
 			}
 
 			vgroup.addComponent(seeksLabel);
-			if (!channels.fics) {
+			if (!Channels.fics) {
 				vgroup.addComponent(activitesLabel);
 				vgroup.addComponent(pure1);
 				vgroup.addComponent(pure3);
@@ -5914,7 +5914,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 
 		// activitesLabel.setIcon(sharedVariables.activitiesIcon);
 		activitesLabel.setText("   Activities   ");
-		if (channels.fics) {
+		if (Channels.fics) {
 			activitesLabel.setText("   Seek   ");
 		}
 		// activitesLabel.setHorizontalAlignment( SwingConstants.CENTER );
@@ -5925,7 +5925,7 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 				if (e.getButton() == MouseEvent.BUTTON3/* || e.getClickCount() == 2 */)
 					;
 				else {
-					if (channels.fics) {
+					if (Channels.fics) {
 						openSeekAGame();
 					} else {
 						openActivities();
@@ -6327,13 +6327,13 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 			URL songPath;
 
 			if (sharedVariables.operatingSystem.equals("unix")) {
-				songPath = this.getClass().getResource("whistle.au"); // Geturl of sound
+				songPath = this.getClass().getResource("sounds/whistle.wav"); // Geturl of sound
 				sharedVariables.songs[0] = songPath;
-				songPath = this.getClass().getResource("move-icc.au"); // Geturl of sound
+				songPath = this.getClass().getResource("sounds/move-fics.wav"); // Geturl of sound
 				sharedVariables.songs[1] = songPath;
-				songPath = this.getClass().getResource("capture-icc.au"); // Geturl of sound
+				songPath = this.getClass().getResource("sounds/capture-fics.wav"); // Geturl of sound
 				sharedVariables.songs[2] = songPath;
-				songPath = this.getClass().getResource("ding.au"); // Geturl of sound
+				songPath = this.getClass().getResource("sounds/ding.wav"); // Geturl of sound
 				sharedVariables.songs[4] = songPath;
 			} else { // these below 4 were waves but should have converted to au now
 				songPath = this.getClass().getResource("tell.au"); // Geturl of sound
@@ -6346,34 +6346,30 @@ class Multiframe extends JFrame implements ActionListener, ChangeListener, Windo
 				sharedVariables.songs[4] = songPath;
 			}
 
-			songPath = this.getClass().getResource("serv1a.au"); // Geturl of sound was wav
+			songPath = this.getClass().getResource("sounds/serv1a.wav"); // Geturl of sound was wav
 			sharedVariables.songs[3] = songPath;
-			songPath = this.getClass().getResource("fitebell.au"); // Geturl of sound
+			songPath = this.getClass().getResource("sounds/fitebell.wav"); // Geturl of sound
 			sharedVariables.songs[5] = songPath;
-			songPath = this.getClass().getResource("buzzer.au"); // Geturl of sound was wav
+			songPath = this.getClass().getResource("sounds/buzzer.wav"); // Geturl of sound was wav
 			sharedVariables.songs[6] = songPath;
 			songPath = this.getClass().getResource("fitbell.au"); // Geturl of sound was wav
 			sharedVariables.songs[7] = songPath;
-			songPath = this.getClass().getResource("alert.au"); // Geturl of sound was wav
+			songPath = this.getClass().getResource("sounds/alert.wav"); // Geturl of sound was wav
 			sharedVariables.songs[8] = songPath;
-			songPath = this.getClass().getResource("draw.au"); // Geturl of sound was wav
+			songPath = this.getClass().getResource("sounds/draw.wav"); // Geturl of sound was wav
 			sharedVariables.songs[9] = songPath;
 			songPath = this.getClass().getResource("AnyConv.com__MOVE2.au"); // Geturl of sound was wav
 			sharedVariables.songs[10] = songPath;
 			songPath = this.getClass().getResource("AnyConv.com__CAPTURE2.au"); // Geturl of sound was wav
 			sharedVariables.songs[11] = songPath;
 
-			songPath = this.getClass().getResource("BEEP_FM.au"); // Geturl of sound was wav
+			songPath = this.getClass().getResource("sounds/beep-fm.wav"); // Geturl of sound was wav
 			sharedVariables.poweroutSounds[0] = songPath;
-			songPath = this.getClass().getResource("BEEPPURE.au"); // Geturl of sound was wav
+			songPath = this.getClass().getResource("sounds/beeppure.wav"); // Geturl of sound was wav
 			sharedVariables.poweroutSounds[1] = songPath;
-			songPath = this.getClass().getResource("BEEPSPAC.au"); // Geturl of sound was wav
+			songPath = this.getClass().getResource("sounds/beepspac.wav"); // Geturl of sound was wav
 			sharedVariables.poweroutSounds[2] = songPath;
 
-			// song1 = new Sound("DING.WAV");
-			// song2 = new Sound("BEEPPURE.wav");
-			// song1 = new Sound("BEEP_FM.wav");
-			// song3 = new Sound("BEEPSPAC.wav");
 
 		} catch (Exception e) {
 		}

@@ -611,7 +611,7 @@ class gamestate {
 	}
 
 	boolean myturn() {
-		if (channels.fics) {
+		if (Channels.fics) {
 			return myColor.equals(currentPlayer);
 		}
 		boolean value = false;

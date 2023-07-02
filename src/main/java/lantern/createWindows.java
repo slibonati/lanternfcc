@@ -43,7 +43,7 @@ import java.util.StringTokenizer;
 
 class createWindows {
 
-	channels sharedVariables;
+	Channels sharedVariables;
 	subframe[] consoleSubframes;
 	Gameboard[] myboards;
 	JTextPane[] consoles;
@@ -59,7 +59,7 @@ class createWindows {
 	chatframe[] consoleChatframes;
 	Multiframe masterFrame;
 
-	createWindows(channels sharedVariables1, subframe[] consoleSubframes1, Gameboard[] myboards1, JTextPane[] consoles1,
+	createWindows(Channels sharedVariables1, subframe[] consoleSubframes1, Gameboard[] myboards1, JTextPane[] consoles1,
 			JTextPane[] gameconsoles1, ConcurrentLinkedQueue<myoutput> queue1, Image[] img1,
 			ConcurrentLinkedQueue<newBoardData> gamequeue1, webframe mywebframe1, resourceClass graphics1,
 			listFrame myfirstlist1, listInternalFrame mysecondlist1, docWriter myDocWriter1,

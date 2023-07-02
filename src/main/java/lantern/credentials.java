@@ -53,7 +53,7 @@ class credentials {
 	void resetNamePass() {
 		String mess = "\r\n\r\n";
 		FileWrite writer = new FileWrite();
-		writer.write(mess, channels.privateDirectory + "lantern_credentials.txt");
+		writer.write(mess, Channels.privateDirectory + "lantern_credentials.txt");
 
 	}
 
@@ -62,13 +62,13 @@ class credentials {
 		pass = encrypter.encrypt(pass);
 		String mess = name + "\r\n" + pass + "\r\n";
 		FileWrite writer = new FileWrite();
-		writer.write(mess, channels.privateDirectory + "lantern_credentials.txt");
+		writer.write(mess, Channels.privateDirectory + "lantern_credentials.txt");
 	}// end method save name and pass
 
 	String getName() {
 		scriptLoader loadScripts = new scriptLoader();
 		ArrayList<String> namepass = new ArrayList();
-		loadScripts.loadScript(namepass, channels.privateDirectory + "lantern_credentials.txt");
+		loadScripts.loadScript(namepass, Channels.privateDirectory + "lantern_credentials.txt");
 		String name = "";
 
 		if (namepass.size() >= 1) {
@@ -85,7 +85,7 @@ class credentials {
 	String getPass() {
 		scriptLoader loadScripts = new scriptLoader();
 		ArrayList<String> namepass = new ArrayList();
-		loadScripts.loadScript(namepass, channels.privateDirectory + "lantern_credentials.txt");
+		loadScripts.loadScript(namepass, Channels.privateDirectory + "lantern_credentials.txt");
 		String pass = "";
 
 		if (namepass.size() >= 2) {

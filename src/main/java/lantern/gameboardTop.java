@@ -55,12 +55,12 @@ class gameboardTop extends JFrame implements WindowListener {
 	}
 
 // myconsolepanel queue sharedVariables
-	channels sharedVariables;
+	Channels sharedVariables;
 	gameboardConsolePanel myconsolepanel;
 	ConcurrentLinkedQueue<myoutput> queue;
 	gamestuff gameData;
 
-	gameboardTop(channels sharedVariables1, gameboardConsolePanel myconsolepanel1,
+	gameboardTop(Channels sharedVariables1, gameboardConsolePanel myconsolepanel1,
 			ConcurrentLinkedQueue<myoutput> queue1, gamestuff gameData1) {
 
 		addWindowListener(this);

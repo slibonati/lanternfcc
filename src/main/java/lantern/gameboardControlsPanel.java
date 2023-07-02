@@ -325,11 +325,11 @@ class gameboardControlsPanel extends JPanel {
 	}
 
 	Gameboard myboard;
-	channels sharedVariables;
+	Channels sharedVariables;
 	gamestuff gameData;
 	ConcurrentLinkedQueue<myoutput> queue;
 
-	gameboardControlsPanel(Gameboard myboard1, gamestuff gameData1, channels sharedVariables1,
+	gameboardControlsPanel(Gameboard myboard1, gamestuff gameData1, Channels sharedVariables1,
 			ConcurrentLinkedQueue<myoutput> queue1) {
 
 		queue = queue1;

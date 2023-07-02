@@ -92,7 +92,7 @@ public class Pearl {
 					final Multiframe frame = new Multiframe();
 					frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 					
-					if (channels.fics) {
+					if (Channels.fics) {
 						frame.setTitle("Pearl Chess on FICS " + frame.sharedVariables.version);
 					} else {
 						frame.setTitle("Lantern Chess " + frame.sharedVariables.version);

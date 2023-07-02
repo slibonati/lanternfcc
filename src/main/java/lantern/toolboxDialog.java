@@ -88,10 +88,10 @@ public class toolboxDialog extends JDialog implements ActionListener {
 	private JButton runButton;
 
 	private Queue<myoutput> queue;
-	private channels svars;
+	private Channels svars;
 	final private JFrame frame;
 
-	public toolboxDialog(final JFrame frame, boolean mybool, Queue<myoutput> queue, channels svars) {
+	public toolboxDialog(final JFrame frame, boolean mybool, Queue<myoutput> queue, Channels svars) {
 		super(frame, mybool);
 		setTitle("Run a Script");
 		this.frame = frame;
@@ -180,8 +180,8 @@ public class toolboxDialog extends JDialog implements ActionListener {
 		if (action.equals("load")) {
 			try {
 				JFileChooser fc = new JFileChooser();
-				if (channels.macClient) {
-					fc.setCurrentDirectory(new File(channels.publicDirectory));
+				if (Channels.macClient) {
+					fc.setCurrentDirectory(new File(Channels.publicDirectory));
 				} else {
 					fc.setCurrentDirectory(new File("."));
 				}
@@ -258,7 +258,7 @@ public class toolboxDialog extends JDialog implements ActionListener {
 	private void runCommand(String command, String prefix) {
 		myoutput output = new myoutput();
 		output.data = "`c" + conNumber + "`" + prefix + command + "\n";
-		if (channels.fics) {
+		if (Channels.fics) {
 			output.data = prefix + command + "\n";
 		}
 		output.consoleNumber = conNumber;

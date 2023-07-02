@@ -39,13 +39,13 @@ class notifyFrame extends JDialog// implements InternalFrameListener
 {
 
 	// subframe [] consoleSubframes;
-	channels sharedVariables;
+	Channels sharedVariables;
 	JCheckBoxMenuItem notontop;
 	listClass notifyList;
 	ConcurrentLinkedQueue queue;
 	notifyPanel notifylistScrollerPanel;
 
-	notifyFrame(JFrame master, channels sharedVariables1, ConcurrentLinkedQueue queue1, listClass notifyList1) {
+	notifyFrame(JFrame master, Channels sharedVariables1, ConcurrentLinkedQueue queue1, listClass notifyList1) {
 		super(master, false);
 		sharedVariables = sharedVariables1;
 		queue = queue1;

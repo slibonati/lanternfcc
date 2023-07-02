@@ -40,7 +40,7 @@ class savesettings {
 	savesettings() {
 	} // constructor we are not using now
 
-	void saveNow(Gameboard boards[], subframe frames[], channels sharedVariables) {
+	void saveNow(Gameboard boards[], subframe frames[], Channels sharedVariables) {
 		myboards = boards;
 		consoleSubframes = frames;
 
@@ -118,7 +118,7 @@ class savesettings {
 
 	}// end method
 
-	void readNow(Gameboard boards[], subframe frames[], channels sharedVariables) {
+	void readNow(Gameboard boards[], subframe frames[], Channels sharedVariables) {
 
 	}
 

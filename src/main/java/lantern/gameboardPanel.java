@@ -88,13 +88,13 @@ class gameboardPanel extends JPanel implements MouseMotionListener, MouseListene
 	int editable;
 	Image[] img;
 	gamestuff gameData;
-	channels sharedVariables;
+	Channels sharedVariables;
 	ConcurrentLinkedQueue<myoutput> queue;
 	resourceClass graphics;
 	int bugging = -1;
 	int xpiece = 99999; // piece value for examining x, can be anything i suppose just not in use
 
-	gameboardPanel(Image img1[], channels sharedVariables1, gamestuff gameData1, ConcurrentLinkedQueue<myoutput> queue1,
+	gameboardPanel(Image img1[], Channels sharedVariables1, gamestuff gameData1, ConcurrentLinkedQueue<myoutput> queue1,
 			resourceClass graphics1) {
 		editable = 1;
 		mx = oldmx = my = oldmy = 100;
@@ -1141,7 +1141,7 @@ class gameboardPanel extends JPanel implements MouseMotionListener, MouseListene
 				.getValue() < sharedVariables.moveSliders[gameData.BoardIndex].getMaximum())
 			return;
 
-		if (inTheAir == true && sharedVariables.moveInputType == channels.CLICK_CLICK) {
+		if (inTheAir == true && sharedVariables.moveInputType == Channels.CLICK_CLICK) {
 			inTheAir = false;
 			if (e.getButton() == MouseEvent.BUTTON3) {
 				sharedVariables.mygame[gameData.LookingAt].premove = "";
@@ -1194,7 +1194,7 @@ class gameboardPanel extends JPanel implements MouseMotionListener, MouseListene
 
 	public void mouseReleased(MouseEvent me) {
 
-		if (sharedVariables.moveInputType == channels.CLICK_CLICK && inTheAir == true)
+		if (sharedVariables.moveInputType == Channels.CLICK_CLICK && inTheAir == true)
 			return;
 		if (me.getButton() == MouseEvent.BUTTON3) {
 			if (arrowSquare > -1
@@ -1226,7 +1226,7 @@ class gameboardPanel extends JPanel implements MouseMotionListener, MouseListene
 			// code here to prefix our command with `g#`command if on icc and we have a name
 			// defined i.e. recieved whoami
 			// this will get any text back from server to go to right console
-			if (!channels.fics && sharedVariables.myname.length() > 0)
+			if (!Channels.fics && sharedVariables.myname.length() > 0)
 				prefixcommand = "`g" + gameData.LookingAt + "`";
 
 			String themove = primary + prefixcommand;
@@ -1353,14 +1353,14 @@ class gameboardPanel extends JPanel implements MouseMotionListener, MouseListene
 					}
 					if ((sharedVariables.mygame[sharedVariables.gamelooking[gameData.BoardIndex]].state == sharedVariables.STATE_PLAYING
 							|| sharedVariables.mygame[sharedVariables.gamelooking[gameData.BoardIndex]].state == sharedVariables.STATE_EXAMINING)
-							&& channels.fics) {
+							&& Channels.fics) {
 						primary = "";
 					}
 					String prefixcommand = "";
 					// code here to prefix our command with `g#`command if on icc and we have a name
 					// defined i.e. recieved whoami
 					// this will get any text back from server to go to right console
-					if (!channels.fics && sharedVariables.myname.length() > 0)
+					if (!Channels.fics && sharedVariables.myname.length() > 0)
 						prefixcommand = "`g" + gameData.LookingAt + "`multi chessmove ";
 
 					String themove = primary + prefixcommand + getMove(piecemoving, piece);
@@ -1506,7 +1506,7 @@ class gameboardPanel extends JPanel implements MouseMotionListener, MouseListene
 						chessMove = "";
 					}
 					String themove = primary + "multi " + chessMove + getMove(-examinepiecemoving, piece);
-					if (channels.fics) {
+					if (Channels.fics) {
 						themove = getMove(-examinepiecemoving, piece);
 					}
 					myoutput amove = new myoutput();

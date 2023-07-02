@@ -37,14 +37,14 @@ public class connectionDialog extends JDialog implements ActionListener, Documen
 	private JPasswordField pwdField;
 	private JCheckBox saveNP;
 	private JButton ok;
-	private channels sVars;
+	private Channels sVars;
 	private credentials creds;
 	private Queue<myoutput> queue;
-	private channels sharedVariables;
+	private Channels sharedVariables;
 
-	public connectionDialog(JFrame frame, channels sVars, Queue<myoutput> queue, boolean mybool) {
+	public connectionDialog(JFrame frame, Channels sVars, Queue<myoutput> queue, boolean mybool) {
 		super(frame, "Connect to ICC", mybool);
-		if (channels.fics) {
+		if (Channels.fics) {
 			setTitle("Connect to FICS");
 		}
 

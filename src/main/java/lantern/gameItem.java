@@ -56,7 +56,7 @@ class gameItem {
 			if (status.equals("3"))
 				res = "a";
 
-			if (channels.fics) {
+			if (Channels.fics) {
 				res = status;
 			}
 			data.add(res); // result
@@ -79,7 +79,7 @@ class gameItem {
 				res = "=";
 			if (status.equals("3"))
 				res = "a";
-			if (channels.fics) {
+			if (Channels.fics) {
 				res = status;
 			}
 			data.add(res); // result
@@ -102,7 +102,7 @@ class gameItem {
 
 		data.add("" + whitetime + " " + whiteinc + " [" + ratedType + " " + rated + "]");
 		data.add(eco);
-		if (channels.fics) {
+		if (Channels.fics) {
 			data.add(mode);
 		} else {
 			data.add(getGameEndCode(status, mode, color));
@@ -156,7 +156,7 @@ class gameItem {
 			res = "=";
 		if (status.equals("3"))
 			res = "a";
-		if (channels.fics) {
+		if (Channels.fics) {
 			data.add(status);
 			data.add(mode);
 		} else {
@@ -174,18 +174,18 @@ class gameItem {
 		 * 0=wild, 1=blitz, 2=standard, 3=bullet, 4=bughouse
 		 */
 		ratedType = getRatedType(ratedType, wild);
-		if (channels.fics) {
+		if (Channels.fics) {
 			data.add(time);
 		} else {
 			data.add("" + whitetime + " " + whiteinc + " [" + ratedType + " " + rated + "]");
 		}
-		if (channels.fics) {
+		if (Channels.fics) {
 			data.add(color);
 		} else {
 			data.add(eco);
 		}
 
-		if (!channels.fics) {
+		if (!Channels.fics) {
 			data.add(date + " " + time);
 			if (myTable.type1.equals("liblist"))
 				data.add(libnote);
